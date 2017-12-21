@@ -8,6 +8,8 @@ var app = angular.module("myApp", []);
 app.controller("modalClassCtr", function($scope) {
 	$scope.isH = true;
 
+	$scope.hostPath = hostPath; //图片地址拼接
+
 	getModalClass($scope); //获取模块分类数据
 	getProductClass($scope); //获取商品分类数据
 
@@ -36,14 +38,14 @@ app.controller("modalClassCtr", function($scope) {
 	$scope.search2 = function() {
 		var search_txt2 = $("#search_txt2").val();
 		var searchUrl2 = Config.getProductClassUrl + "startrow=1&endrow=50&className=" + search_txt2;
-		alert(searchUrl2);
+		//alert(searchUrl2);
 
 		$.ajax({
 			type: "get",
 			url: searchUrl2,
 			dataType: "json",
 			success: function(data) {
-				alert(JSON.stringify(data));
+				//alert(JSON.stringify(data));
 				//alert(data);
 				$scope.productClassData = data.list;
 				$scope.$apply();
@@ -84,6 +86,7 @@ function getModalClass($scope) {
 		success: function(data) {
 			//alert(JSON.stringify(data));
 			//alert(data);
+			//console.log(data); 
 			$scope.modalClassData = JSON.parse(data).list;
 			$scope.$apply();
 		},
@@ -104,6 +107,7 @@ function getProductClass($scope) {
 		dataType: "json",
 		success: function(data) {
 			//alert(JSON.stringify(data)); 
+			//console.log(JSON.stringify(data)); 
 			$scope.productClassData = data.list;
 			$scope.$apply();
 		},
@@ -117,7 +121,7 @@ function addModalClass() {
 	var select_addModal = $('#select_addModal option:selected').val();
 	var modalName_add = $("#modalName_add").val();
 	var modalPath_add = $("#modalPath_add").val();
-	//var classificationImg = "upload/newimg.png";
+	//var classificationImg = "upload/newimg.png";  
 	if(!select_addModal) {
 		alert("请选择商品分类");
 		return;
@@ -179,7 +183,7 @@ function updateModalClass() {
 	var select_updateModal = $('#select_updateModal option:selected').val();
 	var modalName_update = $("#modalName_update").val();
 	var modalPath_update = $("#modalPath_update").val();
-	var classificationImg = "upload/newimg.png";
+	//var classificationImg = "upload/newimg.png";
 
 	if(!select_updateModal) {
 		alert("请选择商品分类");
@@ -194,7 +198,7 @@ function updateModalClass() {
 
 	var getUpdateModalClassUrl = Config.getUpdateModalClassUrl +
 		"classificationName=" + modalName_update + "&classificationImg=" +
-		classificationImg + "&classificationPath=" + modalPath_update +
+		addModalClassImg + "&classificationPath=" + modalPath_update +
 		"&classificationProductId=" + select_updateModal + "&classificationId=" + ModalClassId;
 	//alert(getUpdateModalClassUrl);
 	$.ajax({
@@ -241,10 +245,18 @@ function updateProductClass() {
 
 		}
 	});
-} 
+}
 
 //图片预览功能及上传
-function imgPreview(fileDom) {
+function imgPreview(fileDom) { 
+	Common_UploadImg(fileDom, "preview", "imageForm");
+}
+//图片预览功能及上传2
+function imgPreview2(fileDom) { 
+	Common_UploadImg(fileDom, "preview2", "imageForm2");
+}
+
+function Common_UploadImg(fileDom, previews, imageForms) {
 	//判断是否支持FileReader
 	if(window.FileReader) {
 		var reader = new FileReader();
@@ -263,28 +275,31 @@ function imgPreview(fileDom) {
 	//读取完成
 	reader.onload = function(e) {
 		//获取图片dom
-		var img = document.getElementById("preview");
+		//var img = document.getElementById("preview");
 		//图片路径设置为读取的图片
-		img.src = e.target.result;  
+		//img.src = e.target.result;
+		$("#" + previews).attr('src', e.target.result);
 	};
-	
+
 	reader.readAsDataURL(file);
-	
-	 //上传图片到服务器
+
+	//上传图片到服务器
 	var ajax_option = {
 		url: Config.uploadImg,
-		type: "post", 
+		type: "post",
 		success: function(responseText) {
 			//console.log(responseText);
-			alert(responseText);
-			addModalClassImg=responseText;
+			//alert(responseText);
+			//addModalClassImg = responseText;
+			addModalClassImg = responseText.replace("\"", "").replace("\"", ""); //去掉双引号 
+			//alert(addModalClassImg);
 		},
 		beforSubmit: function(formData, jqForm, options) {
 			//提交之前的回调函数。参数详解：formData，数组对象，为表单的内容；jqForm，jQuery对象，
 			//封装了表单的元素；options，之前设置的ajaxSubmit的option对象。
 			//console.log(formData); 
 		},
-	}; 
-	$("#imageForm").ajaxSubmit(ajax_option); 
-	return false; 
+	};
+	$("#" + imageForms).ajaxSubmit(ajax_option);
+	return false;
 }
