@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-controller="myPictureCtr">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>轮播图设置</title>
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="assets/css/ace.min.css" />
+		<link rel="stylesheet" href="css/userInfo.css" />
+	</head>
+
+	<body>
+		<!--
+        	作者：yyw
+        	时间：2017-12-11
+        	描述：头部模版
+        -->
+		<div ng-include="'temp/header.html'"></div>
+
+		<div class="main-container" id="main-container">
+			<!--
+        	作者：yyw
+        	时间：2017-12-11
+        	描述：左边导航模版
+              -->
+			<div ng-include="'temp/leftNav.html'"></div>
+
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li>
+							<i class="icon-home home-icon"></i>
+							<a href="#">首页</a>
+						</li>
+						<li>
+							<a href="#">小程序管理</a>
+						</li>
+						<li class="active">轮播图设置</li>
+					</ul>
+				</div>
+				<div class="page-content">
+					<div class="row">
+						<div class="col-xs-12">
+
+							 
+								<div class="tabbable">
+									<ul class="nav nav-tabs" id="myTab">
+										<li class="active">
+											<a data-toggle="tab" href="#home">
+												<i class="green icon-home bigger-110"></i> 首页轮播图
+											</a>
+										</li>
+
+										<li>
+											<a data-toggle="tab" href="#profile">
+												商品详情轮播图 
+											</a>
+										</li>
+									</ul>
+
+									<div class="tab-content">
+										<div id="home" class="tab-pane in active clearfix">
+
+											<div id="pictures" class="user-profile">
+												<ul class="ace-thumbnails">
+													<li ng-repeat="item in pictureData">
+														<a href="#" data-rel="colorbox">
+															<img alt="150x150" src="{{item.imgUrl}}" />
+															<div class="text">
+																<div class="inner">{{item.title}}</div>
+															</div>
+														</a>
+
+														<div class="tools tools-bottom">
+															<a href="#">
+																<i class="icon-link"></i>
+															</a>
+
+															<a href="#">
+																<i class="icon-paper-clip"></i>
+															</a>
+
+															<a href="#">
+																<i class="icon-pencil"></i>
+															</a>
+
+															<a href="#">
+																<i class="icon-remove red"></i>
+															</a>
+														</div>
+													</li>
+
+													<li style="border:none;">
+														<a href="#" data-rel="colorbox">
+															<img style="width:160px;height:160px;" alt="150x150" src="img/add.png" />
+															<div class="text">
+																<div class="inner">添加</div>
+															</div>
+														</a>
+													</li>
+												</ul>
+											</div>
+
+										</div>
+
+										<div id="profile" class="tab-pane clearfix">
+											商品详情轮播图
+										</div>
+									</div>
+								</div>
+							 
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="js/angular.min.js"></script>
+	<script src="assets/js/ace.min.js"></script>
+	<script src="assets/js/ace-extra.min.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+
+		})
+		var app = angular.module("myApp", []);
+		app.controller("myPictureCtr", function($scope) {
+			$scope.isA = false;
+			$scope.isB = false;
+			$scope.isC = false;
+			$scope.isD = false;
+			$scope.isE = false;
+			$scope.isF = false;
+			$scope.isG = true;
+
+			getPicture($scope);
+		})
+
+		//获取轮播图数据
+		function getPicture($scope) {
+			$.ajax({
+				type: "get",
+				url: "modal/picture.json",
+				dataType: "json",
+				success: function(data) {
+					//alert(JSON.stringify(data));
+					$scope.pictureData = data.datas;
+					$scope.$apply();
+				},
+				complete: function() {
+
+				}
+			});
+		}
+	</script>
+
+</html>

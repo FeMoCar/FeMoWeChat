@@ -1,0 +1,156 @@
+<div class="main-container-inner">
+	<a class="menu-toggler" id="menu-toggler" href="#">
+		<span class="menu-text"></span>
+	</a>
+	<div class="sidebar" id="sidebar">
+		<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+			<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+				<button class="btn btn-success">
+								<i class="icon-signal"></i>
+							</button>
+
+				<button class="btn btn-info">
+								<i class="icon-pencil"></i>
+							</button>
+
+				<button class="btn btn-warning">
+								<i class="icon-group"></i>
+							</button>
+
+				<button class="btn btn-danger">
+								<i class="icon-cogs"></i>
+							</button>
+			</div>
+			<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+				<span class="btn btn-success"></span>
+
+				<span class="btn btn-info"></span>
+
+				<span class="btn btn-warning"></span>
+
+				<span class="btn btn-danger"></span>
+			</div>
+		</div>
+		<ul class="nav nav-list">
+			<li ng-class="{'active':isA}">
+				<a href="index.html">
+					<i class="icon-dashboard"></i>
+					<span class="menu-text"> 控制台 </span>
+				</a>
+			</li>
+			<li ng-class="{'active':isB}">
+				<a href="userInfo.html">
+					<i class="icon-user"></i>
+					<span class="menu-text"> 用户信息管理 </span>
+				</a>
+			</li> 
+			<li ng-class="{'active':isH}">
+				<a href="modalClass.html">
+					<i class="icon-adjust"></i>
+					<span class="menu-text"> 分类模块 </span>
+				</a>
+			</li> 
+			<li ng-class="{'active':isD}">
+				<a href="onlineLease.html">
+					<i class="icon-desktop"></i>
+					<span class="menu-text"> 在线租赁管理 </span>
+				</a>
+			</li>
+			<li ng-class="{'active':isE}">
+				<a href="appointment.html">
+					<i class="icon-time"></i>
+					<span class="menu-text"> 预约信息管理 </span>
+				</a>
+			</li> 
+			<li ng-class="{'active':isF}">
+				<a href="#" class="dropdown-toggle">
+					<i class="icon-credit-card"></i>
+					<span class="menu-text"> 订单信息管理 </span>
+					<b class="arrow icon-angle-down"></b>
+				</a>
+				<ul class="submenu" id="collapseOne">
+					<li>
+						<a href="payOrder.html">
+							<i class="icon-double-angle-right"></i>支付订单
+						</a>
+					</li>
+					<li>
+						<a href="reseverOrder.html">
+							<i class="icon-double-angle-right"></i>预定订单
+						</a>
+					</li>
+					<li>
+						<a href="leaseOrder.html">
+							<i class="icon-double-angle-right"></i>租赁订单
+						</a>
+					</li> 
+				</ul>
+			</li> 
+			<li ng-class="{'active':isC}">
+				<a href="#" class="dropdown-toggle">
+					<i class="icon-list-alt"></i>
+					<span class="menu-text"> 商品信息管理 </span>
+					<b class="arrow icon-angle-down"></b>
+				</a>
+				<ul class="submenu" id="collapseOne">
+					<li>
+						<a href="goods.html">
+							<i class="icon-double-angle-right"></i>商品信息
+						</a>
+					</li>
+					<li>
+						<a href="addGoods.html">
+							<i class="icon-double-angle-right"></i>添加商品
+						</a>
+					</li>
+					<!--<li>
+						<a href="#">
+							<i class="icon-double-angle-right"></i>购买方式设置
+						</a>
+					</li> -->
+				</ul>
+			</li>
+
+			<li ng-class="{'active':isG}">
+				<a href="#" class="dropdown-toggle">
+					<i class="icon-sitemap"></i>
+					<span class="menu-text"> 小程序模块管理 </span>
+					<b class="arrow icon-angle-down"></b>
+				</a>
+				<ul class="submenu" id="collapseOne">
+					<li>
+						<a href="pictureSet.html">
+							<i class="icon-double-angle-right"></i> 首页轮播图设置
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="icon-double-angle-right"></i> 用户须知设置
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="icon-double-angle-right"></i> 操作说明设置
+						</a>
+					</li>
+					<li>
+						<a href="userComment.html">
+							<i class="icon-double-angle-right"></i> 用户评论管理
+						</a>
+					</li>
+					<li>
+						<a href="userFeedback.html">
+							<i class="icon-double-angle-right"></i> 用户反馈信息
+						</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+		<div class="sidebar-collapse" id="sidebar-collapse">
+			<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+		</div>
+	</div>
+</div>
+<script src="assets/js/ace.min.js"></script>
+<script src="assets/js/ace-extra.min.js"></script>

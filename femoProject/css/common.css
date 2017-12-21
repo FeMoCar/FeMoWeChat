@@ -1,0 +1,8 @@
+.search-contain {
+	margin: 15px 0;
+	overflow: hidden;
+} 
+ 
+.search-contain button{
+	margin-right: 15px;
+}

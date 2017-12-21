@@ -1,0 +1,89 @@
+body {
+	height: 100%;
+	overflow: hidden;
+	padding-top: 120px;
+	padding-bottom: 40px;
+	background: url(../img/bbb.jpg) no-repeat;
+	background-size: cover;
+	
+}
+
+.form-signin {
+	max-width: 420px;
+	padding: 10px 20px 30px;
+	margin: 10px auto;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+	margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+	font-weight: normal;
+}
+
+.form-signin .form-control {
+	position: relative;
+	height: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+	z-index: 2;
+}
+
+.form-signin input[type="email"] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.input-txt input {
+	margin: 20px 0;
+}
+
+.checkboxz {
+	margin: 20px 0;
+}
+
+
+/*yyw create 20171209*/
+
+.container-fluid img {
+	width: 140px;
+	height: 140px;
+	margin: 0 auto;
+	display: block;
+}
+
+.login-form {
+	max-width: 500px;
+	margin: 0 auto;
+	background-color: #fff;
+	border-radius: 10px;
+}
+
+.login-form h2 {
+	text-align: center;
+}
+
+.logo {
+	padding: 10px 0;
+}
+
+.copy {
+	text-align: center;
+	color: #fff;
+	padding: 20px 0;
+}

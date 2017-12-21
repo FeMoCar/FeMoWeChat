@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myIndexCtr">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>控制台</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="assets/css/ace.min.css" />
+
+	</head>
+
+	<body>
+		<!--
+        	作者：yyw
+        	时间：2017-12-11
+        	描述：头部模版
+        -->
+		<div ng-include="'temp/header.html'"></div>
+
+		<div class="main-container" id="main-container">
+			<!--
+        	作者：yyw
+        	时间：2017-12-11
+        	描述：左边导航模版
+              -->
+			<div ng-include="'temp/leftNav.html'"></div>
+
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<ul class="breadcrumb">
+						<li>
+							<i class="icon-home home-icon"></i>
+							<a href="#">首页</a>
+						</li>
+						<li class="active">控制台</li>
+					</ul>
+				</div>
+				<div class="page-content">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="alert alert-block alert-success">
+								<button type="button" class="close" data-dismiss="alert">
+										<i class="icon-remove"></i>
+									</button>
+
+								<i class="icon-ok green"></i> 欢迎使用
+								<strong class="green">
+										肥猫后台管理系统
+										<small>(v0.0.1)</small>
+									</strong>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="js/angular.min.js"></script>
+	<script src="assets/js/ace.min.js"></script>
+	<script src="assets/js/ace-extra.min.js"></script>
+
+	<script type="text/javascript"> 
+		var app = angular.module("myApp", []);
+		app.controller("myIndexCtr", function($scope) {
+			$scope.isA = true;
+			$scope.isB = false;
+			$scope.isC = false;
+			$scope.isD = false;
+			$scope.isE = false;
+			$scope.isF = false;
+			$scope.isG = false;
+
+		})
+		
+		
+	</script> 
+</html>
