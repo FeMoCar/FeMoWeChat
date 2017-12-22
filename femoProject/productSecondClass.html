@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html ng-app="myApp" ng-controller="modalClassCtr">
-
+<html ng-app="myApp" ng-controller="productSecondClassCtr">
 <head>
     <meta charset="UTF-8">
-    <title>分类模块</title>
+    <title>商品二级分类</title>
     <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="assets/css/ace.min.css"/>
     <link rel="stylesheet" href="css/userInfo.css"/>
     <link rel="stylesheet" href="css/common.css"/>
-    <link rel="stylesheet" href="css/layui.css"/>
 </head>
-
 <body>
 <!--
     作者：yyw
@@ -27,7 +24,6 @@
     描述：左边导航模版
       -->
     <div ng-include="'temp/leftNav.html'"></div>
-
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
             <ul class="breadcrumb">
@@ -35,29 +31,20 @@
                     <i class="icon-home home-icon"></i>
                     <a href="#">首页</a>
                 </li>
-                <li class="active">模块分类</li>
+                <li class="active">商品二级分类</li>
             </ul>
         </div>
         <div class="page-content">
             <div class="row">
                 <div class="search-contain">
-                    <div class="col-xs-1 text-right fr" style="line-height: 37px;font-size: 16px;">查询条件：</div>
-                    <div class="col-xs-1">
-                        <div class="form-group">
-                            <select class="form-control" id="select_search">
-                                <option value="classificationName">模块名称</option>
-                                <option value="classificationProductId">商品ID</option>
-                            </select>
-                        </div>
-                    </div>
                     <div class="col-xs-2">
                         <input type="text" id="search_txt" class="form-control" autocomplete="off">
                     </div>
                     <div class="col-xs-2">
                         <button class="btn btn-info btn-sm" ng-click="search()">查询</button>
-                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">添加</button>
+                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addProductClass">添加
+                        </button>
                     </div>
-
                 </div>
 
                 <div class="col-xs-12">
@@ -72,35 +59,32 @@
                                            aria-describedby="sample-table-2_info">
                                         <thead>
                                         <tr role="row">
-                                            <th class="sorting_disabled">模块名称</th>
-                                            <th class="sorting_disabled">模块图片</th>
-                                            <th class="sorting_disabled">分类路径</th>
-                                            <th class="sorting_disabled">商品ID</th>
+                                            <th class="sorting_disabled">二级分类名称</th>
+                                            <th class="sorting_disabled">创建时间</th>
+                                            <th class="sorting_disabled">备注</th>
                                             <th class="sorting_disabled">操作</th>
                                         </tr>
                                         </thead>
 
                                         <tbody role="alert" aria-live="polite" aria-relevant="all">
-                                        <tr class="odd" ng-repeat="item in modalClassData">
+                                        <tr class="odd" ng-repeat="item in productSecondClassData">
                                             <td class="sorting_1 line-h">
-                                                <a href="#">{{item.classificationName}}</a>
+                                                <a href="#">{{item.secondclassName}}</a>
                                             </td>
-                                            <td class="line-h">
-                                                <img src="{{hostPath}}{{item.classificationImg}}" alt=""
-                                                     style="width:45px;height:45px;"/>
+                                            <td class="line-h">{{item.secondclassCreatetime| date:'yyyy-MM-dd
+                                                hh:mm:ss'}}
                                             </td>
-                                            <td class="line-h">{{item.classificationPath}}</td>
-                                            <td class="line-h">{{item.classificationProductId}}</td>
-
+                                            <td class="line-h">{{item.secondclassRemark}}</td>
                                             <td class="line-h">
                                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
                                                     <a class="green" href="#" data-toggle="modal"
-                                                       data-target="#updateClassModal"
-                                                       ng-click="updateClass(item.classificationId,item.classificationProductId)">
+                                                       data-target="#updateProductClass"
+                                                       ng-click="updateProductSecondClass(item.productSecondclassId,item.productClassId)">
                                                         <i class="icon-pencil bigger-130"></i>
                                                     </a>
+
                                                     <a class="red" href="#"
-                                                       ng-click="deleteModalClass(item.classificationId)">
+                                                       ng-click="deleteProductSecondClass(item.productSecondclassId)">
                                                         <i class="icon-trash bigger-130"></i>
                                                     </a>
                                                 </div>
@@ -141,41 +125,28 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<!-- 添加模块分类模态框（Modal） -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- 添加商品分类模态框（Modal） -->
+<div class="modal fade" id="addProductClass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">添加模块分类</h4>
+                <h4 class="modal-title" id="myModalLabel">添加商品二级分类</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" role="form" id="imageForm" enctype="multipart/form-data" action="url"
-                      method="POST">
+                <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label">模块名称</label>
-                        <div class="col-sm-8">
-                            <input type="text" id="modalName_add" placeholder="请输入模块名称" class="col-xs-10 col-sm-5"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">分类图片</label>
-                        <div class="col-sm-8">
-                            <img id="preview" style="width:150px;height: 150px;"/>
-                            <br/><br/>
-                            <input type="file" name="file" onchange="imgPreview(this)"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">分类路径</label>
-                        <div class="col-sm-8">
-                            <input type="text" id="modalPath_add" placeholder="请输入分类路径" class="col-xs-10 col-sm-5"/>
+                        <label class="col-sm-4 control-label">二级分类名称</label>
+                        <div class="col-sm-7">
+                            <input type="text" id="productClassName_add" placeholder="请输入分类名称"
+                                   class="col-xs-10 col-sm-5"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -189,49 +160,40 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">备注</label>
+                        <div class="col-sm-7">
+                            <textarea id="productClassRemark_add" class="form-control" rows="3"
+                                      placeholder="请输入备注"></textarea>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="addModalClass()">添加</button>
+                <button type="button" class="btn btn-primary" onclick="addProductClass()">添加</button>
             </div>
         </div>
     </div>
 </div>
-<!-- 更新模块分类模态框（Modal） -->
-<div class="modal fade" id="updateClassModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<!-- 更新商品分类模态框（Modal） -->
+<div class="modal fade" id="updateProductClass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">更新模块分类</h4>
+                <h4 class="modal-title">更新商品分类</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="imageForm2" role="form" id="imageForm" enctype="multipart/form-data"
-                      action="url" method="POST" ng-repeat="item in modalClassData"
-                      ng-if="item.classificationId==updateClassId">
+                <form class="form-horizontal" role="form" ng-repeat="item in productSecondClassData"
+                      ng-if="item.productSecondclassId==updateProductClassId">
                     <div class="form-group">
                         <label class="col-sm-4 control-label">模块名称</label>
                         <div class="col-sm-8">
-                            <input type="text" id="modalName_update" value="{{item.classificationName}}"
-                                   placeholder="请输入模块名称" class="col-xs-10 col-sm-5"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">分类图片</label>
-                        <div class="col-sm-8">
-                            <img class="preview" id="preview2" src="{{hostPath}}{{item.classificationImg}}"
-                                 style="width:150px;height: 150px;"/>
-                            <br/><br/>
-                            <input type="file" name="file" onchange="imgPreview2(this)"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">分类路径</label>
-                        <div class="col-sm-8">
-                            <input type="text" id="modalPath_update" value="{{item.classificationPath}}"
-                                   placeholder="请输入分类路径" class="col-xs-10 col-sm-5"/>
+                            <input type="text" id="className_update" value="{{item.secondclassName}}"
+                                   placeholder="请输入模块名称"
+                                   class="col-xs-10 col-sm-5"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -245,20 +207,27 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">备注</label>
+                        <div class="col-sm-8">
+                            <textarea id="productClassRemark_update" class="form-control"
+                                      rows="3">{{item.secondclassRemark}}</textarea>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" onclick="updateModalClass()">更新</button>
+                <button type="button" class="btn btn-primary" onclick="updateProductSecondClass()">更新</button>
             </div>
         </div>
     </div>
 </div>
+<!-- 删除确认模态框（Modal） -->
+<div ng-include="'temp/confirmModal.html'"></div>
 
 </body>
-
 <script src="assets/js/jquery.min.js"></script>
-<script src="js/jquery.form.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="js/angular.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
@@ -266,9 +235,113 @@
 
 <script src="js/config.js"></script>
 <script src="js/common.js"></script>
-<script src="js/modalClass.js"></script>
 
 <script type="text/javascript">
-</script>
+    //配置文件（数据请求接口）
+    var Config = Config();
+    var Comm = Common();
+    $(function () {
 
+    })
+    var app = angular.module("myApp", []);
+    app.controller("productSecondClassCtr", function ($scope) {
+        $scope.isC = true;
+        Comm.getProductSecondClass($scope); //获取商品二级分类数据
+        Comm.getProductClass($scope); //获取商品分类数据
+        //商品二级分类搜索
+        $scope.search = function () {
+            var search_txt = $("#search_txt").val();
+            var searchUrl = Config.getProductSecondClassUrl + "startrow=1&endrow=50&secondclassName=" + search_txt;
+            //alert(searchUrl);
+            //console.log(searchUrl);
+            Comm.ajax(searchUrl, "get", "", function (res) {
+                //alert(JSON.stringify(res));
+                $scope.productSecondClassData = res.list;
+                $scope.$apply();
+            });
+        }
+        //根据id更新商品分类
+        $scope.updateProductSecondClass = function (productSecondclassId, productClassId) {
+            //alert(productSecondclassId+":"+productClassId);
+            $scope.updateProductClassId = productSecondclassId;
+            productSecondclassIds = productSecondclassId;
+            $scope.$apply();
+            $("#select_updateModal option[value=" + productClassId + "]").attr("selected", "selected");
+        }
+
+        //根据商品id删除数据
+        $scope.deleteProductSecondClass = function (productSecondclassId) {
+            $('#confirmModal').modal('show');
+            $scope.confirmBtn = function () {
+                var paramData = {
+                    "isdelete": 1,
+                    "productSecondclassId": productSecondclassId
+                };
+                Comm.ajax(Config.updateProductSecondClassUrl, "post", paramData, function (res) {
+                    //alert(JSON.stringify(res));
+                    $('#confirmModal').modal('hide');
+                    alert("删除成功");
+                    location.reload(); //刷新当前页面
+                });
+            }
+        }
+
+    })
+
+
+    //添加商品二级分类
+    function addProductClass() {
+        var select_addModal = $('#select_addModal option:selected').val();
+        var productClassName_add = $("#productClassName_add").val();
+        var productClassRemark_add = $("#productClassRemark_add").val();
+        if (!select_addModal) {
+            alert("请选择商品分类");
+            return;
+        } else if (!productClassName_add) {
+            alert("请输入二级分类名称");
+            return;
+        } else if (!productClassRemark_add) {
+            alert("请输入备注");
+            return;
+        }
+        var paramData = {
+            "secondclassName": productClassName_add,
+            "secondclassRemark": productClassRemark_add,
+            "productClassId": select_addModal
+        };
+        Comm.ajax(Config.addProductSecondClassUrl, "post", paramData, function (res) {
+            //alert(JSON.stringify(res));
+            alert("添加成功");
+            location.reload(); //刷新当前页面
+        });
+    }
+    //更新商品二级分类
+    function updateProductSecondClass() {
+        var select_updateModal = $('#select_updateModal option:selected').val();
+        var className_update = $("#className_update").val();
+        var productClassRemark_update = $("#productClassRemark_update").val();
+        //alert(select_updateModal + ":" + className_update + ":" + productClassRemark_update + ":" + productSecondclassIds);
+        if (!select_updateModal) {
+            alert("请选择商品分类");
+            return;
+        } else if (!className_update) {
+            alert("请修改商品分类名称");
+            return;
+        } else if (!productClassRemark_update) {
+            alert("请修改备注");
+            return;
+        }
+        var paramData = {
+            "secondclassName": className_update,
+            "secondclassRemark": productClassRemark_update,
+            "productClassId": select_updateModal,
+            "productSecondclassId": productSecondclassIds
+        };
+        Comm.ajax(Config.updateProductSecondClassUrl, "post", paramData, function (res) {
+            //alert(JSON.stringify(res));
+            alert("更新成功");
+            location.reload(); //刷新当前页面
+        });
+    }
+</script>
 </html>

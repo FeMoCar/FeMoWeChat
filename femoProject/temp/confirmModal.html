@@ -1,0 +1,19 @@
+<!-- 删除确认模态框（Modal） -->
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">提示消息</h4>
+            </div>
+            <div class="modal-body ">
+                您确定要删除这条数据吗？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" ng-click="confirmBtn()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
