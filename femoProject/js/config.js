@@ -5,8 +5,8 @@
  var Config = Config();
  Config.Func();  
  */
-var host = "http://39.104.15.177:8080/FeMoDemo/";
-
+/*var host = "http://39.104.15.177:8080/FeMoDemo/";*/
+var host = "http://127.0.0.1:8080/FeMoDemo/";
 function Config() {
 	var config = {
 		"getUserInfoUrl": host + "WxUser/selectall?", //后台查询所有用户信息接口
@@ -18,7 +18,8 @@ function Config() {
 		"getProductClassUrl": host + "ProductClass/selectAll?", //获取商品分类
 		"getUpdateProductClassUrl": host + "ProductClass/updateProductClass?", //更新商品分类
 		"getAddProductClassUrl": host + "ProductClass/addProductClass?", //添加商品分类
-
+		"getUserShareUrl": host + "UserShare/selectAllById?", //查询用户分享信息
+		"deleteUserShareUrl": host + "UserShare/updateUserShare?", //删除用户享信息
 	}
 	return config;
 }
