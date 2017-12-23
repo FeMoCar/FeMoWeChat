@@ -7,6 +7,7 @@
  */
 /*var host = "http://39.104.15.177:8080/FeMoDemo/";*/
 var host = "http://127.0.0.1:8080/FeMoDemo/";
+var hostPath = "http://127.0.0.1:8080/FeMoDemo";
 function Config() {
 	var config = {
 		"getUserInfoUrl": host + "WxUser/selectall?", //后台查询所有用户信息接口
@@ -28,7 +29,7 @@ function Config() {
 		"updateProductClassTypeUrl": host + "ProductSpec/updateProductSpec",//更新商品二级分类
 
 		"getUserShareUrl": host + "UserShare/selectAllById?", //查询用户分享信息
-		"deleteUserShareUrl": host + "UserShare/updateUserShare?", //删除用户享信息
+		"deleteUserShareUrl": host + "UserShare/updateUserShare", //删除用户享信息
 	}
 	return config;
 
