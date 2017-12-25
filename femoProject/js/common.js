@@ -55,7 +55,12 @@ function Common() {
             $scope.$apply();
         });
     }
-
+    
+    common.ajaxAsync=function () {
+        $.ajaxSetup({
+            async: true
+        });
+    }
     //图片预览及上传
     common.uploadImg=function (fileDom, previews, imageForms) {
         //判断是否支持FileReader
