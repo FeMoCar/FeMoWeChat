@@ -1,209 +1,149 @@
 <!DOCTYPE html>
-<html ng-app="myApp" ng-controller="modalClassCtr">
-	<head>
-		<meta charset="UTF-8">
-		<title>用户分享信息</title>
-		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
-		<link rel="stylesheet" href="assets/css/ace.min.css" />
-		<link rel="stylesheet" href="css/userInfo.css" />
-		<link rel="stylesheet" href="css/common.css" />
-		<link rel="stylesheet" href="css/layui.css" />
-	</head>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>用户分享信息</title>
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="assets/css/ace.min.css"/>
+        <link rel="stylesheet" href="css/common.css"/>
+        <link rel="stylesheet" href="css/layui.css"/>
+        <link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
+</head>
 
-	<body>
-		<!--
-        	描述：头部模版
-        -->
-		<div ng-include="'temp/header.html'"></div>
+<body>
+<!--
+    描述：头部模版
+-->
+<div ng-include="'temp/header.html'"></div>
 
-		<div class="main-container" id="main-container">
-			<!--
-        	描述：左边导航模版
-              -->
-			<div ng-include="'temp/leftNav.html'"></div>
+<div class="main-container" id="main-container">
+    <!--
+    描述：左边导航模版
+      -->
+    <div ng-include="'temp/leftNav.html'"></div>
 
-			<div class="main-content">
-				<div class="breadcrumbs" id="breadcrumbs">
-					<ul class="breadcrumb">
-						<li>
-							<i class="icon-home home-icon"></i>
-							<a href="#">首页</a>
-						</li>
-						<li class="active">用户分享信息</li>
-					</ul>
-				</div>
-				<div class="page-content">
-					<div class="row">
+    <div class="main-content">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a href="#">首页</a>
+                </li>
+                <li class="active">用户分享信息</li>
+            </ul>
+        </div>
+        <div class="page-content">
+            <div class="row">
 
-						<div class="col-xs-12">
+                <div class="col-xs-12">
 
-							<div class="tabbable">
-								<ul class="nav nav-tabs" id="myTab">
-									<li class="active">
-										<a data-toggle="tab" href="#home">
-											用户分享信息
-										</a>
-									</li>
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="active">
+                                <a data-toggle="tab" href="#home">
+                                    用户分享信息
+                                </a>
+                            </li>
 
-								</ul>
+                        </ul>
+                        <div id="app" ng-app="myApp" ng-controller="modalClassCtr">
+                            <div class="tab-content">
+                                <div id="home" class="tab-pane in active clearfix">
+                                    <div class="search-contain">
+                                        <div class="col-xs-1 text-right fr" style="line-height: 37px;font-size: 16px;">
+                                            查询条件：
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <div class="form-group">
+                                                <select class="form-control" id="select_search">
+                                                    <option value="nickname">用户昵称</option>
+                                                    <option value="productName">商品名称</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <input type="text" id="search_txt" class="form-control" autocomplete="off">
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <button class="btn btn-info btn-sm" ng-click="search()">查询</button>
+                                        </div>
+                                    </div>
 
-								<div class="tab-content">
-									<div id="home" class="tab-pane in active clearfix">
-										<div class="search-contain">
-											<div class="col-xs-1 text-right fr" style="line-height: 37px;font-size: 16px;">查询条件：</div>
-											<div class="col-xs-1">
-												<div class="form-group">
-													<select class="form-control" id="select_search">
-														<option value="nickname">用户昵称</option>
-														<option value="productName">商品名称</option>
-													</select>
-												</div>
-											</div>
-											<div class="col-xs-2">
-												<input type="text" id="search_txt" class="form-control" autocomplete="off">
-											</div>
-											<div class="col-xs-2">
-												<button class="btn btn-info btn-sm" ng-click="search()">查询</button>
-											</div>
-										</div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="table-responsive">
+                                                <div id="sample-table-2_wrapper" class="dataTables_wrapper" role="grid">
 
-										<div class="row">
-											<div class="col-xs-12">
-												<div class="table-responsive">
-													<div id="sample-table-2_wrapper" class="dataTables_wrapper" role="grid">
+                                                    <table id="sample-table-2"
+                                                           class="table table-striped table-bordered table-hover dataTable"
+                                                           aria-describedby="sample-table-2_info">
+                                                        <thead>
+                                                        <tr role="row">
+                                                            <th class="sorting_disabled">分享ID</th>
+                                                            <th class="sorting_disabled" hidden>微信用户ID</th>
+                                                            <th class="sorting_disabled">商品ID</th>
+                                                            <th class="sorting_disabled">商品名称</th>
+                                                            <th class="sorting_disabled">分享时间</th>
+                                                            <th class="sorting_disabled">分享地址</th>
+                                                            <th class="sorting_disabled">用户昵称</th>
+                                                            <th class="sorting_disabled">用户真名</th>
+                                                            <th class="sorting_disabled">操作</th>
+                                                        </tr>
+                                                        </thead>
 
-														<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
-															<thead>
-																<tr role="row">
-																	<th class="sorting_disabled">分享ID</th>
-																	<th class="sorting_disabled" hidden>微信用户ID</th>
-																	<th class="sorting_disabled">商品ID</th>
-																	<th class="sorting_disabled">商品名称</th>
-																	<th class="sorting_disabled">分享时间</th>
-																	<th class="sorting_disabled">分享地址</th>
-																	<th class="sorting_disabled">用户昵称</th>
-																	<th class="sorting_disabled">用户真名</th>
-																	<th class="sorting_disabled">操作</th>
-																</tr>
-															</thead>
+                                                        <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                                        <tr class="odd" ng-repeat="(index,item) in modalShareData">
+                                                            <td class="line-h">{{item.wxshareId}}</td>
+                                                            <td class="line-h" hidden>{{item.wxuserId}}</td>
+                                                            <td class="line-h">{{item.productId}}</td>
+                                                            <td class="line-h">{{item.productName}}</td>
+                                                            <td class="line-h">{{item.shareTime}}</td>
+                                                            <td class="line-h">{{item.shareUrl}}</td>
+                                                            <td class="line-h">{{item.nickname}}</td>
+                                                            <td class="line-h">{{item.wxuserRealname}}</td>
+                                                            <td class="line-h">
+                                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                                    <a class="red" href="#"
+                                                                       ng-click="deleteShare(item.wxshareId)">
+                                                                        <i class="icon-trash bigger-130"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="pager" ng-show="pageCount">
+                                                        <pager page-count="pageCount" current-page="currentPage"
+                                                               on-page-change="onPageChange()" first-text="首页"
+                                                               next-text="下一页" prev-text="上一页" last-text="尾页"
+                                                               show-goto="true" goto-text="跳转到"></pager>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-															<tbody role="alert" aria-live="polite" aria-relevant="all">
-																<tr class="odd" ng-repeat="(index,item) in modalShareData">
-																	<td class="line-h">{{item.wxshareId}}</td>
-																	<td class="line-h" hidden>{{item.wxuserId}}</td>
-																	<td class="line-h">{{item.productId}}</td>
-																	<td class="line-h">{{item.productName}}</td>
-																	<td class="line-h">{{item.shareTime}}</td>
-																	<td class="line-h">{{item.shareUrl}}</td>
-																	<td class="line-h">{{item.nickname}}</td>
-																	<td class="line-h">{{item.wxuserRealname}}</td>
-																	<td class="line-h">
-																		<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-																			<a class="red" href="#" ng-click="deleteShare(item.wxshareId)">
-																				<i class="icon-trash bigger-130"></i>
-																			</a>
-																		</div>
-																	</td>
-																</tr>
-															</tbody>
-														</table>
-														<div class="row">
-															<div class="col-sm-6">
-																<div class="dataTables_info" id="sample-table-2_info">Showing 1 to 10 of 23 entries</div>
-															</div>
-															<div class="col-sm-6">
-																<div class="dataTables_paginate paging_bootstrap">
-																	<ul class="pagination">
-																		<li class="prev disabled">
-																			<a href="#"><i class="icon-double-angle-left"></i></a>
-																		</li>
-																		<li class="active">
-																			<a href="#">1</a>
-																		</li>
-																		<li>
-																			<a href="#">2</a>
-																		</li>
-																		<li>
-																			<a href="#">3</a>
-																		</li>
-																		<li class="next">
-																			<a href="#"><i class="icon-double-angle-right"></i></a>
-																		</li>
-																	</ul>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+</body>
+<script src="assets/ngpagination/jquery.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="assets/js/ace.min.js"></script>
+<script src="assets/js/ace-extra.min.js"></script>
+<script src="assets/ngpagination/angular.min.js"></script>
+<script src="assets/ngpagination/ng-pagination.js"></script>
 
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</body>
-
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="js/jquery.form.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="js/angular.min.js"></script>
-	<script src="assets/js/ace.min.js"></script>
-	<script src="assets/js/ace-extra.min.js"></script>
-
-	<script src="js/config.js"></script>
-	<script src="js/common.js"></script>
-	<script charset="utf-8" src="js/userShare.js"></script>
-<!--	<script type="text/javascript">
-		var Config = Config();
-		var Comm = Common();
-		$(function () {
-
-		})
-		var app = angular.module("myApp", []);
-		app.controller("modalClassCtr", function ($scope) {
-			$scope.isH = true;
-			getModalClass($scope);
-			//根据用户输入搜索
-			$scope.search = function () {
-				var search_type = $('#select_search option:selected').val();
-				var search_txt = $("#search_txt").val();
-				var searchUrl = Config.getUserShareUrl + "startrow=1&endrow=50&" + search_type + "=" + search_txt;
-				Comm.ajax(searchUrl, "get", "", function (res) {
-					$scope.modalShareData = JSON.parse(res).list;
-					$scope.$apply();
-				});
-			}
-			//根据分享id删除分享信息
-			$scope.deleteShare = function (shareId) {
-				var paramData = {
-					"isdelete": 1,
-					"wxshareId": shareId,
-				};
-				Comm.ajax(Config.deleteUserShareUrl, "post", paramData, function (res) {
-					//alert(JSON.stringify(res));
-					alert("删除成功");
-					location.reload(); //刷新当前页面
-				});
-			}
-		})
-
-		//获取分享模块数据
-		function getModalClass($scope) {
-			var startRow = 1;
-			var endRow = 50;
-			var getModalClassUrl = Config.getUserShareUrl + "startrow=" + startRow + "&endrow=" + endRow;
-			Comm.ajax(getModalClassUrl, "get", "", function (res) {
-				$scope.modalShareData = JSON.parse(res).list;
-				$scope.$apply();
-			});
-		}
-	</script>-->
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script charset="utf-8" src="js/userShare.js"></script>
 
 </html>
