@@ -28,6 +28,12 @@ function Config() {
         "addProductClassTypeUrl": host + "ProductSpec/addProductSpec",//添加商品二级分类
         "updateProductClassTypeUrl": host + "ProductSpec/updateProductSpec",//更新商品二级分类
 
+
+        "getProductInfoUrl": host + "Product/selectAll",//获取商品信息
+        "updateProductInfoUrl": host + "Product/updateProduct",//更新商品信息
+        "addProductInfoUrl": host + "Product/addProduct",//添加商品信息
+
+
     }
     return config;
 }

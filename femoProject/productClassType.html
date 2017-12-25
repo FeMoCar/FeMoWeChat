@@ -223,6 +223,8 @@
         </div>
     </div>
 </div>
+<!-- 删除确认模态框（Modal） -->
+<div ng-include="'temp/confirmModal.html'"></div>
 </body>
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
@@ -245,7 +247,7 @@
     app.controller("productClassTypeCtr", function ($scope) {
         $scope.isC = true;
         Comm.getProductSecondClass($scope); //获取商品二级分类数据
-        getProductClassType($scope);  //获取商品型号
+        Comm.getProductClassType($scope);  //获取商品型号
         //商品型号搜索
         $scope.search = function () {
             var search_txt = $("#search_txt").val();
@@ -270,29 +272,32 @@
         //根据商品id删除数据
         $scope.deleteProductClassType = function (productClassTypeId) {
             //alert(productClassTypeId);
-            var paramData={
-                "isdelete": 1,
-                "productSpecid": productClassTypeId
-            };
-            Comm.ajax(Config.updateProductClassTypeUrl, "post", paramData, function (res) {
-                //alert(JSON.stringify(res));
-                alert("删除成功");
-                location.reload(); //刷新当前页面
-            });
+            $('#confirmModal').modal('show');
+            $scope.confirmBtn = function () {
+                var paramData={
+                    "isdelete": 1,
+                    "productSpecid": productClassTypeId
+                };
+                Comm.ajax(Config.updateProductClassTypeUrl, "post", paramData, function (res) {
+                    //alert(JSON.stringify(res));
+                    alert("删除成功");
+                    location.reload(); //刷新当前页面
+                });
+            }
         }
 
     })
     //获取商品分类型号
-    function getProductClassType($scope) {
-        var startRow = 1;
-        var endRow = 50;
-        var getProductClassTypeUrl = Config.getProductClassTypeUrl + "startrow=" + startRow + "&endrow=" + endRow;
-        Comm.ajax(getProductClassTypeUrl, "get", "", function (res) {
-            //alert(JSON.stringify(res));
-            $scope.productClassTypeData = res.list;
-            $scope.$apply();
-        });
-    }
+//    function getProductClassType($scope) {
+//        var startRow = 1;
+//        var endRow = 50;
+//        var getProductClassTypeUrl = Config.getProductClassTypeUrl + "startrow=" + startRow + "&endrow=" + endRow;
+//        Comm.ajax(getProductClassTypeUrl, "get", "", function (res) {
+//            //alert(JSON.stringify(res));
+//            $scope.productClassTypeData = res.list;
+//            $scope.$apply();
+//        });
+//    }
 
     //添加商品二级分类
     function addProductClass() {

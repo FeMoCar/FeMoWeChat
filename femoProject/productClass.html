@@ -192,7 +192,8 @@
 				</div>
 			</div>
 		</div>
-
+		<!-- 删除确认模态框（Modal） -->
+		<div ng-include="'temp/confirmModal.html'"></div>
 	</body>
 
 	<script src="assets/js/jquery.min.js"></script>
@@ -247,23 +248,26 @@
 			//根据商品id删除数据
 			$scope.deleteProductClass = function(productId) {
 				//var deleteProductClassUrl = Config.getUpdateProductClassUrl + "isdelete=1&productClassId=" + productId;
-				$.ajax({
-					type: "post",
-					url: Config.UpdateProductClassUrl,
-					dataType: "json",
-					data: {
-						"isdelete": 1,
-						"productClassId": productId
-					},
-					success: function(data) {
-						//alert(JSON.stringify(data));
-						alert("删除成功");
-						location.reload(); //刷新当前页面
-					},
-					complete: function() {
+                $('#confirmModal').modal('show');
+                $scope.confirmBtn = function () {
+                    $.ajax({
+                        type: "post",
+                        url: Config.UpdateProductClassUrl,
+                        dataType: "json",
+                        data: {
+                            "isdelete": 1,
+                            "productClassId": productId
+                        },
+                        success: function(data) {
+                            //alert(JSON.stringify(data));
+                            alert("删除成功");
+                            location.reload(); //刷新当前页面
+                        },
+                        complete: function() {
 
-					}
-				});
+                        }
+                    });
+				}
 			}
 
 		})

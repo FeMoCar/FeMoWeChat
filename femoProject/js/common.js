@@ -44,6 +44,18 @@ function Common() {
             $scope.$apply();
         });
     }
+    //获取商品分类型号
+    common.getProductClassType=function ($scope) {
+        var startRow = 1;
+        var endRow = 50;
+        var getProductClassTypeUrl = Config.getProductClassTypeUrl + "startrow=" + startRow + "&endrow=" + endRow;
+        common.ajax(getProductClassTypeUrl, "get", "", function (res) {
+            //alert(JSON.stringify(res));
+            $scope.productClassTypeData = res.list;
+            $scope.$apply();
+        });
+    }
+
     //图片预览及上传
     common.uploadImg=function (fileDom, previews, imageForms) {
         //判断是否支持FileReader

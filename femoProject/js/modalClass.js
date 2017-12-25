@@ -38,15 +38,18 @@ app.controller("modalClassCtr", function ($scope) {
 
     //根据模块id删除一条数据
     $scope.deleteModalClass = function (modalClassId) {
-        var paramData={
-            "isdelete": 1,
-            "classificationId": modalClassId
-        };
-        Comm.ajax(Config.getUpdateModalClassUrl, "post", paramData, function (res) {
-            //alert(JSON.stringify(res));
-            alert("删除成功");
-            location.reload(); //刷新当前页面
-        });
+        $('#confirmModal').modal('show');
+        $scope.confirmBtn = function () {
+            var paramData={
+                "isdelete": 1,
+                "classificationId": modalClassId
+            };
+            Comm.ajax(Config.getUpdateModalClassUrl, "post", paramData, function (res) {
+                //alert(JSON.stringify(res));
+                alert("删除成功");
+                location.reload(); //刷新当前页面
+            });
+        }
     }
 
 })
