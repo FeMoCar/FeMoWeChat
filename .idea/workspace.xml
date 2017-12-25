@@ -25,7 +25,7 @@
         <entry file="file://$PROJECT_DIR$/femoProject/productSecondClass.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="20">
-              <caret line="193" column="101" lean-forward="true" selection-start-line="193" selection-start-column="69" selection-end-line="193" selection-end-column="101" />
+              <caret line="193" column="101" lean-forward="false" selection-start-line="193" selection-start-column="69" selection-end-line="193" selection-end-column="101" />
               <folding>
                 <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -39,17 +39,17 @@
         <entry file="file://$PROJECT_DIR$/femoProject/userInfo.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="430">
-              <caret line="197" column="52" lean-forward="true" selection-start-line="197" selection-start-column="52" selection-end-line="197" selection-end-column="52" />
+              <caret line="197" column="52" lean-forward="false" selection-start-line="197" selection-start-column="52" selection-end-line="197" selection-end-column="52" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="common.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="common.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/femoProject/js/common.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="53" column="39" lean-forward="false" selection-start-line="53" selection-start-column="19" selection-end-line="53" selection-end-column="39" />
+            <state relative-caret-position="-812">
+              <caret line="57" column="4" lean-forward="false" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -58,9 +58,11 @@
       <file leaf-file-name="config.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/femoProject/js/config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="592">
-              <caret line="33" column="26" lean-forward="false" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="26" />
-              <folding />
+            <state relative-caret-position="726">
+              <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -80,11 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="goods.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="goods.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/femoProject/goods.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="535">
-              <caret line="336" column="41" lean-forward="false" selection-start-line="336" selection-start-column="28" selection-end-line="336" selection-end-column="41" />
+            <state relative-caret-position="454">
+              <caret line="173" column="25" lean-forward="true" selection-start-line="173" selection-start-column="25" selection-end-line="173" selection-end-column="25" />
               <folding>
                 <element signature="n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
               </folding>
@@ -106,7 +108,7 @@
         <entry file="file://$PROJECT_DIR$/femoProject/addGoods.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="129">
-              <caret line="351" column="75" lean-forward="true" selection-start-line="351" selection-start-column="75" selection-end-line="351" selection-end-column="75" />
+              <caret line="351" column="75" lean-forward="false" selection-start-line="351" selection-start-column="75" selection-end-line="351" selection-end-column="75" />
               <folding />
             </state>
           </provider>
@@ -164,14 +166,14 @@
         <option value="$PROJECT_DIR$/femoProject/modalClass.html" />
         <option value="$PROJECT_DIR$/femoProject/js/modalClass.js" />
         <option value="$PROJECT_DIR$/femoProject/userInfo.html" />
-        <option value="$PROJECT_DIR$/femoProject/js/config.js" />
         <option value="$PROJECT_DIR$/femoProject/addGoods.html" />
         <option value="$PROJECT_DIR$/femoProject/assets/js/date-time/bootstrap-datepicker.min.js" />
         <option value="$PROJECT_DIR$/femoProject/css/city.css" />
         <option value="$PROJECT_DIR$/femoProject/js/city.min.js" />
-        <option value="$PROJECT_DIR$/femoProject/js/common.js" />
         <option value="$PROJECT_DIR$/femoProject/productClassType.html" />
         <option value="$PROJECT_DIR$/femoProject/goods.html" />
+        <option value="$PROJECT_DIR$/femoProject/js/config.js" />
+        <option value="$PROJECT_DIR$/femoProject/js/common.js" />
       </list>
     </option>
   </component>
@@ -366,12 +368,12 @@
       <updated>1513915210380</updated>
       <workItem from="1513915230267" duration="94000" />
       <workItem from="1513915351478" duration="18428000" />
-      <workItem from="1514162763545" duration="19483000" />
+      <workItem from="1514162763545" duration="20082000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38005000" />
+    <option name="totallyTimeSpent" value="38604000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -504,7 +506,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="756">
           <caret line="28" column="34" lean-forward="false" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="34" />
-          <folding />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -567,7 +571,7 @@
     <entry file="file://$PROJECT_DIR$/femoProject/userInfo.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="430">
-          <caret line="197" column="52" lean-forward="true" selection-start-line="197" selection-start-column="52" selection-end-line="197" selection-end-column="52" />
+          <caret line="197" column="52" lean-forward="false" selection-start-line="197" selection-start-column="52" selection-end-line="197" selection-end-column="52" />
           <folding />
         </state>
       </provider>
@@ -591,7 +595,7 @@
     <entry file="file://$PROJECT_DIR$/femoProject/addGoods.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="129">
-          <caret line="351" column="75" lean-forward="true" selection-start-line="351" selection-start-column="75" selection-end-line="351" selection-end-column="75" />
+          <caret line="351" column="75" lean-forward="false" selection-start-line="351" selection-start-column="75" selection-end-line="351" selection-end-column="75" />
           <folding />
         </state>
       </provider>
@@ -620,22 +624,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/femoProject/js/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="592">
-          <caret line="33" column="26" lean-forward="false" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/femoProject/js/common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="53" column="39" lean-forward="false" selection-start-line="53" selection-start-column="19" selection-end-line="53" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/femoProject/productClassType.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
@@ -652,7 +640,7 @@
     <entry file="file://$PROJECT_DIR$/femoProject/productSecondClass.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="20">
-          <caret line="193" column="101" lean-forward="true" selection-start-line="193" selection-start-column="69" selection-end-line="193" selection-end-column="101" />
+          <caret line="193" column="101" lean-forward="false" selection-start-line="193" selection-start-column="69" selection-end-line="193" selection-end-column="101" />
           <folding>
             <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
             <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -663,11 +651,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/femoProject/goods.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="336" column="41" lean-forward="false" selection-start-line="336" selection-start-column="28" selection-end-line="336" selection-end-column="41" />
+        <state relative-caret-position="454">
+          <caret line="173" column="25" lean-forward="true" selection-start-line="173" selection-start-column="25" selection-end-line="173" selection-end-column="25" />
           <folding>
             <element signature="n#div#2;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/femoProject/js/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="726">
+          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/femoProject/js/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-812">
+          <caret line="57" column="4" lean-forward="false" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>

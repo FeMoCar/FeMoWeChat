@@ -1,328 +1,149 @@
 <!DOCTYPE html>
-<html ng-app="myApp" ng-controller="modalClassCtr">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>用户分享信息</title>
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="assets/css/ace.min.css"/>
+        <link rel="stylesheet" href="css/common.css"/>
+        <link rel="stylesheet" href="css/layui.css"/>
+        <link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
+</head>
 
-	<head>
-		<meta charset="UTF-8">
-		<title>用户分享信息</title>
-		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
-		<link rel="stylesheet" href="assets/css/ace.min.css" />
-		<link rel="stylesheet" href="css/userInfo.css" />
-		<link rel="stylesheet" href="css/common.css" />
-		<link rel="stylesheet" href="css/layui.css" />
-	</head>
+<body>
+<!--
+    描述：头部模版
+-->
+<div ng-include="'temp/header.html'"></div>
 
-	<body>
-		<!--
-        	描述：头部模版
-        -->
-		<div ng-include="'temp/header.html'"></div>
+<div class="main-container" id="main-container">
+    <!--
+    描述：左边导航模版
+      -->
+    <div ng-include="'temp/leftNav.html'"></div>
 
-		<div class="main-container" id="main-container">
-			<!--
-        	描述：左边导航模版
-              -->
-			<div ng-include="'temp/leftNav.html'"></div>
+    <div class="main-content">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a href="#">首页</a>
+                </li>
+                <li class="active">用户分享信息</li>
+            </ul>
+        </div>
+        <div class="page-content">
+            <div class="row">
 
-			<div class="main-content">
-				<div class="breadcrumbs" id="breadcrumbs">
-					<ul class="breadcrumb">
-						<li>
-							<i class="icon-home home-icon"></i>
-							<a href="#">首页</a>
-						</li>
-						<li class="active">用户分享信息</li>
-					</ul>
-				</div>
-				<div class="page-content">
-					<div class="row">
+                <div class="col-xs-12">
 
-						<div class="col-xs-12">
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="active">
+                                <a data-toggle="tab" href="#home">
+                                    用户分享信息
+                                </a>
+                            </li>
 
-							<div class="tabbable">
-								<ul class="nav nav-tabs" id="myTab">
-									<li class="active">
-										<a data-toggle="tab" href="#home">
-											用户分享信息
-										</a>
-									</li>
+                        </ul>
+                        <div id="app" ng-app="myApp" ng-controller="modalClassCtr">
+                            <div class="tab-content">
+                                <div id="home" class="tab-pane in active clearfix">
+                                    <div class="search-contain">
+                                        <div class="col-xs-1 text-right fr" style="line-height: 37px;font-size: 16px;">
+                                            查询条件：
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <div class="form-group">
+                                                <select class="form-control" id="select_search">
+                                                    <option value="nickname">用户昵称</option>
+                                                    <option value="productName">商品名称</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <input type="text" id="search_txt" class="form-control" autocomplete="off">
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <button class="btn btn-info btn-sm" ng-click="search()">查询</button>
+                                        </div>
+                                    </div>
 
-									<!--<li>
-										<a data-toggle="tab" href="#profile">
-											用户推荐信息
-										</a>
-									</li>-->
-								</ul>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="table-responsive">
+                                                <div id="sample-table-2_wrapper" class="dataTables_wrapper" role="grid">
 
-								<div class="tab-content">
-									<div id="home" class="tab-pane in active clearfix">
-										<div class="search-contain">
-											<div class="col-xs-1 text-right fr" style="line-height: 37px;font-size: 16px;">查询条件：</div>
-											<div class="col-xs-1">
-												<div class="form-group">
-													<select class="form-control" id="select_search">
-														<option value="classificationName">用户昵称</option>
-														<option value="classificationProductId">用户名称</option>
-													</select>
-												</div>
-											</div>
-											<div class="col-xs-2">
-												<input type="text" id="search_txt" class="form-control" autocomplete="off">
-											</div>
-											<div class="col-xs-2">
-												<button class="btn btn-info btn-sm" ng-click="search()">查询</button>
-												<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">添加</button>
-											</div>
-										</div>
+                                                    <table id="sample-table-2"
+                                                           class="table table-striped table-bordered table-hover dataTable"
+                                                           aria-describedby="sample-table-2_info">
+                                                        <thead>
+                                                        <tr role="row">
+                                                            <th class="sorting_disabled">分享ID</th>
+                                                            <th class="sorting_disabled" hidden>微信用户ID</th>
+                                                            <th class="sorting_disabled">商品ID</th>
+                                                            <th class="sorting_disabled">商品名称</th>
+                                                            <th class="sorting_disabled">分享时间</th>
+                                                            <th class="sorting_disabled">分享地址</th>
+                                                            <th class="sorting_disabled">用户昵称</th>
+                                                            <th class="sorting_disabled">用户真名</th>
+                                                            <th class="sorting_disabled">操作</th>
+                                                        </tr>
+                                                        </thead>
 
-										<div class="row">
-											<div class="col-xs-12">
-												<div class="table-responsive">
-													<div id="sample-table-2_wrapper" class="dataTables_wrapper" role="grid">
+                                                        <tbody role="alert" aria-live="polite" aria-relevant="all">
+                                                        <tr class="odd" ng-repeat="(index,item) in modalShareData">
+                                                            <td class="line-h">{{item.wxshareId}}</td>
+                                                            <td class="line-h" hidden>{{item.wxuserId}}</td>
+                                                            <td class="line-h">{{item.productId}}</td>
+                                                            <td class="line-h">{{item.productName}}</td>
+                                                            <td class="line-h">{{item.shareTime}}</td>
+                                                            <td class="line-h">{{item.shareUrl}}</td>
+                                                            <td class="line-h">{{item.nickname}}</td>
+                                                            <td class="line-h">{{item.wxuserRealname}}</td>
+                                                            <td class="line-h">
+                                                                <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+                                                                    <a class="red" href="#"
+                                                                       ng-click="deleteShare(item.wxshareId)">
+                                                                        <i class="icon-trash bigger-130"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="pager" ng-show="pageCount">
+                                                        <pager page-count="pageCount" current-page="currentPage"
+                                                               on-page-change="onPageChange()" first-text="首页"
+                                                               next-text="下一页" prev-text="上一页" last-text="尾页"
+                                                               show-goto="true" goto-text="跳转到"></pager>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-														<table id="sample-table-2" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
-															<thead>
-																<tr role="row">
-																	<th class="sorting_disabled">分享ID</th>
-																	<th class="sorting_disabled">微信用户ID</th>
-																	<th class="sorting_disabled">商品ID</th>
-																	<th class="sorting_disabled">商品名称</th>
-																	<th class="sorting_disabled">分享时间</th>
-																	<th class="sorting_disabled">分享地址</th>
-																	<th class="sorting_disabled">用户昵称</th>
-																	<th class="sorting_disabled">用户真名</th>
-																	<th class="sorting_disabled">操作</th>
-																</tr>
-															</thead>
+</body>
+<script src="assets/ngpagination/jquery.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="js/jquery.form.js"></script>
+<script src="assets/js/ace.min.js"></script>
+<script src="assets/js/ace-extra.min.js"></script>
+<script src="assets/ngpagination/angular.min.js"></script>
+<script src="assets/ngpagination/ng-pagination.js"></script>
 
-															<tbody role="alert" aria-live="polite" aria-relevant="all">
-																<tr class="odd" ng-repeat="item in modalClassData">
-																	<td class="sorting_1 line-h">
-																		<a href="#">{{item.classificationName}}</a>
-																	</td>
-																	<td class="line-h">{{item.classificationPath}}</td>
-																	<td class="line-h">{{item.classificationPath}}</td>
-																	<td class="line-h">{{item.classificationProductId}}</td>
-																	<td class="line-h">{{item.classificationProductId}}</td>
-																	<td class="line-h">{{item.classificationProductId}}</td>
-																	<td class="line-h">{{item.classificationProductId}}</td>
-																	<td class="line-h">{{item.classificationProductId}}</td>
-																	<td class="line-h">
-																		<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-
-																			<a class="green" href="#" data-toggle="modal" data-target="#updateClassModal" ng-click="updateClass(item.classificationId,item.classificationProductId)">
-																				<i class="icon-pencil bigger-130"></i>
-																			</a>
-
-																			<a class="red" href="#">
-																				<i class="icon-trash bigger-130"></i>
-																			</a>
-																		</div>
-
-																	</td>
-																</tr>
-															</tbody>
-														</table>
-														<div class="row">
-															<div class="col-sm-6">
-																<div class="dataTables_info" id="sample-table-2_info">Showing 1 to 10 of 23 entries</div>
-															</div>
-															<div class="col-sm-6">
-																<div class="dataTables_paginate paging_bootstrap">
-																	<ul class="pagination">
-																		<li class="prev disabled">
-																			<a href="#"><i class="icon-double-angle-left"></i></a>
-																		</li>
-																		<li class="active">
-																			<a href="#">1</a>
-																		</li>
-																		<li>
-																			<a href="#">2</a>
-																		</li>
-																		<li>
-																			<a href="#">3</a>
-																		</li>
-																		<li class="next">
-																			<a href="#"><i class="icon-double-angle-right"></i></a>
-																		</li>
-																	</ul>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-
-									</div>
-
-									<div id="profile" class="tab-pane clearfix">
-										商品详情轮播图
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-		<!-- 更新分类模态框（Modal） -->
-		<div class="modal fade" id="updateClassModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">更新模块分类{{updateClassId}}</h4>
-					</div>
-					<div class="modal-body">
-						<form class="form-horizontal" role="form" ng-repeat="item in modalClassData" ng-if="item.classificationId==updateClassId">
-							<div class="form-group">
-								<label class="col-sm-4 control-label">模块名称</label>
-								<div class="col-sm-8">
-									<input type="text" value="{{item.classificationName}}" placeholder="请输入模块名称" class="col-xs-10 col-sm-5" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-4 control-label">分类路径</label>
-								<div class="col-sm-8">
-									<input type="text" value="{{item.classificationPath}}" placeholder="请输入分类路径" class="col-xs-10 col-sm-5" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-4 control-label">商品分类</label>
-								<div class="col-sm-4">
-									<select class="form-control" id="select_updateModal">
-										<option value="">请选择</option>
-										<option ng-repeat="item in productClassData" ng-model="selected_modal" value="{{item.productClassId}}">{{item.className}}</option>
-									</select>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-						<button type="button" class="btn btn-primary">更新</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</body>
-
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="js/angular.min.js"></script>
-	<script src="assets/js/ace.min.js"></script>
-	<script src="assets/js/ace-extra.min.js"></script>
-
-	<script src="js/config.js"></script>
-
-	<script type="text/javascript">
-		var Config = Config();
-
-		$(function() {
-
-		})
-		var app = angular.module("myApp", []);
-		app.controller("modalClassCtr", function($scope) {
-			$scope.isH = true;
-
-			getModalClass($scope);
-			getProductClass($scope);
-			//根据用户输入搜索
-			$scope.search = function() {
-				var search_txt = $("#search_txt").val();
-				var searchUrl = Config.getUserShareUrl + "startrow=1&endrow=50&" + search_type + "=" + search_txt;
-				//alert(searchUrl);
-
-				$.ajax({
-					type: "get",
-					url: searchUrl,
-					dataType: "json",
-					success: function(data) {
-						//alert(JSON.stringify(data));
-						$scope.userInfoData = data.list;
-						$scope.$apply();
-					},
-					complete: function() {
-
-					}
-				});
-			}
-			//根据模块id更新模块分类
-			$scope.updateClass = function(modalId,productId) {
-				alert(productId);
-				$scope.updateClassId = modalId;
-                $scope.selected_modal=productId;
-			}
-
-		})
-
-		//获取模块分类数据
-		function getModalClass($scope) {
-			var startRow = 1;
-			var endRow = 50;
-			var getModalClassUrl = Config.getUserShareUrl + "startrow=" + startRow + "&endrow=" + endRow;
-			//alert(getUserInfoUrl);
-			$.ajax({
-				type: "get",
-				url: getModalClassUrl,
-				dataType: "json",
-				success: function(data) {
-					console.log(JSON.stringify(data));
-					console.log(JSON.parse(data).list);
-					$scope.modalClassData = JSON.parse(data).list;
-					$scope.$apply();
-				},
-				complete: function() {
-
-				}
-			});
-		}
-
-		//获取商品分类
-		function getProductClass($scope) {
-			var startRow = 1;
-			var endRow = 50;
-			var getProductClassUrl = Config.getUserShareUrl + "startrow=" + startRow + "&endrow=" + endRow;
-			//alert(getUserInfoUrl);
-			$.ajax({
-				type: "get",
-				url: getProductClassUrl,
-				dataType: "json",
-				success: function(data) {
-					//alert(JSON.stringify(data));
-					$scope.productClassData = data.list;  
-					$scope.$apply();
-				},
-				complete: function() {
-
-				}
-			});
-		}
-
-
-			var getAddModalClassUrl = Config.getUserShareUrl + "classificationName=" + modalName_add + "&classificationImg=" + classificationImg + "&classificationPath=" + modalPath_add + "&classificationProductId=" + select_addModal;
-			//alert(getAddModalClassUrl);
-			$.ajax({
-				type: "get",
-				url: getAddModalClassUrl,
-				dataType: "json",
-				success: function(data) {
-					//alert(JSON.stringify(data));
-					alert("添加成功");
-					location.reload(); //刷新当前页面
-					//$("#myModal").modal('hide');
-				},
-				complete: function() {
-
-				}
-			});
-
-
-	</script>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script charset="utf-8" src="js/userShare.js"></script>
 
 </html>
