@@ -55,7 +55,7 @@ function Common() {
             $scope.$apply();
         });
     }
-    
+
     common.ajaxAsync=function () {
         $.ajaxSetup({
             async: true

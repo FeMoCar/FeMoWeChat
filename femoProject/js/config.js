@@ -5,9 +5,8 @@
  var Config = Config();
  Config.Func();
  */
-/*var host = "http://39.104.15.177:8080/FeMoDemo/";*/
-var host = "http://127.0.0.1:8080/FeMoDemo/";
-var hostPath = "http://127.0.0.1:8080/FeMoDemo";
+var host = "http://39.104.15.177:8080/FeMoDemo/";
+var hostPath = "http://39.104.15.177:8080/FeMoDemo";
 function Config() {
 	var config = {
 		"getUserInfoUrl": host + "WxUser/selectall?", //后台查询所有用户信息接口
