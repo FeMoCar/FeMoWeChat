@@ -24,8 +24,8 @@ function Config() {
 		"addProductSecondClassUrl": host + "ProductSecondClass/addProductSecondclass",//添加商品二级分类
 		"updateProductSecondClassUrl": host + "ProductSecondClass/updateProductSecondclass",//更新商品二级分类
 		"getProductClassTypeUrl": host + "ProductSpec/selectAll?",//获取商品分类型号
-		"addProductClassTypeUrl": host + "ProductSpec/addProductSpec",//添加商品二级分类
-		"updateProductClassTypeUrl": host + "ProductSpec/updateProductSpec",//更新商品二级分类
+		"addProductClassTypeUrl": host + "ProductSpec/addProductSpec",//添加商品分类型号
+		"updateProductClassTypeUrl": host + "ProductSpec/updateProductSpec",//更新商品分类型号
 
 		"getUserShareUrl": host + "UserShare/selectAllById?", //查询用户分享信息
 		"deleteUserShareUrl": host + "UserShare/updateUserShare", //删除用户享信息
@@ -39,6 +39,10 @@ function Config() {
         "getProductInfoUrl": host + "Product/selectAll",//获取商品信息
         "updateProductInfoUrl": host + "Product/updateProduct",//更新商品信息
         "addProductInfoUrl": host + "Product/addProduct",//添加商品信息
+
+        "getProductRIMGUrl": host + "ProductRIMG/selectAll",//获取商品轮播图
+        "addProductRIMGUrl": host + "ProductRIMG/addProductrimg",//添加商品轮播图
+        "updateProductRIMGUrl": host + "ProductRIMG/updateProductrimg",//更新商品轮播图
 	}
 	return config;
 }

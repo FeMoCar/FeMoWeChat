@@ -1,381 +1,221 @@
 <!DOCTYPE html>
 <html ng-app="myApp" ng-controller="myAddGoodsCtr">
 
-	<head>
-		<meta charset="UTF-8">
-		<title>添加商品</title>
-		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
-		<link rel="stylesheet" href="assets/css/ace.min.css" />
-		<link rel="stylesheet" href="assets/css/datepicker.css" />
-		<link rel="stylesheet" href="css/userInfo.css" />
-		<link rel="stylesheet" href="css/common.css" />
+<head>
+    <meta charset="UTF-8">
+    <title>商品详情轮播图</title>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="assets/css/datepicker.css"/>
+    <link rel="stylesheet" href="css/userInfo.css"/>
+    <link rel="stylesheet" href="css/common.css"/>
 
-	</head>   
+</head>
 
-	<body>
-		<!--
-        	作者：yyw
-        	时间：2017-12-11
-        	描述：头部模版
-		-->
-		
-		<div ng-include="'temp/header.html'"></div>
+<body>
+<!--
+    作者：yyw
+    时间：2017-12-11
+    描述：头部模版
+-->
 
-		<div class="main-container" id="main-container">
-			<!--
-        	作者：yyw
-        	时间：2017-12-11
-        	描述：左边导航模版
-              -->
-			<div ng-include="'temp/leftNav.html'"></div>
+<div ng-include="'temp/header.html'"></div>
 
-			<div class="main-content">
-				<div class="breadcrumbs" id="breadcrumbs">
-					<ul class="breadcrumb">
-						<li>
-							<i class="icon-home home-icon"></i>
-							<a href="#">首页</a>
-						</li>
-						<li>
-							<a href="#">商品信息管理</a>
-						</li>
-						<li class="active">添加商品</li>
-					</ul>
-				</div>
-				<div class="page-content">
-					<div class="row">
-						<div class="col-xs-12">
+<div class="main-container" id="main-container">
+    <!--
+    作者：yyw
+    时间：2017-12-11
+    描述：左边导航模版
+      -->
+    <div ng-include="'temp/leftNav.html'"></div>
 
-							<!--<form class="form-horizontal" role="form">-->
-								<!--<div class="form-group">-->
-									<!--<label class="col-sm-3 control-label">商品名称</label>-->
-									<!--<div class="col-sm-7">-->
-										<!--<input type="text" placeholder="请输入商品名称" class="col-xs-10 col-sm-5" />-->
-									<!--</div>-->
-								<!--</div>-->
-								<!--<div class="form-group">-->
-									<!--<label class="col-sm-3 control-label">级别</label>-->
-									<!--<div class="col-sm-3">-->
-										<!--<select class="form-control">-->
-											<!--<option value="">请选择</option>-->
-											<!--<option value="1">1</option>-->
-											<!--<option value="2">2</option>-->
-											<!--<option value="3">3</option> -->
-										<!--</select>-->
-									<!--</div>-->
-								<!--</div>-->
-								<!--<div class="form-group">-->
-									<!--<label class="col-sm-3 control-label">换挡类型</label>-->
-									<!--<div class="col-sm-3">-->
-										<!--<select class="form-control">-->
-											<!--<option value="">请选择</option>-->
-											<!--<option value="1">自动挡</option>-->
-											<!--<option value="2">手动挡</option>-->
-											<!--<option value="3">手自一体</option>-->
-										<!--</select>-->
-									<!--</div>-->
-								<!--</div>-->
-								<!--<div class="form-group">-->
-									<!--<label class="col-sm-3 control-label">排量</label>-->
-									<!--<div class="col-sm-3">-->
-										<!--<select class="form-control">-->
-											<!--<option value="">请选择</option>-->
-											<!--<option value="1">2.0</option>-->
-											<!--<option value="2">3.0</option>-->
-											<!--<option value="3">4.0</option>-->
-										<!--</select>-->
-									<!--</div>-->
-								<!--</div>-->
-								<!--<div class="form-group">-->
-									<!--<label class="col-sm-3 control-label">车系</label>-->
-									<!--<div class="col-sm-3">-->
-										<!--<select class="form-control">-->
-											<!--<option value="">请选择</option>-->
-											<!--<option value="1">全新四系</option>-->
-											<!--<option value="2">全新五系</option>-->
-											<!--<option value="3">全新六系</option>-->
-										<!--</select>-->
-									<!--</div>-->
-								<!--</div>-->
-								<!--<div class="form-group">-->
-									<!--<label class="col-sm-3 control-label">销售类别</label>-->
-									<!--<div class="col-sm-3">-->
-										<!--<select class="form-control">-->
-											<!--<option value="">请选择</option>-->
-											<!--<option value="1">销售类别1</option>-->
-											<!--<option value="2">销售类别2</option>-->
-											<!--<option value="3">销售类别3</option>-->
-										<!--</select>-->
-									<!--</div>-->
-								<!--</div>-->
-								<!--<div class="form-group">-->
-									<!--<label class="col-sm-3 control-label">销售区域</label>-->
-									<!--<div class="col-sm-3">-->
-										<!--<select class="form-control">-->
-											<!--<option value="">请选择</option>-->
-											<!--<option value="1">鄞州区</option>-->
-											<!--<option value="2">海曙区</option>-->
-											<!--<option value="3">江东区</option>-->
-										<!--</select>-->
-									<!--</div>-->
-								<!--</div>-->
-								<!--<div class="form-group">-->
-									<!--<label class="col-sm-3 control-label">汽车价格</label>-->
-									<!--<div class="col-sm-7">-->
-										<!--<input type="text" placeholder="请输入汽车价格" class="col-xs-10 col-sm-5" />-->
-									<!--</div>-->
-								<!--</div>-->
-								<!--<div class="form-group">-->
-									<!--<label class="col-sm-3 control-label">上市日期</label>-->
-									<!--<div class="col-sm-3">-->
-										<!--<div class="input-group">-->
-											<!--<input class="form-control date-picker" id="datetimepicker1" type="text" data-date-format="yyyy-mm-dd" />-->
-											<!--<span class="input-group-addon">-->
-												<!--<i class="icon-calendar bigger-110"></i>-->
-											<!--</span>-->
-										<!--</div>-->
+    <div class="main-content">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a href="#">首页</a>
+                </li>
+                <li>
+                    <a href="#">商品信息管理</a>
+                </li>
+                <li class="active">商品轮播图</li>
+            </ul>
+        </div>
+        <div class="page-content">
+            <div class="row">
+                <div class="col-xs-12">
 
-										<!--&lt;!&ndash;<div>-->
-											<!--<label class="col-sm-0 control-label" for="msgname">-->
-												<!--*查询日期：-->
-											<!--</label>-->
-											<!--<input class="datainp" id="datebuty" type="text" placeholder="请选择" readonly>-->
-                                            <!--<input type="button" class="btn btn-primary" onClick="jeDate({dateCell:'#datebuty',isTime:true,format:'YYYY-MM'})" value="选择日期">-->
-									    <!--</div>&ndash;&gt;-->
-									<!--</div>-->
-								<!--</div>-->
-								<!--<div class="form-group">-->
-									<!--<label class="col-sm-3 control-label">质保期</label>-->
-									<!--<div class="col-sm-7">-->
-										<!--<input type="text" placeholder="请输入质保期" class="col-xs-10 col-sm-5" />-->
-									<!--</div>-->
-								<!--</div>-->
-								<!--<div class="form-group">-->
-									<!--<label class="col-sm-3 control-label">动力类型</label>-->
-									<!--<div class="col-sm-3">-->
-										<!--<select class="form-control">-->
-											<!--<option value="">请选择</option>-->
-											<!--<option value="1">混合</option>-->
-											<!--<option value="2">燃油</option>-->
-											<!--<option value="3">电动</option>-->
-										<!--</select>-->
-									<!--</div>-->
-								<!--</div>-->
-								<!--<div class="form-group">-->
-									<!--<label class="col-sm-3 control-label">重量</label>-->
-									<!--<div class="col-sm-7">-->
-										<!--<input type="text" placeholder="请输入重量" class="col-xs-10 col-sm-5" />-->
-									<!--</div>-->
-								<!--</div>-->
-								<!--<div class="form-group">-->
-									<!--<label class="col-sm-3 control-label">产品尺寸</label>-->
-									<!--<div class="col-sm-7">-->
-										<!--<input type="text" placeholder="请输入产品尺寸" class="col-xs-10 col-sm-5" />-->
-									<!--</div>-->
-								<!--</div>-->
+                    <div id="pictures" class="user-profile">
+                        <ul class="ace-thumbnails">
+                            <li ng-repeat="item in pictureData">
+                                <a href="#" data-rel="colorbox">
+                                    <img alt="150x150" src="{{item.imgurl}}" style="width:150px;height: 150px;"/>
+                                    <div class="text">
+                                        <div class="inner">商品ID:{{item.productId}}</div>
+                                    </div>
+                                </a>
+                                <div class="tools tools-bottom">
+                                    <a href="#" data-toggle="modal"
+                                       data-target="#updateProductImg"
+                                       ng-click="updateProductImg(item)">
+                                        <i class="icon-pencil"></i>
+                                    </a>
+                                    <a href="#">
+                                        <i class="icon-remove red"></i>
+                                    </a>
+                                </div>
+                            </li>
+                            <li style="border:none;" data-toggle="modal"
+                                data-target="#addProductImg">
+                                <a href="#" data-rel="colorbox">
+                                    <img style="width:160px;height:160px;" alt="150x150" src="img/add.png"/>
+                                    <div class="text">
+                                        <div class="inner">添加</div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
 
-								<!--<div class="form-group">-->
-									<!--<label class="col-sm-3 control-label"></label>-->
-									<!--<div class="col-sm-2">-->
-										<!--<button class="btn btn-info btn-lg btn-block">提交</button>-->
-									<!--</div>-->
-								<!--</div>-->
-							<!--</form>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+<!-- 更新商品轮播图（Modal） -->
+<div class="modal fade" id="updateProductImg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">添加商品二级分类</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">二级分类名称</label>
+                        <div class="col-sm-7">
+                            <input type="text" id="productClassName_add" placeholder="请输入分类名称"
+                                   class="col-xs-10 col-sm-5"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">商品分类</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="select_addModal">
+                                <option value="">请选择</option>
+                                <option ng-repeat="item in productClassData" value="{{item.productClassId}}">
+                                    {{item.className}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">备注</label>
+                        <div class="col-sm-7">
+                            <textarea id="productClassRemark_add" class="form-control" rows="3"
+                                      placeholder="请输入备注"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="addProductClass()">添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 添加商品轮播图（Modal） -->
+<div class="modal fade" id="addProductImg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel2">添加商品轮播图</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">商品名称</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="select_productName">
+                                <option value="">请选择</option>
+                                <option ng-repeat="item in goodsInfoData" value="{{item.productId}}">
+                                    {{item.productName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">轮播图地址</label>
+                        <div class="col-sm-7">
 
-		<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addProduct">添加</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="addProductClass()">添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="assets/js/ace.min.js"></script>
+<script src="assets/js/ace-extra.min.js"></script>
 
-		<!-- 添加商品分类模态框（Modal） -->
-		<div class="modal fade" id="addProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-			 aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title" id="myModalLabel">添加商品</h4>
-					</div>
-					<div class="modal-body">
-						<form class="form-horizontal" role="form">
-							<div class="form-group">
-								<label class="col-sm-3 control-label">商品名称</label>
-								<div class="col-sm-7">
-									<input type="text" placeholder="请输入商品名称" class="col-xs-10 col-sm-5" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">级别</label>
-								<div class="col-sm-3">
-									<select class="form-control">
-										<option value="">请选择</option>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">换挡类型</label>
-								<div class="col-sm-3">
-									<select class="form-control">
-										<option value="">请选择</option>
-										<option value="1">自动挡</option>
-										<option value="2">手动挡</option>
-										<option value="3">手自一体</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">排量</label>
-								<div class="col-sm-3">
-									<select class="form-control">
-										<option value="">请选择</option>
-										<option value="1">2.0</option>
-										<option value="2">3.0</option>
-										<option value="3">4.0</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">车系</label>
-								<div class="col-sm-3">
-									<select class="form-control">
-										<option value="">请选择</option>
-										<option value="1">全新四系</option>
-										<option value="2">全新五系</option>
-										<option value="3">全新六系</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">销售类别</label>
-								<div class="col-sm-3">
-									<select class="form-control">
-										<option value="">请选择</option>
-										<option value="1">销售类别1</option>
-										<option value="2">销售类别2</option>
-										<option value="3">销售类别3</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">销售区域</label>
-								<div class="col-sm-3">
-									<select class="form-control">
-										<option value="">请选择</option>
-										<option value="1">鄞州区</option>
-										<option value="2">海曙区</option>
-										<option value="3">江东区</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">汽车价格</label>
-								<div class="col-sm-7">
-									<input type="text" placeholder="请输入汽车价格" class="col-xs-10 col-sm-5" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">上市日期</label>
-								<div class="col-sm-3">
-									<div class="input-group">
-										<input class="form-control date-picker" id="datetimepicker1" type="text" data-date-format="yyyy-mm-dd" />
-										<span class="input-group-addon">
-												<i class="icon-calendar bigger-110"></i>
-											</span>
-									</div>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript">
+    //配置文件（数据请求接口）
+    var Config = Config();
+    var Comm = Common();
+    $(function () {
 
-									<!--<div>
-                                        <label class="col-sm-0 control-label" for="msgname">
-                                            *查询日期：
-                                        </label>
-                                        <input class="datainp" id="datebuty" type="text" placeholder="请选择" readonly>
-                                        <input type="button" class="btn btn-primary" onClick="jeDate({dateCell:'#datebuty',isTime:true,format:'YYYY-MM'})" value="选择日期">
-                                    </div>-->
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">质保期</label>
-								<div class="col-sm-7">
-									<input type="text" placeholder="请输入质保期" class="col-xs-10 col-sm-5" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">动力类型</label>
-								<div class="col-sm-3">
-									<select class="form-control">
-										<option value="">请选择</option>
-										<option value="1">混合</option>
-										<option value="2">燃油</option>
-										<option value="3">电动</option>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">重量</label>
-								<div class="col-sm-7">
-									<input type="text" placeholder="请输入重量" class="col-xs-10 col-sm-5" />
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">产品尺寸</label>
-								<div class="col-sm-7">
-									<input type="text" placeholder="请输入产品尺寸" class="col-xs-10 col-sm-5" />
-								</div>
-							</div>
 
-							<div class="form-group">
-								<label class="col-sm-3 control-label"></label>
-								<div class="col-sm-2">
-									<button class="btn btn-info btn-lg btn-block">提交</button>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="button" class="btn btn-primary" onclick="addProductClass()">添加</button>
-					</div>
-				</div>
-			</div>
-		</div>
+    })
+    var app = angular.module("myApp", []);
+    app.controller("myAddGoodsCtr", function ($scope) {
+        $scope.isC = true;
+        getPicture($scope);
+        Comm.getGoodsInfo($scope); //获取商品信息
 
-	</body>
 
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/date-time/bootstrap-datepicker.min.js"></script>
-	<script src="js/angular.min.js"></script>
-	<script src="assets/js/ace.min.js"></script>
-	<script src="assets/js/ace-extra.min.js"></script>
-	<!--<script src="js/jedate.js"></script>-->
-
-	<script type="text/javascript">
-		$(function() {
-			$('.date-picker').datepicker({
-				autoclose: true,
-				language: 'cn'
-			}).next().on(ace.click_event, function() {
-				$(this).prev().focus();
-			});
-
-		})
-		var app = angular.module("myApp", []);
-		app.controller("myAddGoodsCtr", function($scope) {
-			$scope.isA = false;
-			$scope.isB = false;
-			$scope.isC = true;
-			$scope.isD = false;
-			$scope.isE = false;
-			$scope.isF = false;
-			$scope.isG = false;
-
-		})
-	</script>
+    })
+    //获取轮播图数据
+    function getPicture($scope) {
+//        $.ajax({
+//            type: "get",
+//            url: "modal/picture.json",
+//            dataType: "json",
+//            success: function (data) {
+//                //alert(JSON.stringify(data));
+//                $scope.pictureData = data.datas;
+//                $scope.$apply();
+//            },
+//            complete: function () {
+//
+//            }
+//        });
+        var startRow = 1;
+        var endRow = 50;
+        var getProductRIMGUrl=Config.getProductRIMGUrl+"?startrow="+startRow+"&endrow="+endRow;
+        Comm.ajax(getProductRIMGUrl, "get", "", function (res) {
+            //alert(JSON.stringify(res));
+            $scope.pictureData = res.list;
+            $scope.$apply();
+        });
+    }
+</script>
 
 </html>
