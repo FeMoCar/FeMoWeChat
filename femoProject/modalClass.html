@@ -10,10 +10,9 @@
     <link rel="stylesheet" href="css/userInfo.css"/>
     <link rel="stylesheet" href="css/common.css"/>
     <link rel="stylesheet" href="css/layui.css"/>
-    <link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
 </head>
 
-<>
+<body>
 <!--
     作者：yyw
     时间：2017-12-11
@@ -87,7 +86,8 @@
                                                 <a href="#">{{item.classificationName}}</a>
                                             </td>
                                             <td class="line-h">
-                                                <img src="{{hostPath}}{{item.classificationImg}}" alt="" style="width:45px;height:45px;"/>
+                                                <img src="{{hostPath}}{{item.classificationImg}}" alt=""
+                                                     style="width:45px;height:45px;"/>
                                             </td>
                                             <td class="line-h">{{item.classificationPath}}</td>
                                             <td class="line-h">{{item.classificationProductId}}</td>
@@ -109,12 +109,32 @@
                                         </tr>
                                         </tbody>
                                     </table>
-                                </div>
-                                <div class="message-navbar clearfix">
-                                    <div class="row" style="float:right">
-                                        <div class="pager" ng-show="pageCount">
-                                            <pager page-count="pageCount" current-page="currentPage" on-page-change="onPageChange()" first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页" show-goto="true" goto-text="跳转到">
-                                            </pager>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="dataTables_info" id="sample-table-2_info">Showing 1 to 10 of 23
+                                                entries
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="dataTables_paginate paging_bootstrap">
+                                                <ul class="pagination">
+                                                    <li class="prev disabled">
+                                                        <a href="#"><i class="icon-double-angle-left"></i></a>
+                                                    </li>
+                                                    <li class="active">
+                                                        <a href="#">1</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">2</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">3</a>
+                                                    </li>
+                                                    <li class="next">
+                                                        <a href="#"><i class="icon-double-angle-right"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -126,7 +146,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- 添加模块分类模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -245,8 +264,6 @@
 <script src="js/angular.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
 <script src="assets/js/ace-extra.min.js"></script>
-<script src="assets/ngpagination/angular.min.js"></script>
-<script src="assets/ngpagination/ng-pagination.js"></script>
 
 <script src="js/config.js"></script>
 <script src="js/common.js"></script>

@@ -3,7 +3,6 @@ var Comm = Common();
 var app = angular.module("myApp",['ng-pagination']);
 app.controller("modalClassCtr", ['$scope',function ($scope) {
     $scope.isH = true;
-    //分页改变事件
     $scope.onPageChange = function() {
         var start = ($scope.currentPage-1)*10+1;
         var end = 10;
@@ -26,6 +25,7 @@ app.controller("modalClassCtr", ['$scope',function ($scope) {
     $scope.search = function () {
         var search_type = $('#select_search option:selected').val();
         var search_txt = $("#search_txt").val();
+
         var searchUrl = Config.getUserShareUrl + "startrow=1&endrow=10&" + search_type + "=" + search_txt;
         Comm.ajax(searchUrl, "get", "",
             function (res) {
@@ -33,6 +33,7 @@ app.controller("modalClassCtr", ['$scope',function ($scope) {
                 $scope.$apply(function () {
                     $scope.modalShareData = obj.list;
                     $scope.pageCount = obj.pages;
+                    alert( $scope.pageCount)
                 });
             });
     }
@@ -43,6 +44,7 @@ app.controller("modalClassCtr", ['$scope',function ($scope) {
             "wxshareId": shareId,
         };
         Comm.ajax(Config.deleteUserShareUrl, "post", paramData, function (res) {
+            //alert(JSON.stringify(res));
             alert("删除成功");
             location.reload(); //刷新当前页面
         });

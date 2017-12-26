@@ -4,8 +4,8 @@ var Comm = Common();
 $(function () {
 
 })
-var app = angular.module("myApp", ['ng-pagination']);
-app.controller("modalClassCtr",  ['$scope',function ($scope) {
+var app = angular.module("myApp", []);
+app.controller("modalClassCtr", function ($scope) {
     $scope.isH = true;
 
     $scope.hostPath = hostPath; //图片地址拼接
@@ -14,23 +14,6 @@ app.controller("modalClassCtr",  ['$scope',function ($scope) {
     //getProductClass($scope); //获取商品分类数据
     Comm.getProductClass($scope); //获取商品分类数据
 
-    $scope.onPageChange = function() {
-        var start = ($scope.currentPage-1)*10+1;
-        var end = 10;
-        Comm.ajax(Config.getModalClassUrl, "post",
-            {
-                "startrow":start,
-                "endrow":end
-            },
-            function (res) {
-                var obj = JSON.parse(res);
-                $scope.$apply(function () {
-                    $scope.modalShareData = obj.list;
-                    $scope.pageCount = obj.pages;
-                    $scope.currentPage = obj.pageNum;
-                });
-            });
-    }
     //根据用户输入搜索(模块分类搜索)
     $scope.search = function () {
         var search_txt = $("#search_txt").val();
@@ -38,9 +21,8 @@ app.controller("modalClassCtr",  ['$scope',function ($scope) {
         var searchUrl = Config.getModalClassUrl + "startrow=1&endrow=50&" + search_type + "=" + search_txt;
         //alert(searchUrl);
         Comm.ajax(searchUrl, "get", "", function (res) {
-            var obj = JSON.parse(res);
-            $scope.modalClassData = obj.list;
-            $scope.pageCount = obj.pages;
+            //alert(JSON.stringify(res));
+            $scope.modalClassData = JSON.parse(res).list;
             $scope.$apply();
         });
     }
@@ -70,19 +52,17 @@ app.controller("modalClassCtr",  ['$scope',function ($scope) {
         }
     }
 
-}])
+})
 
 //获取模块分类数据
 function getModalClass($scope) {
     var startRow = 1;
-    var endRow = 10;
+    var endRow = 50;
     var getModalClassUrl = Config.getModalClassUrl + "startrow=" + startRow + "&endrow=" + endRow;
     //alert(getModalClassUrl);
     Comm.ajax(getModalClassUrl, "get", "", function (res) {
         //alert(JSON.stringify(res));
-        var obj = JSON.parse(res);
-        $scope.modalClassData = obj.list;
-        $scope.pageCount = obj.pages;
+        $scope.modalClassData = JSON.parse(res).list;
         $scope.$apply();
     });
 }
