@@ -36,11 +36,11 @@ function Common() {
     //获取商品二级分类数据
     common.getProductSecondClass=function ($scope) {
         var startRow = 1;
-        var endRow = 50;
+        var endRow = 10;
         var getProductSecondClassUrl = Config.getProductSecondClassUrl + "startrow=" + startRow + "&endrow=" + endRow;
         common.ajax(getProductSecondClassUrl, "get", "", function (res) {
-            //alert(JSON.stringify(res));
             $scope.productSecondClassData = res.list;
+            $scope.pageCount = res.pages;
             $scope.$apply();
         });
     }

@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>用户分享信息</title>
-        <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="assets/css/ace.min.css"/>
-        <link rel="stylesheet" href="css/common.css"/>
-        <link rel="stylesheet" href="css/layui.css"/>
-        <link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/layui.css"/>
+    <link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
 </head>
 
 <body>
+<div id="app" ng-app="myApp" ng-controller="modalClassCtr">
 <!--
     描述：头部模版
 -->
@@ -47,7 +48,6 @@
                             </li>
 
                         </ul>
-                        <div id="app" ng-app="myApp" ng-controller="modalClassCtr">
                             <div class="tab-content">
                                 <div id="home" class="tab-pane in active clearfix">
                                     <div class="search-contain">
@@ -87,7 +87,7 @@
                                                             <th class="sorting_disabled">分享时间</th>
                                                             <th class="sorting_disabled">分享地址</th>
                                                             <th class="sorting_disabled">用户昵称</th>
-                                                            <th class="sorting_disabled">用户真名</th>
+                                                            <th class="sorting_disabled">用户真实名</th>
                                                             <th class="sorting_disabled">操作</th>
                                                         </tr>
                                                         </thead>
@@ -113,11 +113,11 @@
                                                         </tr>
                                                         </tbody>
                                                     </table>
-                                                    <div class="pager" ng-show="pageCount">
-                                                        <pager page-count="pageCount" current-page="currentPage"
-                                                               on-page-change="onPageChange()" first-text="首页"
-                                                               next-text="下一页" prev-text="上一页" last-text="尾页"
-                                                               show-goto="true" goto-text="跳转到"></pager>
+                                                    <div class="row" style="float:right">
+                                                        <div class="pager" ng-show="pageCount">
+                                                            <pager page-count="pageCount" current-page="currentPage" on-page-change="onPageChange()" first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页" show-goto="true" goto-text="跳转到">
+                                                            </pager>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
