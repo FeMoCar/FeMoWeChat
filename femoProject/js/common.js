@@ -55,6 +55,21 @@ function Common() {
             $scope.$apply();
         });
     }
+    //获取商品信息
+    common.getGoodsInfo=function ($scope) {
+        var startRow = 1;
+        var endRow = 50;
+        var paramData = {
+            "startrow": startRow,
+            "endrow": endRow
+        };
+        common.ajax(Config.getProductInfoUrl, "post", paramData, function (res) {
+            //alert(JSON.stringify(res));
+            //console.log(res)
+            $scope.goodsInfoData = JSON.parse(res).list;
+            $scope.$apply();
+        });
+    }
 
     common.ajaxAsync=function () {
         $.ajaxSetup({

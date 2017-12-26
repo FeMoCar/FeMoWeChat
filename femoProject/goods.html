@@ -107,7 +107,8 @@
                                                     <!--<a class="blue" href="#">
                                                         <i class="icon-cog bigger-130"></i>
                                                     </a>-->
-                                                    <a class="green" href="#" ng-click="updateProductInfo(item)"  data-toggle="modal"
+                                                    <a class="green" href="#" ng-click="updateProductInfo(item)"
+                                                       data-toggle="modal"
                                                        data-target="#updateProduct">
                                                         <i class="icon-pencil bigger-130"></i>
                                                     </a>
@@ -182,7 +183,7 @@
                         <div class="col-sm-7">
                             <select class="form-control" id="select_productType">
                                 <option value="">请选择</option>
-                                <option ng-repeat="item in productClassTypeData"  value="{{item.productSpecid}}">
+                                <option ng-repeat="item in productClassTypeData" value="{{item.productSpecid}}">
                                     {{item.specName}}{{item.productSpecid}}
                                 </option>
                             </select>
@@ -249,14 +250,14 @@
                                     </ul>
                                     <input type="hidden" name="cho_Province" value="请选择省份">
                                 </span>
-                                 <span id="City" class="City">
+                                    <span id="City" class="City">
                                     <i>请选择城市</i>
                                     <ul>
                                         <li><a href="javascript:void(0)" alt="请选择城市">请选择城市</a></li>
                                     </ul>
                                     <input type="hidden" name="cho_City" value="请选择城市">
                                 </span>
-                                <span id="Area" class="Area">
+                                    <span id="Area" class="Area">
                                     <i>请选择地区</i>
                                     <ul>
                                         <li><a href="javascript:void(0)" alt="请选择地区">请选择地区</a></li>
@@ -337,7 +338,8 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">商品名称</label>
                         <div class="col-sm-9">
-                            <input value="{{item.productName}}" type="text" id="productNameId_update" placeholder="请输入商品名称" class="col-xs-10 col-sm-9"/>
+                            <input value="{{item.productName}}" type="text" id="productNameId_update"
+                                   placeholder="请输入商品名称" class="col-xs-10 col-sm-9"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -345,7 +347,9 @@
                         <div class="col-sm-7">
                             <select class="form-control" id="select_productType_update">
                                 <option value="">请选择</option>
-                                <option ng-repeat="itemList in productClassTypeData" ng-selected="{{itemList.productSpecid}}=={{item.productSpecid}}"  value="{{itemList.productSpecid}}">
+                                <option ng-repeat="itemList in productClassTypeData"
+                                        ng-selected="{{itemList.productSpecid}}=={{item.productSpecid}}"
+                                        value="{{itemList.productSpecid}}">
                                     {{itemList.specName}}
                                 </option>
                             </select>
@@ -365,7 +369,7 @@
                         <div class="col-sm-7">
                             <select class="form-control" id="hdlxSelect_update">
                                 <option value="">请选择</option>
-                                <option selected="selected"  value="自动挡">自动挡</option>
+                                <option selected="selected" value="自动挡">自动挡</option>
                             </select>
                         </div>
                     </div>
@@ -374,7 +378,7 @@
                         <div class="col-sm-7">
                             <select class="form-control" id="plSelect_update">
                                 <option value="">请选择</option>
-                                <option selected="selected"  value="0">0</option>
+                                <option selected="selected" value="0">0</option>
                             </select>
                         </div>
                     </div>
@@ -383,7 +387,7 @@
                         <div class="col-sm-7">
                             <select class="form-control" id="cxSelect_update">
                                 <option value="">请选择</option>
-                                <option  value="2017 智尚版">2017 智尚版</option>
+                                <option value="2017 智尚版">2017 智尚版</option>
                             </select>
                         </div>
                     </div>
@@ -392,9 +396,12 @@
                         <div class="col-sm-7">
                             <select class="form-control" id="xslbSelect_update">
                                 <option value="">请选择</option>
-                                <option ng-selected='{{item.salesType}}=="销售"||{{item.salesType}}==1' value="1">销售</option>
-                                <option ng-selected='{{item.salesType}}=="租赁"||{{item.salesType}}==2' value="2">租赁</option>
-                                <option ng-selected='{{item.salesType}}=="租售"||{{item.salesType}}==3' value="3">租售</option>
+                                <option ng-selected='{{item.salesType}}=="销售"||{{item.salesType}}==1' value="1">销售
+                                </option>
+                                <option ng-selected='{{item.salesType}}=="租赁"||{{item.salesType}}==2' value="2">租赁
+                                </option>
+                                <option ng-selected='{{item.salesType}}=="租售"||{{item.salesType}}==3' value="3">租售
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -431,14 +438,16 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">汽车价格</label>
                         <div class="col-sm-9">
-                            <input type="text" value="{{item.carPrice}}" id="carPriceId_update" placeholder="请输入汽车价格" class="col-xs-10 col-sm-9"/>
+                            <input type="text" value="{{item.carPrice}}" id="carPriceId_update" placeholder="请输入汽车价格"
+                                   class="col-xs-10 col-sm-9"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">上市日期</label>
                         <div class="col-sm-7">
                             <div class="input-group">
-                                <input value="{{item.marketTime}}" class="form-control date-picker" id="datetimepicker1_update" type="text"
+                                <input value="{{item.marketTime}}" class="form-control date-picker"
+                                       id="datetimepicker1_update" type="text"
                                        data-date-format="yyyy-mm-dd"/>
                                 <span class="input-group-addon">
 									 <i class="icon-calendar bigger-110"></i>
@@ -449,7 +458,8 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">质保期</label>
                         <div class="col-sm-9">
-                            <input type="text" value="{{item.guaranteePeriod}}" id="zbId_update" placeholder="请输入质保期,如三年或12万公里" class="col-xs-10 col-sm-9"/>
+                            <input type="text" value="{{item.guaranteePeriod}}" id="zbId_update"
+                                   placeholder="请输入质保期,如三年或12万公里" class="col-xs-10 col-sm-9"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -464,13 +474,15 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">重量</label>
                         <div class="col-sm-9">
-                            <input type="text" value="{{item.weight}}" id="weigtId_update" placeholder="请输入重量" class="col-xs-10 col-sm-9"/>
+                            <input type="text" value="{{item.weight}}" id="weigtId_update" placeholder="请输入重量"
+                                   class="col-xs-10 col-sm-9"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">长*宽*高(mm)</label>
                         <div class="col-sm-9">
-                            <input type="text" value="{{item.productSize}}" id="ccId_update" placeholder="请输入产品尺寸,如3200*1670*1550"
+                            <input type="text" value="{{item.productSize}}" id="ccId_update"
+                                   placeholder="请输入产品尺寸,如3200*1670*1550"
                                    class="col-xs-10 col-sm-9"/>
                         </div>
                     </div>
@@ -485,8 +497,6 @@
 </div>
 <!-- 删除确认模态框（Modal） -->
 <div ng-include="'temp/confirmModal.html'"></div>
-
-
 </body>
 <script src="js/jquery.min.js"></script>
 <script src="assets/js/date-time/bootstrap-datepicker.min.js"></script>
@@ -511,45 +521,40 @@
             $(this).prev().focus();
         });
 
-
     })
 
     var app = angular.module("myApp", []);
     app.controller("myGoodsCtr", function ($scope) {
         $scope.isC = true;
-//        $scope.updaeId=1;
-//        alert($scope.updaeId);
-
-        getGoodsInfo($scope); //获取商品信息
+        Comm.getGoodsInfo($scope); //获取商品信息
         Comm.getProductClassType($scope);  //获取商品型号
         //更新商品信息
-        $scope.updateProductInfo=function (item) {
-            $scope.updateProductId=item.productId;
-            ProductId=item.productId;
+        $scope.updateProductInfo = function (item) {
+            $scope.updateProductId = item.productId;
+            ProductId = item.productId;
 //             $("#Province_update i").text("测试1");
 //             $("#City_update i").text("测试2");
 //             $("#Area_update i").text();
             //alert(item.productId+":"+item.productSpecid);
             //alert(JSON.stringify(item))
-
+        }
+        //根据商品信息id删除数据
+        $scope.deleteProduct=function (productId_delete) {
+            $('#confirmModal').modal('show');
+            $scope.confirmBtn = function () {
+                var paramData = {
+                    "isdelete": 1,
+                    "productId": productId_delete
+                };
+                Comm.ajax(Config.updateProductInfoUrl, "post", paramData, function (res) {
+                    //alert(JSON.stringify(res));
+                    alert("删除成功");
+                    location.reload(); //刷新当前页面
+                });
+            }
         }
     })
 
-    //获取商品信息
-    function getGoodsInfo($scope) {
-        var startRow = 1;
-        var endRow = 50;
-        var paramData = {
-            "startrow": startRow,
-            "endrow": endRow
-        };
-        Comm.ajax(Config.getProductInfoUrl, "post", paramData, function (res) {
-            //alert(JSON.stringify(res));
-            //console.log(res)
-            $scope.goodsInfoData = JSON.parse(res).list;
-            $scope.$apply();
-        });
-    }
     //添加商品信息
     function addProduct() {
         var productName = $("#productNameId").val();  //商品名称
@@ -567,10 +572,10 @@
         var cxSelect = $('#cxSelect option:selected').val();        //车系
         var xslbSelect = $('#xslbSelect option:selected').val();    //销售类别
         //销售区域
-        var Province=$("#Province i").text();
-        var City=$("#City i").text();
-        var Area=$("#Area i").text();
-        var xsqySelect=Province+City+Area;
+        var Province = $("#Province i").text();
+        var City = $("#City i").text();
+        var Area = $("#Area i").text();
+        var xsqySelect = Province + City + Area;
 
         //alert(productName+":"+carPriceId+":"+zbId+":"+weigtId+":"+ccId+":"+datetimepicker1);
         //alert(dlSelect+":"+levelSelect+":"+hdlxSelect+":"+plSelect+":"+cxSelect+":"+xslbSelect);
@@ -585,36 +590,36 @@
         } else if (!zbId) {
             alert("请输入质保期");
             return;
-        }else if (!weigtId) {
+        } else if (!weigtId) {
             alert("请输入重量");
             return;
-        }else if (!ccId) {
+        } else if (!ccId) {
             alert("请输入产品尺寸");
             return;
-        }else if (!datetimepicker1) {
+        } else if (!datetimepicker1) {
             alert("请选择上市日期");
             return;
-        }else if (!dlSelect) {
+        } else if (!dlSelect) {
             alert("请选择动力类型");
             return;
-        }else if (!levelSelect) {
+        } else if (!levelSelect) {
             alert("请选择级别");
             return;
-        }else if (!hdlxSelect) {
+        } else if (!hdlxSelect) {
             alert("请选择换挡类型");
             return;
-        }else if (!plSelect) {
+        } else if (!plSelect) {
             alert("请选择排量");
             return;
-        }else if (!cxSelect) {
+        } else if (!cxSelect) {
             alert("请选择车系");
             return;
-        }else if (Province=="请选择省份"||City=="请选择城市"||Area=="请选择地区") {
+        } else if (Province == "请选择省份" || City == "请选择城市" || Area == "请选择地区") {
             alert("请选择销售区域");
             return;
         }
         var paramData = {
-            "productSpecid":select_productType,
+            "productSpecid": select_productType,
             "productName": productName,
             "carLevel": levelSelect,
             "shiftType": hdlxSelect,
@@ -638,7 +643,7 @@
         });
     }
     //更新商品信息
-    function  updateProductBtn() {
+    function updateProductBtn() {
         var productName = $("#productNameId_update").val();  //商品名称
         var carPriceId = $("#carPriceId_update").val();  //汽车价格
         var zbId = $("#zbId_update").val();   //质保期
@@ -654,10 +659,10 @@
         var cxSelect = $('#cxSelect_update option:selected').val();        //车系
         var xslbSelect = $('#xslbSelect_update option:selected').val();    //销售类别
         //销售区域
-        var Province=$("#Province_update i").text();
-        var City=$("#City_update i").text();
-        var Area=$("#Area_update i").text();
-        var xsqySelect=Province+City+Area;
+        var Province = $("#Province_update i").text();
+        var City = $("#City_update i").text();
+        var Area = $("#Area_update i").text();
+        var xsqySelect = Province + City + Area;
 
 //        alert(productName+":"+carPriceId+":"+zbId+":"+weigtId+":"+ccId+":"+datetimepicker1);
 //        alert(dlSelect+":"+levelSelect+":"+hdlxSelect+":"+plSelect+":"+cxSelect+":"+xslbSelect);
@@ -698,10 +703,10 @@
 //            alert("请选择车系");
 //            return;
 //        }
-         xsqySelect="浙江省宁波市海曙区";
+        xsqySelect = "浙江省宁波市海曙区";
         var paramData = {
-            "productId":ProductId,
-            "productSpecid":select_productType,
+            "productId": ProductId,
+            "productSpecid": select_productType,
             "productName": productName,
             "carLevel": levelSelect,
             "shiftType": hdlxSelect,
