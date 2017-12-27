@@ -1,133 +1,185 @@
 <!DOCTYPE html>
 <html ng-app="myApp" ng-controller="myUserCommentCtr">
 
-	<head>
-		<meta charset="UTF-8">
-		<title>用户评论信息</title>
-		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
-		<link rel="stylesheet" href="assets/css/ace.min.css" />
-		<link rel="stylesheet" href="css/userInfo.css" />
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <title>用户评论信息</title>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/layui.css"/>
+    <link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
+</head>
 
-	<body>
-		<!--
+<body>
+<!--
         	作者：yyw
         	时间：2017-12-11
         	描述：头部模版
         -->
-		<div ng-include="'temp/header.html'"></div>
+<div ng-include="'temp/header.html'"></div>
 
-		<div class="main-container" id="main-container">
-			<!--
-        	作者：yyw
-        	时间：2017-12-11
-        	描述：左边导航模版
-              -->
-			<div ng-include="'temp/leftNav.html'"></div>
+<div class="main-container" id="main-container">
+    <!--
+    作者：yyw
+    时间：2017-12-11
+    描述：左边导航模版
+      -->
+    <div ng-include="'temp/leftNav.html'"></div>
+    <div class="main-content">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a href="#">首页</a>
+                </li>
+                <li>
+                    <a href="#">小程序管理</a>
+                </li>
+                <li class="active">用户评论信息</li>
+            </ul>
+        </div>
+        <div class="page-content">
+            <div class="row">
+                <!--<div class="search-contain">
+                    <div class="col-xs-2">
+                        <input type="text" class="form-control" autocomplete="off">
+                    </div>
+                    <div class="col-xs-3">
+                        <button class="btn btn-info btn-sm">查询</button>
+                    </div>
+                </div>-->
+                <div class="col-xs-12">
 
-			<div class="main-content">
-				<div class="breadcrumbs" id="breadcrumbs">
-					<ul class="breadcrumb">
-						<li>
-							<i class="icon-home home-icon"></i>
-							<a href="#">首页</a>
-						</li>
-						<li>
-							<a href="#">小程序管理</a>
-						</li>
-						<li class="active">用户评论信息</li>
-					</ul>
-				</div>
-				<div class="page-content">
-					<div class="row">
-						<!--<div class="search-contain">
-							<div class="col-xs-2">
-								<input type="text" class="form-control" autocomplete="off">
-							</div>
-							<div class="col-xs-3">
-								<button class="btn btn-info btn-sm">查询</button> 
-							</div> 
-						</div>-->
-						<div class="col-xs-12">
+                    <div id="feed" class="tab-pane">
+                        <div class="profile-feed row-fluid">
+                        <div class="profile-activity clearfix" ng-repeat="item in userCommentData">
+                    <div>
+                        <img class="pull-left" alt="用户头像" ng-src="{{item.headicon}}"/>
+                        <a class="user" href="#">{{item.nickname}}</a>
+                        {{item.evaluatecontent}}
+                        <div class="time">
+                            <i class="icon-time bigger-110"></i>{{item.createtime|date:'yyyyMMdd HH:mm:ss'}}
+                        </div>
+                    </div>
 
-							<div id="feed" class="tab-pane">
-								<div class="profile-feed row-fluid"> 
-									<div class="profile-activity clearfix" ng-repeat="item in userCommentData">
-										<div>
-											<img class="pull-left" alt="avater" src="{{item.avaterUrl}}" />
-											<a class="user" href="#">{{item.userName}}</a>
-											{{item.content}}
-											<div class="time">
-												<i class="icon-time bigger-110"></i>{{item.dateTime}}
-											</div>
-										</div>
+                    <div class="tools action-buttons">
+                        <a href="#" class="blue">
+                            <a href="#" class="red">
+                                <i class="icon-remove bigger-125" ng-click="delete(item.evaluateId)"></i>
+                            </a>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="message-navbar clearfix">
+                <div class="row" style="float:right">
+                    <div class="pager" ng-show="pageCount">
+                        <pager page-count="pageCount" current-page="currentPage" on-page-change="onPageChange()"
+                               first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页" show-goto="true"
+                               goto-text="跳转到">
+                        </pager>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- 删除确认模态框（Modal） -->
+    <div ng-include="'temp/confirmModal.html'"></div>
+</body>
 
-										<div class="tools action-buttons">
-											<a href="#" class="blue">
-												<i class="icon-pencil bigger-125"></i>
-											</a>
+<script src="assets/js/jquery.min.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="assets/js/ace.min.js"></script>
+<script src="assets/js/ace-extra.min.js"></script>
+<script src="assets/ngpagination/angular.min.js"></script>
+<script src="assets/ngpagination/ng-pagination.js"></script>
 
-											<a href="#" class="red">
-												<i class="icon-remove bigger-125"></i>
-											</a>
-										</div>
-									</div> 
-								</div> 
-								<div class="space-12"></div> 
-								<div class="center">
-									<a href="#" class="btn btn-small btn-primary">
-										下一页
-										<i class="icon-on-right icon-arrow-right"></i>
-									</a>
-								</div>
-							</div>  
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</body>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript">
+    var Config = Config();
+    var Comm = Common();
+    $(function () {
 
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="js/angular.min.js"></script>
-	<script src="assets/js/ace.min.js"></script>
-	<script src="assets/js/ace-extra.min.js"></script>
+    })
+    var app = angular.module("myApp", []);
+    var app = angular.module("myApp", ['ng-pagination']);
+    app.controller("myUserCommentCtr", function ($scope) {
+        $scope.isA = false;
+        $scope.isB = false;
+        $scope.isC = false;
+        $scope.isD = false;
+        $scope.isE = false;
+        $scope.isF = false;
+        $scope.isG = true;
 
-	<script type="text/javascript">
-		$(function() {
+        getUserComment($scope);
+        //分页改变事件
+        $scope.onPageChange = function () {
+            var start = ($scope.currentPage - 1) * 10 + 1;
+            var end = 10;
+            Comm.ajax(Config.getEvaluate, "post",
+                    {
+                        "startrow": start,
+                        "endrow": end
+                    },
+                    function (res) {
+                        var obj = JSON.parse(res);
+                        $scope.$apply(function () {
+                            $scope.userCommentData = obj.list;
+                            $scope.pageCount = obj.pages;
+                            $scope.currentPage = obj.pageNum;
+                        });
+                    });
+        }
+        //删除评论信息
+        $scope.delete = function (evaluateId) {
+            $('#confirmModal').modal('show');
+            $scope.confirmBtn = function () {
+                Comm.ajax(Config.deleteEvaluate, "post", {
+                    "isdelete": 1,
+                    "evaluateId": evaluateId,
+                }, function (res) {
+                    //alert("删除成功");
+                    $('#confirmModal').modal('hide');
+                    location.reload(); //刷新当前页面
+                });
+            }
+        }
+    })
 
-		})
-		var app = angular.module("myApp", []);
-		app.controller("myUserCommentCtr", function($scope) {
-			$scope.isA = false;
-			$scope.isB = false;
-			$scope.isC = false;
-			$scope.isD = false;
-			$scope.isE = false;
-			$scope.isF = false;
-			$scope.isG = true;
+    //获取用户评论数据
+    function getUserComment($scope) {
+        $.ajax({
+            type: "get",
+            url: "modal/userComment.json",
+            dataType: "json",
+            success: function (data) {
+                //alert(JSON.stringify(data));
+                $scope.userCommentData = data.datas;
+                $scope.$apply();
+            },
+            complete: function () {
 
-			getUserComment($scope);
-		})
+            }
+        });
+        Comm.ajax(Config.getEvaluate, "post",
+                {
+                    "startrow": 1,
+                    "endrow": 10
+                },
+                function (res) {
+                    var obj = JSON.parse(res);
+                    console.log(obj)
+                    $scope.userCommentData = obj.list;
+                    $scope.pageCount = obj.pages;
+                    $scope.$apply();
+                })
+    }
+</script>
 
-		//获取用户评论数据
-		function getUserComment($scope) {
-			$.ajax({
-				type: "get",
-				url: "modal/userComment.json",
-				dataType: "json",
-				success: function(data) {
-					//alert(JSON.stringify(data));
-					$scope.userCommentData = data.datas;
-					$scope.$apply();
-				},
-				complete: function() {
-
-				}
-			});
-		}
-	</script>
 
 </html>
