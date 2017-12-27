@@ -64,7 +64,7 @@ function Common() {
             "endrow": endRow
         };
         common.ajax(Config.getProductInfoUrl, "post", paramData, function (res) {
-            alert(JSON.stringify(res));
+            //alert(JSON.stringify(res));
             //console.log(res)
             $scope.goodsInfoData = JSON.parse(res).list;
             $scope.$apply();

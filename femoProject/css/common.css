@@ -11,6 +11,13 @@
 	display: table;
 	border: 1px dashed #E0E0E0;
 }
+.umar-t20{
+	margin-top:20px;
+}
+.umar-t50{
+	margin-top: 50px;
+}
+/*加号添加按钮*/
 .img-item {
 	display: table !important;
 	position: relative !important;

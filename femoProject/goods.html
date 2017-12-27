@@ -539,7 +539,7 @@
             //alert(JSON.stringify(item))
         }
         //根据商品信息id删除数据
-        $scope.deleteProduct=function (productId_delete) {
+        $scope.deleteProduct = function (productId_delete) {
             $('#confirmModal').modal('show');
             $scope.confirmBtn = function () {
                 var paramData = {
@@ -668,41 +668,6 @@
 //        alert(dlSelect+":"+levelSelect+":"+hdlxSelect+":"+plSelect+":"+cxSelect+":"+xslbSelect);
 //        alert(xsqySelect);
 //        return;
-
-//        if (!productName) {
-//            alert("请输入商品名称");
-//            return;
-//        } else if (!carPriceId) {
-//            alert("请输入汽车价格");
-//            return;
-//        } else if (!zbId) {
-//            alert("请输入质保期");
-//            return;
-//        }else if (!weigtId) {
-//            alert("请输入重量");
-//            return;
-//        }else if (!ccId) {
-//            alert("请输入产品尺寸");
-//            return;
-//        }else if (!datetimepicker1) {
-//            alert("请选择上市日期");
-//            return;
-//        }else if (!dlSelect) {
-//            alert("请选择动力类型");
-//            return;
-//        }else if (!levelSelect) {
-//            alert("请选择级别");
-//            return;
-//        }else if (!hdlxSelect) {
-//            alert("请选择换挡类型");
-//            return;
-//        }else if (!plSelect) {
-//            alert("请选择排量");
-//            return;
-//        }else if (!cxSelect) {
-//            alert("请选择车系");
-//            return;
-//        }
         xsqySelect = "浙江省宁波市海曙区";
         var paramData = {
             "productId": ProductId,
@@ -721,7 +686,7 @@
             "productSize": ccId,
             "powerType": dlSelect
         };
-        alert(JSON.stringify(paramData));
+        //alert(JSON.stringify(paramData));
         //alert(Config.addProductInfoUrl);
         Comm.ajax(Config.updateProductInfoUrl, "post", paramData, function (res) {
             //alert(JSON.stringify(res));
@@ -731,7 +696,7 @@
     }
 
     function addGoods() {
-        window.location.href = "addGoods.html";
+        window.location.href = "productImg.html";
     }
 </script>
 

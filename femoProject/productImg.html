@@ -112,7 +112,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">轮播图</label>
                         <div class="col-sm-8">
-                            <img id="preview" src="{{productUpdateImg}}" style="width:150px;height: 150px;"/>
+                            <img id="preview" src="{{hostPath}}{{productUpdateImg}}" style="width:150px;height: 150px;"/>
                             <br/><br/>
                             <input type="file" name="file" onchange="imgPreview(this)"/>
                         </div>
@@ -181,7 +181,11 @@
     var Config = Config();
     var Comm = Common();
     $(function () {
-
+//        var cc='["/femoupload/image201712270949182731.jpg","/femoupload/image201712270949182731.jpg"]';
+//        cc=cc.replace("[","").replace("]","").replace(new RegExp('"',"gm"),"");
+//       // alert(cc)
+//        arr=cc.split(",");
+        //alert(arr.length);
     })
     var productImgId = ""; //轮播图id
     var app = angular.module("myApp", []);
@@ -207,7 +211,7 @@
                     "productImgid": productImgId
                 };
                 Comm.ajax(Config.updateProductRIMGUrl, "post", paramData, function (res) {
-                    //alert(JSON.stringify(res));
+                    alert(JSON.stringify(res));
                     alert("删除成功");
                     location.reload(); //刷新当前页面
                 });
@@ -222,7 +226,7 @@
         var getProductRIMGUrl = Config.getProductRIMGUrl + "?startrow=" + startRow + "&endrow=" + endRow;
         Comm.ajax(getProductRIMGUrl, "get", "", function (res) {
             //alert(JSON.stringify(res));
-            console.log(JSON.stringify(res));
+            //console.log(JSON.stringify(res));
             $scope.pictureData = res.list;
             $scope.$apply();
         });
@@ -235,7 +239,6 @@
     //更新轮播图
     function updateProductImgBtn() {
         var select_productIdUpdate = $('#select_productNameUpdate option:selected').val();
-
         if (!select_productIdUpdate) {
             alert("请选择商品名称");
             return;
@@ -245,7 +248,7 @@
             "imgurl": addModalClassImg,
             "productImgid": productImgId
         };
-        console.log(JSON.stringify(paramData));
+        //console.log(JSON.stringify(paramData));
         Comm.ajax(Config.updateProductRIMGUrl, "post", paramData, function (res) {
             //alert(JSON.stringify(res));
             alert("更新成功");
@@ -263,16 +266,14 @@
             alert("请选择图片并上传");
             return;
         }
+        arr=imgUrls.replace("[","").replace("]","").replace(new RegExp('"',"gm"),"").split(",");
         var paramData = {
             "productId": productId,
-            "imgurls": imgUrls
+            "imgurls": arr
         };
         console.log(JSON.stringify(paramData));
-        console.log(imgUrls[0]);
-        console.log(imgUrls[1]);
-        return;
         Comm.ajax(Config.addProductRIMGUrl, "post", paramData, function (res) {
-            alert(JSON.stringify(res));
+            //alert(JSON.stringify(res));
             alert("添加成功");
             location.reload(); //刷新当前页面
         });
