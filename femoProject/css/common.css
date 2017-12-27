@@ -6,3 +6,24 @@
 .search-contain button{
 	margin-right: 15px;
 }
+
+.img-up-add {
+	display: table;
+	border: 1px dashed #E0E0E0;
+}
+.img-item {
+	display: table !important;
+	position: relative !important;
+	float: left;
+	margin-right: 0.1875rem;
+	margin-bottom: 0.1875rem;
+	height: 158px;
+	width: 158px;
+	box-sizing: border-box;
+}
+.img-add-icon {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 80px;
+}

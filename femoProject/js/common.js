@@ -71,6 +71,7 @@ function Common() {
         });
     }
 
+
     common.ajaxAsync=function () {
         $.ajaxSetup({
             async: true

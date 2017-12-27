@@ -526,8 +526,8 @@
     var app = angular.module("myApp", []);
     app.controller("myGoodsCtr", function ($scope) {
         $scope.isC = true;
-        Comm.getGoodsInfo($scope); //获取商品信息
         Comm.getProductClassType($scope);  //获取商品型号
+        Comm.getGoodsInfo($scope); //获取商品信息
         //更新商品信息
         $scope.updateProductInfo = function (item) {
             $scope.updateProductId = item.productId;

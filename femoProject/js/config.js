@@ -16,6 +16,8 @@ function Config() {
 		"getUpdateModalClassUrl": host + "Classification/updateClassification", //后台更新模块分类信息
 
 		"uploadImg": host + "FileUpload/SaveFile", //图片上传接口
+        "uploadImgs": host + "FileUpload/SaveFiles", //轮播图上传接口
+
 		"getProductClassUrl": host + "ProductClass/selectAll?", //获取商品分类
 		"UpdateProductClassUrl": host + "ProductClass/updateProductClass", //更新商品分类
 		"getAddProductClassUrl": host + "ProductClass/addProductClass?", //添加商品分类
