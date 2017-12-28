@@ -512,8 +512,23 @@
     app.controller("myGoodsCtr", function ($scope) {
         $scope.isC = true;
         Comm.getProductClassType($scope);  //获取商品型号
-        Comm.getGoodsInfo($scope); //获取商品信息
-
+        //Comm.getGoodsInfo($scope); //获取商品信息
+        //获取商品信息
+        $scope.getGoodsInfo=function () {
+            var startRow = 1;
+            var endRow = 10;
+            var paramData = {
+                "startrow": startRow,
+                "endrow": endRow
+            };
+            Comm.ajax(Config.getProductInfoUrl, "post", paramData, function (res) {
+                var obj = JSON.parse(res);
+                console.log(obj)
+                $scope.pageCount = obj.pages;
+                $scope.goodsInfoData = obj.list;
+                $scope.$apply();
+            });
+        }
         //分页改变事件
         $scope.onPageChange = function () {
             var start = $scope.currentPage;
@@ -557,6 +572,7 @@
                 });
             }
         }
+        $scope.getGoodsInfo();
     })
 
     //添加商品信息

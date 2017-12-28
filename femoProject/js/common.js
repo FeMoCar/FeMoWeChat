@@ -66,10 +66,7 @@ function Common() {
             "endrow": endRow
         };
         common.ajax(Config.getProductInfoUrl, "post", paramData, function (res) {
-<<<<<<< HEAD
-=======
             //alert(JSON.stringify(res));
->>>>>>> 3a1e36e340f6cd8de1439933921e031fdc0d4025
             //console.log(res)
             $scope.pageCount = res.pages;
             $scope.goodsInfoData = JSON.parse(res).list;
