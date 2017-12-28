@@ -12,18 +12,22 @@ function Config() {
 	var config = {
 		"getUserInfoUrl": host + "WxUser/selectall?", //后台查询所有用户信息接口
 		"getUserInfoSearchUrl": host + "WxUser/selectuser?", //微信查询用户信息接口
+
 		"getModalClassUrl": host + "Classification/selectClassification?", //后台查询模块分类信息
 		"getAddModalClassUrl": host + "Classification/addClassification?", //后台添加模块分类信息
 		"getUpdateModalClassUrl": host + "Classification/updateClassification", //后台更新模块分类信息
 
-		"uploadImg": host + "FileUpload/SaveFile", //图片上传接口
+		"uploadImg": host + "FileUpload/SaveFile", //图片上传接口(单张）
+        "uploadImgs": host + "FileUpload/SaveFiles", //轮播图上传接口（多张）
+
 		"getProductClassUrl": host + "ProductClass/selectAll?", //获取商品分类
 		"UpdateProductClassUrl": host + "ProductClass/updateProductClass", //更新商品分类
 		"getAddProductClassUrl": host + "ProductClass/addProductClass?", //添加商品分类
-		"getProductSecondClassUrl": host + "ProductSecondClass/selectProductSecondclass?",//获取商品二级分类
 
+		"getProductSecondClassUrl": host + "ProductSecondClass/selectProductSecondclass?",//获取商品二级分类
 		"addProductSecondClassUrl": host + "ProductSecondClass/addProductSecondclass",//添加商品二级分类
 		"updateProductSecondClassUrl": host + "ProductSecondClass/updateProductSecondclass",//更新商品二级分类
+
 		"getProductClassTypeUrl": host + "ProductSpec/selectAll?",//获取商品分类型号
 		"addProductClassTypeUrl": host + "ProductSpec/addProductSpec",//添加商品分类型号
 		"updateProductClassTypeUrl": host + "ProductSpec/updateProductSpec",//更新商品分类型号
@@ -49,7 +53,13 @@ function Config() {
         "getProductRIMGUrl": host + "ProductRIMG/selectAll",//获取商品轮播图
         "addProductRIMGUrl": host + "ProductRIMG/addProductrimg",//添加商品轮播图
         "updateProductRIMGUrl": host + "ProductRIMG/updateProductrimg",//更新商品轮播图
-	}
+
+        "getProductDetailUrl": host + "Productdetail/selectAll",//获取商品详情
+        "addProductDetailUrl": host + "Productdetail/addProductDetail",//添加商品详情
+        "updateProductDetailUrl": host + "Productdetail/updateProductDetail",//更新商品详情
+        "searchProductDetailUrl": host + "Productdetail/selectByid",//查询商品详情
+
+    }
 	return config;
 }
 

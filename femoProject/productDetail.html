@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-controller="myProductDetailCtr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>商品详情</title>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="css/userInfo.css"/>
+    <link rel="stylesheet" href="css/common.css"/>
+</head>
+
+<body>
+<!--
+    作者：yyw
+    时间：2017-12-11
+    描述：头部模版
+-->
+
+<div ng-include="'temp/header.html'"></div>
+
+<div class="main-container" id="main-container">
+    <!--
+    作者：yyw
+    时间：2017-12-11
+    描述：左边导航模版
+      -->
+    <div ng-include="'temp/leftNav.html'"></div>
+
+    <div class="main-content">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a href="#">首页</a>
+                </li>
+                <li>
+                    <a href="#">商品信息管理</a>
+                </li>
+                <li class="active">商品详情</li>
+            </ul>
+        </div>
+        <div class="page-content">
+            <div class="row">
+                <div class="col-xs-3">
+                    <input type="text" id="search_txt" class="form-control" autocomplete="off">
+                </div>
+                <div class="col-xs-2">
+                    <button class="btn btn-info btn-sm" ng-click="search()">查询</button>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addProductDetail">添加</button>
+                </div>
+                <div class="col-xs-12 umar-t20">
+                    <div class="hr"></div>
+                    <div class="col-xs-6 col-sm-3 pricing-box" ng-repeat="item in pictureDetailData">
+                        <div class="widget-box">
+                            <div class="widget-header header-color-blue">
+                                <h5 class="bigger lighter">商品详情</h5>
+                            </div>
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <ul class="list-unstyled spaced2">
+                                        <li>
+                                            <i class="icon-ok green"></i> 商品详情ID：{{item.productDetailid}}
+                                        </li>
+                                        <li>
+                                            <i class="icon-ok green"></i> 商品ID：{{item.productId}}
+                                        </li>
+                                        <li>
+                                            <i class="icon-ok green"></i> 商品促销ID：{{item.productPromotionId||'暂无活动'}}
+                                        </li>
+                                        <li>
+                                            <i class="icon-ok green"></i> 商品团购ID：{{item.groupBuyingId||'暂无活动'}}
+                                        </li>
+                                        <li>
+                                            <i class="icon-ok green"></i> 车辆编号：{{item.carno}}
+                                        </li>
+                                        <li>
+                                            <i class="icon-ok green"></i> 租赁状态：{{item.leaseState}}
+                                        </li>
+                                    </ul>
+
+                                    <hr />
+                                    <div class="price" ng-bind-html="item.productContent| trustHtml">
+
+                                    </div>
+                                </div>
+                                <div>
+                                    <a href="#" class="btn btn-block btn-primary">
+                                        <i class="icon-edit  bigger-110"></i>
+                                        <span data-toggle="modal" data-target="#updateProductDetail" style="margin:0 15px 0 0;" ng-click="updateProductDetail(item)">修改</span>
+                                        <i class="icon-exclamation-sign  bigger-110"></i>
+                                        <span ng-click="deleteProductDetail(item.productDetailid)">删除</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 更新商品轮播图（Modal） -->
+<div class="modal fade" id="updateProductDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="width:900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">更新商品详情</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">商品名称</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="select_productNameu">
+                                <option value="">请选择</option>
+                                <option ng-repeat="item in goodsInfoData" ng-selected="item.productId==updateItems.productId" value="{{item.productId}}">
+                                    {{item.productName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">商品促销</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="select_cxu">
+                                <option value="">请选择</option>
+                                <option selected value="">暂无促销活动</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">商品团购</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="select_tgu">
+                                <option value="">请选择</option>
+                                <option selected value="">暂无团购活动</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">销售类别</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="select_zlu">
+                                <option  value="">请选择</option>
+                                <option ng-selected='updateItems.leaseState==1' value="1">销售</option>
+                                <option ng-selected='updateItems.leaseState==2' value="2">租赁</option>
+                                <option ng-selected='updateItems.leaseState==3' value="3">租售</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">车辆编号</label>
+                        <div class="col-sm-4">
+                            <input type="text" value="{{updateItems.carno}}" id="carNumu" class="col-xs-10 col-sm-9"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">内容信息</label>
+                        <div class="col-sm-10">
+                            <div id="editoru">
+                                <div ng-bind-html="updateItems.productContent| trustHtml"></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="updateProductDetailBtn()">更新</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 添加商品轮播图（Modal） -->
+<div class="modal fade" id="addProductDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="width:900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel2">添加商品详情</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">商品名称</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="select_productName">
+                                <option value="">请选择</option>
+                                <option ng-repeat="item in goodsInfoData" value="{{item.productId}}">
+                                    {{item.productName}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">商品促销</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="select_cx">
+                                <option value="">请选择</option>
+                                <option value="">暂无促销活动</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">商品团购</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="select_tg">
+                                <option value="">请选择</option>
+                                <option value="">暂无团购活动</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">销售类别</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="select_zl">
+                                <option value="">请选择</option>
+                                <option value="1">销售</option>
+                                <option value="2">租赁</option>
+                                <option value="3">租售</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">车辆编号</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="carNum" placeholder="请输入车辆编号" class="col-xs-10 col-sm-9"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">内容信息</label>
+                        <div class="col-sm-10">
+                            <div id="editor">
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="addProductDetail()">添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 删除确认模态框（Modal） -->
+<div ng-include="'temp/confirmModal.html'"></div>
+</body>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="assets/js/ace.min.js"></script>
+<script src="assets/js/ace-extra.min.js"></script>
+
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+
+<script src="js/wangEditor.js"></script>
+<script type="text/javascript">
+    //配置文件（数据请求接口）
+    var Config = Config();
+    var Comm = Common();
+    var E = window.wangEditor
+    var editor = new E('#editor');
+    var editoru = new E('#editoru');
+    editoru.create();
+    // 或者 var editor = new E( document.getElementById('editor') )
+    editor.create();
+    $(function () {
+
+    })
+
+    var myApp = angular.module("myApp", []);
+    myApp.filter('trustHtml',function($sce){
+        return function(input){
+            return $sce.trustAsHtml(input);
+        }
+    });
+    var productDetailId="";  //商品详情id
+    myApp.controller("myProductDetailCtr", function ($scope) {
+        $scope.isC = true;
+
+        getProductDetail($scope);
+        Comm.getGoodsInfo($scope); //获取商品信息
+
+        //根据用户输入搜索
+        $scope.search = function () {
+            var search_txt = $("#search_txt").val();
+            var searchProductDetailUrl = Config.searchProductDetailUrl + "?productDetailid=" + search_txt;
+            //alert(searchUrl);
+            Comm.ajax(searchProductDetailUrl, "get", "", function (res) {
+                //alert(JSON.stringify(res));
+                $scope.pictureDetailData = res;
+                $scope.$apply();
+            });
+        }
+        //更新轮播图
+        $scope.updateProductDetail = function (item) {
+            $scope.updateItems=item;
+           //console.log(JSON.stringify(item));
+            productDetailId=item.productDetailid;
+        }
+
+        //根据id删除这条数据
+        $scope.deleteProductDetail = function (productDetailId) {
+            $('#confirmModal').modal('show');
+            $scope.confirmBtn = function () {
+                var paramData = {
+                    "isdelete": 1,
+                    "productDetailid": productDetailId
+                };
+                Comm.ajax(Config.updateProductDetailUrl, "post", paramData, function (res) {
+                    //alert(JSON.stringify(res));
+                    alert("删除成功");
+                    location.reload(); //刷新当前页面
+                });
+            }
+        }
+
+    })
+    //获取商品详情数据
+    function getProductDetail($scope) {
+        var startRow = 1;
+        var endRow = 50;
+        var getProductDetailUrl = Config.getProductDetailUrl + "?startrow=" + startRow + "&endrow=" + endRow;
+        Comm.ajax(getProductDetailUrl, "get", "", function (res) {
+            //alert(JSON.stringify(res));
+            //console.log(res);
+            $scope.pictureDetailData = JSON.parse(res);
+            $scope.$apply();
+        });
+    }
+    //添加商品详情
+    function  addProductDetail() {
+        var select_productName=$("#select_productName option:selected").val();//商品名称
+        var select_cx=$("#select_cx option:selected").val();  //促销活动
+        var select_tg=$("#select_tg option:selected").val();  //团购活动
+        var select_zl=$("#select_zl option:selected").val();  //租赁状态
+        var carNum=$("#carNum").val();  //车辆编号
+        var productContent=editor.txt.html();  //图文内容
+        var productDetail="测试商品参数详情信息";   //商品参数详情信息
+
+        if (!select_productName) {
+            alert("请选择商品名称");
+            return;
+        } else if (!select_zl) {
+            alert("请选择租赁状态");
+            return;
+        }
+        var paramData = {
+            "productId": select_productName,
+            "productContent": productContent,
+            "productDetail": productDetail,
+            "productPromotionId": select_cx,
+            "groupBuyingId": select_tg,
+            "carno": carNum,
+            "leaseState": select_zl
+        };
+        //alert(JSON.stringify(paramData));
+        //console.log(JSON.stringify(paramData));
+        Comm.ajax(Config.addProductDetailUrl, "post", paramData, function (res) {
+            //alert(JSON.stringify(res));
+            alert("添加成功");
+            location.reload(); //刷新当前页面
+        });
+    }
+     //更新商品详情
+    function updateProductDetailBtn() {
+        var select_productName=$("#select_productNameu option:selected").val();//商品名称
+        var select_cx=$("#select_cxu option:selected").val();  //促销活动
+        var select_tg=$("#select_tgu option:selected").val();  //团购活动
+        var select_zl=$("#select_zlu option:selected").val();  //租赁状态
+        var carNum=$("#carNumu").val();  //车辆编号
+        var productContent=editoru.txt.html();  //图文内容
+        var productDetail="测试商品参数详情信息";   //商品参数详情信息
+
+        if (!select_productName) {
+            alert("请选择商品名称");
+            return;
+        } else if (!select_zl) {
+            alert("请选择租赁状态");
+            return;
+        }
+        var paramData = {
+            "productDetailid":productDetailId,
+            "productId": select_productName,
+            "productContent": productContent,
+            "productDetail": productDetail,
+            "productPromotionId": select_cx,
+            "groupBuyingId": select_tg,
+            "carno": carNum,
+            "leaseState": select_zl
+        };
+        //alert(JSON.stringify(paramData));
+        //console.log(JSON.stringify(paramData));
+        Comm.ajax(Config.updateProductDetailUrl, "post", paramData, function (res) {
+            //alert(JSON.stringify(res));
+            alert("更新成功");
+            location.reload(); //刷新当前页面
+        });
+    }
+
+
+
+</script>
+
+</html>

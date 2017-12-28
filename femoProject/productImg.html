@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="assets/css/datepicker.css"/>
     <link rel="stylesheet" href="css/userInfo.css"/>
     <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/iconfont.css"/>
+    <link rel="stylesheet" href="css/fileUpload.css"/>
 
 </head>
 
@@ -51,7 +53,8 @@
                         <ul class="ace-thumbnails">
                             <li ng-repeat="item in pictureData">
                                 <a href="#" data-rel="colorbox">
-                                    <img alt="150x150" src="{{item.imgurl}}" style="width:150px;height: 150px;"/>
+                                    <img alt="150x150" src="{{hostPath}}{{item.imgurl}}"
+                                         style="width:150px;height: 150px;"/>
                                     <div class="text">
                                         <div class="inner">商品ID:{{item.productId}}</div>
                                     </div>
@@ -62,7 +65,7 @@
                                        ng-click="updateProductImg(item)">
                                         <i class="icon-pencil"></i>
                                     </a>
-                                    <a href="#">
+                                    <a href="#" ng-click="deleteProductImg(item.productImgid)">
                                         <i class="icon-remove red"></i>
                                     </a>
                                 </div>
@@ -70,10 +73,7 @@
                             <li style="border:none;" data-toggle="modal"
                                 data-target="#addProductImg">
                                 <a href="#" data-rel="colorbox">
-                                    <img style="width:160px;height:160px;" alt="150x150" src="img/add.png"/>
-                                    <div class="text">
-                                        <div class="inner">添加</div>
-                                    </div>
+                                    <div class="img-up-add  img-item"><span class="img-add-icon">+</span></div>
                                 </a>
                             </li>
                         </ul>
@@ -95,37 +95,33 @@
                 <h4 class="modal-title" id="myModalLabel">添加商品二级分类</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" id="imageForm" enctype="multipart/form-data" action="url"
+                      method="POST">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label">二级分类名称</label>
-                        <div class="col-sm-7">
-                            <input type="text" id="productClassName_add" placeholder="请输入分类名称"
-                                   class="col-xs-10 col-sm-5"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label">商品分类</label>
+                        <label class="col-sm-2 control-label">商品名称</label>
                         <div class="col-sm-4">
-                            <select class="form-control" id="select_addModal">
+                            <select class="form-control" id="select_productNameUpdate">
                                 <option value="">请选择</option>
-                                <option ng-repeat="item in productClassData" value="{{item.productClassId}}">
-                                    {{item.className}}
+                                <option ng-repeat="item in goodsInfoData"
+                                        ng-selected="{{item.productId}}==updateProductId" value="{{item.productId}}">
+                                    {{item.productName}}
                                 </option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-4 control-label">备注</label>
-                        <div class="col-sm-7">
-                            <textarea id="productClassRemark_add" class="form-control" rows="3"
-                                      placeholder="请输入备注"></textarea>
+                        <label class="col-sm-2 control-label">轮播图</label>
+                        <div class="col-sm-8">
+                            <img id="preview" src="{{hostPath}}{{productUpdateImg}}" style="width:150px;height: 150px;"/>
+                            <br/><br/>
+                            <input type="file" name="file" onchange="imgPreview(this)"/>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="addProductClass()">添加</button>
+                <button type="button" class="btn btn-primary" onclick="updateProductImgBtn()">更新</button>
             </div>
         </div>
     </div>
@@ -142,7 +138,7 @@
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label">商品名称</label>
+                        <label class="col-sm-2 control-label">商品名称</label>
                         <div class="col-sm-4">
                             <select class="form-control" id="select_productName">
                                 <option value="">请选择</option>
@@ -153,22 +149,25 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-4 control-label">轮播图地址</label>
-                        <div class="col-sm-7">
-
+                        <label class="col-sm-2 control-label">轮播图</label>
+                        <div class="col-sm-8">
+                            <div id="fileUploadContent" class="fileUploadContent"></div>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="addProductClass()">添加</button>
+                <button type="button" class="btn btn-primary" onclick="addProductImg()">添加</button>
             </div>
         </div>
     </div>
 </div>
+<!-- 删除确认模态框（Modal） -->
+<div ng-include="'temp/confirmModal.html'"></div>
 </body>
 <script src="assets/js/jquery.min.js"></script>
+<script src="js/jquery.form.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="js/angular.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
@@ -176,45 +175,129 @@
 
 <script src="js/config.js"></script>
 <script src="js/common.js"></script>
+<script src="js/fileUpload.js"></script>
 <script type="text/javascript">
     //配置文件（数据请求接口）
     var Config = Config();
     var Comm = Common();
     $(function () {
-
-
+//        var cc='["/femoupload/image201712270949182731.jpg","/femoupload/image201712270949182731.jpg"]';
+//        cc=cc.replace("[","").replace("]","").replace(new RegExp('"',"gm"),"");
+//       // alert(cc)
+//        arr=cc.split(",");
+        //alert(arr.length);
     })
+    var productImgId = ""; //轮播图id
     var app = angular.module("myApp", []);
     app.controller("myAddGoodsCtr", function ($scope) {
         $scope.isC = true;
+        $scope.hostPath = hostPath; //图片地址拼接
         getPicture($scope);
         Comm.getGoodsInfo($scope); //获取商品信息
 
+        //更新轮播图
+        $scope.updateProductImg = function (item) {
+            $scope.productUpdateImg = item.imgurl;
+            $scope.updateProductId = item.productId;
+            productImgId = item.productImgid;
+        }
+
+        //根据id删除这条数据
+        $scope.deleteProductImg = function (productImgId) {
+            $('#confirmModal').modal('show');
+            $scope.confirmBtn = function () {
+                var paramData = {
+                    "isdelete": 1,
+                    "productImgid": productImgId
+                };
+                Comm.ajax(Config.updateProductRIMGUrl, "post", paramData, function (res) {
+                    alert(JSON.stringify(res));
+                    alert("删除成功");
+                    location.reload(); //刷新当前页面
+                });
+            }
+        }
 
     })
     //获取轮播图数据
     function getPicture($scope) {
-//        $.ajax({
-//            type: "get",
-//            url: "modal/picture.json",
-//            dataType: "json",
-//            success: function (data) {
-//                //alert(JSON.stringify(data));
-//                $scope.pictureData = data.datas;
-//                $scope.$apply();
-//            },
-//            complete: function () {
-//
-//            }
-//        });
         var startRow = 1;
         var endRow = 50;
-        var getProductRIMGUrl=Config.getProductRIMGUrl+"?startrow="+startRow+"&endrow="+endRow;
+        var getProductRIMGUrl = Config.getProductRIMGUrl + "?startrow=" + startRow + "&endrow=" + endRow;
         Comm.ajax(getProductRIMGUrl, "get", "", function (res) {
             //alert(JSON.stringify(res));
+            //console.log(JSON.stringify(res));
             $scope.pictureData = res.list;
             $scope.$apply();
         });
+    }
+    var addModalClassImg = ""; //存储要上传的图片
+    //图片预览功能及上传(更新轮播图的上传图片）
+    function imgPreview(fileDom) {
+        Comm.uploadImg(fileDom, "preview", "imageForm");
+    }
+    //更新轮播图
+    function updateProductImgBtn() {
+        var select_productIdUpdate = $('#select_productNameUpdate option:selected').val();
+        if (!select_productIdUpdate) {
+            alert("请选择商品名称");
+            return;
+        }
+        var paramData = {
+            "productId": select_productIdUpdate,
+            "imgurl": addModalClassImg,
+            "productImgid": productImgId
+        };
+        //console.log(JSON.stringify(paramData));
+        Comm.ajax(Config.updateProductRIMGUrl, "post", paramData, function (res) {
+            //alert(JSON.stringify(res));
+            alert("更新成功");
+            location.reload(); //刷新当前页面
+        });
+    }
+
+    //添加商品图片轮播图
+    function addProductImg() {
+        var productId = $("#select_productName option:selected").val();
+        if (!productId) {
+            alert("请选择商品名称");
+            return;
+        } else if (!imgUrls) {
+            alert("请选择图片并上传");
+            return;
+        }
+        arr=imgUrls.replace("[","").replace("]","").replace(new RegExp('"',"gm"),"").split(",");
+        var paramData = {
+            "productId": productId,
+            "imgurls": arr
+        };
+        console.log(JSON.stringify(paramData));
+        Comm.ajax(Config.addProductRIMGUrl, "post", paramData, function (res) {
+            //alert(JSON.stringify(res));
+            alert("添加成功");
+            location.reload(); //刷新当前页面
+        });
+    }
+    //多图上传方法
+    $("#fileUploadContent").initUpload({
+        "uploadUrl": Config.uploadImgs,//上传文件信息地址
+        //"size":350,//文件大小限制，单位kb,默认不限制
+        "maxFileNumber": 5,//文件个数限制，为整数
+        "onUpload": onUploadFun,//在上传后执行的函数
+        //autoCommit:true,//文件是否自动上传
+        "fileType": ['png', 'jpg', 'docx', 'doc']//文件类型限制，默认不限制，注意写的是文件后缀
+    });
+    //var imgUrls = new Array();//存储多张图片
+    var imgUrls = "";
+    //在上传后执行的函数
+    function onUploadFun(opt, data) {
+        //alert(data);
+        //alert(data.length);
+        //imgUrls=imgUrls.concat(data);
+        imgUrls = data;
+        console.log(imgUrls);
+        uploadTools.uploadError(opt);//显示上传错误
+        uploadTools.uploadSuccess(opt);//显示上传成功
     }
 </script>
 
