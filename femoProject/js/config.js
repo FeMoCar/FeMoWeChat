@@ -6,6 +6,7 @@
  Config.Func();
  */
 var host = "http://39.104.15.177:8080/FeMoDemo/";
+//var host = "http://127.0.0.1:8080/FeMoDemo/";
 var hostPath = "http://39.104.15.177:8080/FeMoDemo";
 function Config() {
 	var config = {
@@ -34,7 +35,18 @@ function Config() {
 		"getUserShareUrl": host + "UserShare/selectAllById?", //查询用户分享信息
 		"deleteUserShareUrl": host + "UserShare/updateUserShare", //删除用户享信息
 
-        "getProductInfoUrl": host + "Product/selectAll",//获取商品信息
+		"getInformation": host + "Information/selectById?", //查询用户反馈信息
+		"deleteInformation": host + "Information/updateInformation", //删除用户反馈信息
+
+		"getEvaluate": host + "Evaluate/selectAllById?", //查询用户评论信息
+		"deleteEvaluate": host + "Evaluate/updateEvaluate", //删除用户班次论信息
+
+		"getUserCard": host + "CardCheck/selectAll?", //查询用户证件信息
+
+		"getUserReserve": host + "WxUserReserve/selectAll?", //查询用户预约信息
+		"updateUserReserve": host + "WxUserReserve/updateWxUserreserve", //更新用户预约信息
+
+		"getProductInfoUrl": host + "Product/selectAll",//获取商品信息
         "updateProductInfoUrl": host + "Product/updateProduct",//更新商品信息
         "addProductInfoUrl": host + "Product/addProduct",//添加商品信息
 

@@ -13,19 +13,9 @@
 </head>
 
 <body>
-<!--
-        	作者：yyw
-        	时间：2017-12-11
-        	描述：头部模版
-        -->
 <div ng-include="'temp/header.html'"></div>
 
 <div class="main-container" id="main-container">
-    <!--
-    作者：yyw
-    时间：2017-12-11
-    描述：左边导航模版
-      -->
     <div ng-include="'temp/leftNav.html'"></div>
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
@@ -42,59 +32,55 @@
         </div>
         <div class="page-content">
             <div class="row">
-                <!--<div class="search-contain">
-                    <div class="col-xs-2">
-                        <input type="text" class="form-control" autocomplete="off">
-                    </div>
-                    <div class="col-xs-3">
-                        <button class="btn btn-info btn-sm">查询</button>
-                    </div>
-                </div>-->
                 <div class="col-xs-12">
 
                     <div id="feed" class="tab-pane">
                         <div class="profile-feed row-fluid">
-                        <div class="profile-activity clearfix" ng-repeat="item in userCommentData">
-                    <div>
-                        <img class="pull-left" alt="用户头像" ng-src="{{item.headicon}}"/>
-                        <a class="user" href="#">{{item.nickname}}</a>
-                        {{item.evaluatecontent}}
-                        <div class="time">
-                            <i class="icon-time bigger-110"></i>{{item.createtime|date:'yyyyMMdd HH:mm:ss'}}
-                        </div>
-                    </div>
+                            <div class="profile-activity clearfix" ng-repeat="item in userCommentData">
+                                <div>
+                                    <img class="pull-left" alt="用户头像" ng-src="{{item.headicon}}"/>
+                                    <a class="user" href="#">{{item.nickname}}</a>
+                                    {{item.evaluatecontent}}
+                                    <div class="time">
+                                        <i class="icon-time bigger-110"></i>{{item.createtime|date:'yyyyMMdd HH:mm:ss'}}
+                                    </div>
+                                </div>
 
-                    <div class="tools action-buttons">
-                        <a href="#" class="blue">
-                            <a href="#" class="red">
-                                <i class="icon-remove bigger-125" ng-click="delete(item.evaluateId)"></i>
-                            </a>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="message-navbar clearfix">
-                <div class="row" style="float:right">
-                    <div class="pager" ng-show="pageCount">
-                        <pager page-count="pageCount" current-page="currentPage" on-page-change="onPageChange()"
-                               first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页" show-goto="true"
-                               goto-text="跳转到">
-                        </pager>
+                                <div class="tools action-buttons">
+                                    <a href="#" class="blue">
+                                        <a href="#" class="red">
+                                            <i class="icon-remove bigger-125" ng-click="delete(item.evaluateId)"></i>
+                                        </a>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="message-navbar clearfix">
+                            <div class="row" style="float:right">
+                                <div class="pager" ng-show="pageCount">
+                                    <pager page-count="pageCount" current-page="currentPage"
+                                           on-page-change="onPageChange()"
+                                           first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页"
+                                           show-goto="true"
+                                           goto-text="跳转到">
+                                    </pager>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-    <!-- 删除确认模态框（Modal） -->
-    <div ng-include="'temp/confirmModal.html'"></div>
+<!-- 删除确认模态框（Modal） -->
+<div ng-include="'temp/confirmModal.html'"></div>
 </body>
 
 <script src="assets/js/jquery.min.js"></script>
-<script src="js/angular.min.js"></script>
+<script src="assets/ngpagination/angular.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
 <script src="assets/js/ace-extra.min.js"></script>
-<script src="assets/ngpagination/angular.min.js"></script>
 <script src="assets/ngpagination/ng-pagination.js"></script>
 
 <script src="js/config.js"></script>
@@ -105,21 +91,14 @@
     $(function () {
 
     })
-    var app = angular.module("myApp", []);
     var app = angular.module("myApp", ['ng-pagination']);
     app.controller("myUserCommentCtr", function ($scope) {
-        $scope.isA = false;
-        $scope.isB = false;
-        $scope.isC = false;
-        $scope.isD = false;
-        $scope.isE = false;
-        $scope.isF = false;
         $scope.isG = true;
 
         getUserComment($scope);
         //分页改变事件
         $scope.onPageChange = function () {
-            var start = ($scope.currentPage - 1) * 10 + 1;
+            var start = $scope.currentPage;
             var end = 10;
             Comm.ajax(Config.getEvaluate, "post",
                     {
@@ -153,19 +132,6 @@
 
     //获取用户评论数据
     function getUserComment($scope) {
-        $.ajax({
-            type: "get",
-            url: "modal/userComment.json",
-            dataType: "json",
-            success: function (data) {
-                //alert(JSON.stringify(data));
-                $scope.userCommentData = data.datas;
-                $scope.$apply();
-            },
-            complete: function () {
-
-            }
-        });
         Comm.ajax(Config.getEvaluate, "post",
                 {
                     "startrow": 1,
@@ -173,13 +139,10 @@
                 },
                 function (res) {
                     var obj = JSON.parse(res);
-                    console.log(obj)
                     $scope.userCommentData = obj.list;
                     $scope.pageCount = obj.pages;
                     $scope.$apply();
                 })
     }
 </script>
-
-
 </html>

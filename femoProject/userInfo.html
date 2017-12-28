@@ -10,24 +10,13 @@
     <link rel="stylesheet" href="css/userInfo.css"/>
     <link rel="stylesheet" href="css/common.css"/>
     <link rel="stylesheet" href="css/layui.css"/>
+    <link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
 </head>
 
 <body>
-<!--
-    作者：yyw
-    时间：2017-12-11
-    描述：头部模版
--->
 <div ng-include="'temp/header.html'"></div>
-
 <div class="main-container" id="main-container">
-    <!--
-    作者：yyw
-    时间：2017-12-11
-    描述：左边导航模版
-      -->
     <div ng-include="'temp/leftNav.html'"></div>
-
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
             <ul class="breadcrumb">
@@ -72,12 +61,6 @@
                                            aria-describedby="sample-table-2_info">
                                         <thead>
                                         <tr role="row">
-                                            <!--<th class="center sorting_disabled">
-                                                <label>
-                                                    <input type="checkbox" class="ace">
-                                                    <span class="lbl"></span>
-                                                </label>
-                                            </th>-->
                                             <th class="sorting_disabled">用户昵称</th>
                                             <th class="sorting_disabled">头像</th>
                                             <th class="sorting_disabled">授权时间</th>
@@ -93,12 +76,6 @@
 
                                         <tbody role="alert" aria-live="polite" aria-relevant="all">
                                         <tr class="odd" ng-repeat="item in userInfoData">
-                                            <!--<td class="center">
-                                                <label>
-                                                    <input type="checkbox" class="ace">
-                                                    <span class="lbl"></span>
-                                                </label>
-                                            </td>-->
                                             <td class="sorting_1 line-h">
                                                 <a href="#">{{item.nickname}}</a>
                                             </td>
@@ -131,39 +108,22 @@
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="dataTables_info" id="sample-table-2_info">Showing 1 to 10 of 23
-                                                entries
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="dataTables_paginate paging_bootstrap">
-                                                <ul class="pagination">
-                                                    <li class="prev disabled">
-                                                        <a href="#"><i class="icon-double-angle-left"></i></a>
-                                                    </li>
-                                                    <li class="active">
-                                                        <a href="#">1</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">2</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">3</a>
-                                                    </li>
-                                                    <li class="next">
-                                                        <a href="#"><i class="icon-double-angle-right"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                </div>
+                                <div class="message-navbar clearfix">
+                                    <div class="row" style="float:right">
+                                        <div class="pager" ng-show="pageCount">
+                                            <pager page-count="pageCount" current-page="currentPage"
+                                                   on-page-change="onPageChange()"
+                                                   first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页"
+                                                   show-goto="true"
+                                                   goto-text="跳转到">
+                                            </pager>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -177,20 +137,37 @@
 <script src="assets/js/ace.min.js"></script>
 <script src="assets/js/ace-extra.min.js"></script>
 <script src="js/layui.js"></script>
-
+<script src="assets/ngpagination/angular.min.js"></script>
+<script src="assets/ngpagination/ng-pagination.js"></script>
 <script src="js/config.js"></script>
 
 <script type="text/javascript">
     var Config = Config();
-
     $(function () {
 
     })
-    var app = angular.module("myApp", []);
+    var app = angular.module("myApp", ['ng-pagination']);
     app.controller("myUserInfoCtr", function ($scope) {
         $scope.isB = true;
-
         getUserInfo($scope);
+        //分页改变事件
+        $scope.onPageChange = function () {
+            var start = $scope.currentPage;
+            var end = 10;
+            Comm.ajax(Config.getUserInfoUrl, "post",
+                    {
+                        "startrow": start,
+                        "endrow": end
+                    },
+                    function (res) {
+                        var obj = JSON.parse(res);
+                        $scope.$apply(function () {
+                            $scope.userInfoData = obj.list;
+                            $scope.pageCount = obj.pages;
+                            $scope.currentPage = obj.pageNum;
+                        });
+                    });
+        }
         //根据用户输入搜索
         $scope.search = function () {
             var search_type = $('#select_search option:selected').val();
@@ -199,7 +176,7 @@
                 alert("请输入查询条件！");
                 return false;
             }
-            var searchUrl = Config.getUserInfoUrl + "startrow=1&endrow=50&" + search_type + "=" + search_txt;
+            var searchUrl = Config.getUserInfoUrl + "startrow=1&endrow=10&" + search_type + "=" + search_txt;
             //alert(searchUrl);
 
             $.ajax({
@@ -207,8 +184,9 @@
                 url: searchUrl,
                 dataType: "json",
                 success: function (data) {
-                    //alert(JSON.stringify(data));
-                    $scope.userInfoData = JSON.parse(data).list;
+                    var obj = JSON.parse(res);
+                    $scope.userInfoData = obj.list;
+                    $scope.pageCount = obj.pages;
                     $scope.$apply();
                 },
                 complete: function () {
@@ -224,16 +202,17 @@
         //模拟数据"modal/userInfo.json"
         //后台查询所有用户信息接口
         var startRow = 1;
-        var endRow = 50;
+        var endRow = 10;
         var getUserInfoUrl = Config.getUserInfoUrl + "startrow=" + startRow + "&endrow=" + endRow;
         //alert(getUserInfoUrl);
         $.ajax({
             type: "get",
             url: getUserInfoUrl,
             dataType: "json",
-            success: function (data) {
-                //alert(JSON.stringify(data));
-                $scope.userInfoData = JSON.parse(data).list;
+            success: function (res) {
+                var obj = JSON.parse(res);
+                $scope.userInfoData = obj.list;
+                $scope.pageCount = obj.pages;
                 $scope.$apply();
             },
             complete: function () {
