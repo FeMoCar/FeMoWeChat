@@ -1,173 +1,154 @@
 <!DOCTYPE html>
-<html ng-app="myApp" ng-controller="myUserFeedbackCtr">
+<head>
+    <meta charset="UTF-8">
+    <title>用户反馈</title>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="css/userInfo.css"/>
+    <link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
+    <style>
+        .message-item .time {
+            width: 150px !important;
+        }
 
-	<head>
-		<meta charset="UTF-8">
-		<title>用户反馈</title>
-		<link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
-		<link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
-		<link rel="stylesheet" href="assets/css/ace.min.css"/>
-		<link rel="stylesheet" href="css/common.css"/>
-		<link rel="stylesheet" href="css/layui.css"/>
-		<link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
-		<style>
-			.message-item .time {
-				width: 75px !important;
-			}
-		</style>
+        .message-item .text {
+            width: 400px !important;
+        }
+    </style>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="myUserFeedbackCtr">
+    <div ng-include="'temp/header.html'"></div>
 
-	</head>
+    <div class="main-container" id="main-container">
+        <div ng-include="'temp/leftNav.html'"></div>
 
-	<body>
-		<!--
-        	作者：yyw
-        	时间：2017-12-11
-        	描述：头部模版
-        -->
-		<div ng-include="'temp/header.html'"></div>
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="icon-home home-icon"></i>
+                        <a href="#">首页</a>
+                    </li>
+                    <li>
+                        <a href="#">小程序管理</a>
+                    </li>
+                    <li class="active">用户反馈信息</li>
+                </ul>
+            </div>
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="tab-content no-border no-padding">
+                            <div class="tab-pane in active">
+                                <div class="message-container">
+                                    <div id="id-message-list-navbar" class="message-navbar align-center clearfix">
+                                        <div class="message-bar">
+                                            <div class="message-infobar" id="id-message-infobar">
+                                                <span class="blue bigger-150">用户反馈</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-		<div class="main-container" id="main-container">
-			<!--
-        	作者：yyw
-        	时间：2017-12-11
-        	描述：左边导航模版
-              -->
-			<div ng-include="'temp/leftNav.html'"></div>
+                                <div class="message-list-container">
+                                    <div class="message-list" id="message-list">
 
-			<div class="main-content">
-				<div class="breadcrumbs" id="breadcrumbs">
-					<ul class="breadcrumb">
-						<li>
-							<i class="icon-home home-icon"></i>
-							<a href="#">首页</a>
-						</li>
-						<li>
-							<a href="#">小程序管理</a>
-						</li>
-						<li class="active">用户反馈信息</li>
-					</ul>
-				</div>
-				<div class="page-content">
-					<div class="row">
-						<!--<div class="search-contain">
-							<div class="col-xs-2">
-								<input type="text" class="form-control" autocomplete="off">
-							</div>
-							<div class="col-xs-3">
-								<button class="btn btn-info btn-sm">查询</button> 
-							</div> 
-						</div>-->
-						<div class="col-xs-12">
-
-							<div class="tab-content no-border no-padding">
-								<div class="tab-pane in active">
-									<div class="message-container">
-										<div id="id-message-list-navbar" class="message-navbar align-center clearfix">
-											<div class="message-bar">
-												<div class="message-infobar" id="id-message-infobar">
-													<span class="blue bigger-150">用户反馈</span>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="message-list-container">
-										<div class="message-list" id="message-list">
-
-											<div class="message-item message-unread" ng-repeat="item in userFeedbackData">
-												<!--<label class="inline">
-													 <input type="checkbox" class="ace" />
-													 <span class="lbl"></span>
-													 </label>-->
-												<i class="message-star icon-star orange2"></i>
-												<span class="sender" title="Alex John Red Smith">{{item.userName}}</span>
-												<span class="time">{{item.dateTime}}</span>
+                                        <div class="message-item message-unread"
+                                             ng-repeat="item in userFeedbackData">
+                                            <i class="message-star icon-star orange2"></i>
+                                            <span class="informationId" hidden>{{item.informationId}}</span>
+                                            <span class="wxuserId" hidden>{{item.wxuserId}}</span>
+                                            <span class="sender"
+                                                  title="{{item.wxuserRealname}}">{{item.wxuserRealname}}</span>
+                                            <span class="time">{{item.createtime|date:'yyyy-MM-dd HH:mm:ss'}}</span>
 												<span class="summary">
-														 <span class="text">
-															 {{item.content}}
+														 <span class="text" data-toggle="tooltip" data-placement="top"
+                                                               title="{{item.informationContent}}">
+															 {{item.informationContent}}
 														 </span>
 												</span>
-											</div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="message-navbar clearfix">
+                                    <div class="row" style="float:right">
+                                        <div class="pager" ng-show="pageCount">
+                                            <pager page-count="pageCount" current-page="currentPage"
+                                                   on-page-change="onPageChange()" first-text="首页" next-text="下一页"
+                                                   prev-text="上一页" last-text="尾页" show-goto="true" goto-text="跳转到">
+                                            </pager>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="assets/js/jquery.min.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="assets/js/ace.min.js"></script>
+<script src="assets/js/ace-extra.min.js"></script>
+<script src="assets/ngpagination/angular.min.js"></script>
+<script src="assets/ngpagination/ng-pagination.js"></script>
 
-										</div>
-									</div>
-									<div class="message-navbar clearfix">
-										<div class="col-sm-6">
-											<div class="dataTables_info" id="sample-table-2_info">Showing 1 to 10 of 23 entries</div>
-										</div>
-										<div class="col-sm-6">
-											<div class="dataTables_paginate paging_bootstrap">
-												<ul class="pagination">
-													<li class="prev disabled">
-														<a href="#"><i class="icon-double-angle-left"></i></a>
-													</li>
-													<li class="active">
-														<a href="#">1</a>
-													</li>
-													<li>
-														<a href="#">2</a>
-													</li>
-													<li>
-														<a href="#">3</a>
-													</li>
-													<li class="next">
-														<a href="#"><i class="icon-double-angle-right"></i></a>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript">
+    var Config = Config();
+    var Comm = Common();
+    $(function () {
 
-								</div>
-							</div>
-						</div>
+    })
+    var app = angular.module("myApp", ['ng-pagination']);
+    app.controller("myUserFeedbackCtr", function ($scope) {
+        $scope.isG = true;
 
-					</div>
-				</div>
-			</div>
-		</div>
-		</div>
-	</body>
+        getUserFeedback($scope);
+        //分页改变事件
+        $scope.onPageChange = function () {
+            var start = $scope.currentPage;
+            var end = 10;
+            Comm.ajax(Config.getInformation, "post",
+                    {
+                        "startrow": start,
+                        "endrow": end
+                    },
+                    function (res) {
+                        var obj = JSON.parse(res);
+                        $scope.$apply(function () {
+                            $scope.modalShareData = obj.list;
+                            $scope.pageCount = obj.pages;
+                            $scope.currentPage = obj.pageNum;
+                        });
+                    });
+        }
+    })
 
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="js/angular.min.js"></script>
-	<script src="assets/js/ace.min.js"></script>
-	<script src="assets/js/ace-extra.min.js"></script>
-
-	<script type="text/javascript">
-		$(function() {
-
-		})
-		var app = angular.module("myApp", []);
-		app.controller("myUserFeedbackCtr", function($scope) {
-			$scope.isA = false;
-			$scope.isB = false;
-			$scope.isC = false;
-			$scope.isD = false;
-			$scope.isE = false;
-			$scope.isF = false;
-			$scope.isG = true;
-
-			getUserFeedback($scope);
-		})
-
-		//获取用户反馈数据
-		function getUserFeedback($scope) {
-			$.ajax({
-				type: "get",
-				url: "modal/userFeedback.json",
-				dataType: "json",
-				success: function(data) {
-					//alert(JSON.stringify(data));
-					$scope.userFeedbackData = data.datas;
-					$scope.$apply();
-				},
-				complete: function() {
-
-				}
-			});
-		}
-	</script>
+    //获取用户反馈数据
+    function getUserFeedback($scope) {
+        var start = ($scope.currentPage - 1) * 10 + 1;
+        var end = 10;
+        Comm.ajax(Config.getInformation, "post",
+                {
+                    "startrow": 1,
+                    "endrow": 10
+                },
+                function (res) {
+                    console.log(res)
+                    var obj = JSON.parse(res);
+                    $scope.userFeedbackData = obj.list;
+                    $scope.pageCount = obj.pages;
+                    $scope.$apply();
+                })
+    }
+</script>
 
 </html>

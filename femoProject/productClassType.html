@@ -8,21 +8,12 @@
     <link rel="stylesheet" href="assets/css/ace.min.css"/>
     <link rel="stylesheet" href="css/userInfo.css"/>
     <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
 </head>
 <body>
-<!--
-    作者：yyw
-    时间：2017-12-11
-    描述：头部模版
--->
 <div ng-include="'temp/header.html'"></div>
 
 <div class="main-container" id="main-container">
-    <!--
-    作者：yyw
-    时间：2017-12-11
-    描述：左边导航模版
-      -->
     <div ng-include="'temp/leftNav.html'"></div>
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
@@ -71,8 +62,7 @@
                                             <td class="sorting_1 line-h">
                                                 <a href="#">{{item.specName}}</a>
                                             </td>
-                                            <td class="line-h">{{item.specCreatetime| date:'yyyy-MM-dd
-                                                hh:mm:ss'}}
+                                            <td class="line-h">{{item.specCreatetime| date:'yyyy-MM-dd hh:mm:ss'}}
                                             </td>
                                             <td class="line-h">{{item.specRemark}}</td>
                                             <td class="line-h">
@@ -93,39 +83,22 @@
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="dataTables_info" id="sample-table-2_info">Showing 1 to 10 of 23
-                                                entries
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="dataTables_paginate paging_bootstrap">
-                                                <ul class="pagination">
-                                                    <li class="prev disabled">
-                                                        <a href="#"><i class="icon-double-angle-left"></i></a>
-                                                    </li>
-                                                    <li class="active">
-                                                        <a href="#">1</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">2</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">3</a>
-                                                    </li>
-                                                    <li class="next">
-                                                        <a href="#"><i class="icon-double-angle-right"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                </div>
+                                <div class="message-navbar clearfix">
+                                    <div class="row" style="float:right">
+                                        <div class="pager" ng-show="pageCount">
+                                            <pager page-count="pageCount" current-page="currentPage"
+                                                   on-page-change="onPageChange()"
+                                                   first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页"
+                                                   show-goto="true"
+                                                   goto-text="跳转到">
+                                            </pager>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -231,7 +204,8 @@
 <script src="js/angular.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
 <script src="assets/js/ace-extra.min.js"></script>
-
+<script src="assets/ngpagination/angular.min.js"></script>
+<script src="assets/ngpagination/ng-pagination.js"></script>
 <script src="js/config.js"></script>
 <script src="js/common.js"></script>
 
@@ -243,19 +217,38 @@
 
     })
     var ProductClassTypeIds="";
-    var app = angular.module("myApp", []);
+    var app = angular.module("myApp", ['ng-pagination']);
     app.controller("productClassTypeCtr", function ($scope) {
         $scope.isC = true;
         Comm.getProductSecondClass($scope); //获取商品二级分类数据
-        Comm.getProductClassType($scope);  //获取商品型号
+        ProductClassType($scope);  //获取商品型号
+
+        //分页改变事件
+        $scope.onPageChange = function () {
+            var start = $scope.currentPage;
+            var end = 10;
+            Comm.ajax(Config.getProductClassTypeUrl, "post",
+                    {
+                        "startrow": start,
+                        "endrow": end
+                    },
+                    function (res) {
+                        var obj = JSON.parse(res);
+                        $scope.$apply(function () {
+                            $scope.productClassTypeData = obj.list;
+                            $scope.pageCount = obj.pages;
+                            $scope.currentPage = obj.pageNum;
+                        });
+                    });
+        }
         //商品型号搜索
         $scope.search = function () {
             var search_txt = $("#search_txt").val();
-            var searchUrl = Config.getProductClassTypeUrl + "startrow=1&endrow=50&specName=" + search_txt;
+            var searchUrl = Config.getProductClassTypeUrl + "startrow=1&endrow=10&specName=" + search_txt;
             //alert(searchUrl);
             //console.log(searchUrl);
             Comm.ajax(searchUrl, "get", "", function (res) {
-                //alert(JSON.stringify(res));
+                $scope.pageCount = res.pages;
                 $scope.productClassTypeData = res.list;
                 $scope.$apply();
             });
@@ -351,6 +344,17 @@
             //alert(JSON.stringify(res));
             alert("更新成功");
             location.reload(); //刷新当前页面
+        });
+    }
+
+    function ProductClassType($scope) {
+        var startRow = 1;
+        var endRow = 10;
+        var getProductClassTypeUrl = Config.getProductClassTypeUrl + "startrow=" + startRow + "&endrow=" + endRow;
+        Comm.ajax(getProductClassTypeUrl, "get", "", function (res) {
+            $scope.pageCount = res.pages;
+            $scope.productClassTypeData = res.list;
+            $scope.$apply();
         });
     }
 </script>

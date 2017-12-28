@@ -7,13 +7,14 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
     <link rel="stylesheet" href="css/city.css"/>
-    <style>
+    <!--<style>
         .search-contain {
             margin: 15px 0;
             overflow: hidden;
         }
-    </style>
+    </style>-->
 </head>
 
 <body>
@@ -122,39 +123,22 @@
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="dataTables_info" id="sample-table-2_info">Showing 1 to 10 of 23
-                                                entries
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="dataTables_paginate paging_bootstrap">
-                                                <ul class="pagination">
-                                                    <li class="prev disabled">
-                                                        <a href="#"><i class="icon-double-angle-left"></i></a>
-                                                    </li>
-                                                    <li class="active">
-                                                        <a href="#">1</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">2</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">3</a>
-                                                    </li>
-                                                    <li class="next">
-                                                        <a href="#"><i class="icon-double-angle-right"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                </div>
+                                <div class="message-navbar clearfix">
+                                    <div class="row" style="float:right">
+                                        <div class="pager" ng-show="pageCount">
+                                            <pager page-count="pageCount" current-page="currentPage"
+                                                   on-page-change="onPageChange()"
+                                                   first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页"
+                                                   show-goto="true"
+                                                   goto-text="跳转到">
+                                            </pager>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -504,7 +488,8 @@
 <script src="js/angular.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
 <script src="assets/js/ace-extra.min.js"></script>
-
+<script src="assets/ngpagination/angular.min.js"></script>
+<script src="assets/ngpagination/ng-pagination.js"></script>
 <script src="js/city.min.js"></script>
 <script src="js/config.js"></script>
 <script src="js/common.js"></script>
@@ -523,11 +508,30 @@
 
     })
 
-    var app = angular.module("myApp", []);
+    var app = angular.module("myApp",['ng-pagination']);
     app.controller("myGoodsCtr", function ($scope) {
         $scope.isC = true;
         Comm.getProductClassType($scope);  //获取商品型号
         Comm.getGoodsInfo($scope); //获取商品信息
+
+        //分页改变事件
+        $scope.onPageChange = function () {
+            var start = $scope.currentPage;
+            var end = 10;
+            Comm.ajax(Config.getProductInfoUrl, "post",
+                    {
+                        "startrow": start,
+                        "endrow": end
+                    },
+                    function (res) {
+                        var obj = JSON.parse(res);
+                        $scope.$apply(function () {
+                            $scope.goodsInfoData = obj.list;
+                            $scope.pageCount = obj.pages;
+                            $scope.currentPage = obj.pageNum;
+                        });
+                    });
+        }
         //更新商品信息
         $scope.updateProductInfo = function (item) {
             $scope.updateProductId = item.productId;

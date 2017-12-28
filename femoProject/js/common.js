@@ -24,11 +24,12 @@ function Common() {
     //获取商品分类数据
     common.getProductClass=function ($scope) {
         var startRow = 1;
-        var endRow = 50;
+        var endRow = 10;
         var getProductClassUrl = Config.getProductClassUrl + "startrow=" + startRow + "&endrow=" + endRow;
         //alert(getProductClassUrl);
         common.ajax(getProductClassUrl, "get", "", function (res) {
             //alert(JSON.stringify(res));
+            $scope.pageCount = res.pages;
             $scope.productClassData = res.list;
             $scope.$apply();
         });
@@ -47,10 +48,11 @@ function Common() {
     //获取商品分类型号
     common.getProductClassType=function ($scope) {
         var startRow = 1;
-        var endRow = 50;
+        var endRow = 10;
         var getProductClassTypeUrl = Config.getProductClassTypeUrl + "startrow=" + startRow + "&endrow=" + endRow;
         common.ajax(getProductClassTypeUrl, "get", "", function (res) {
             //alert(JSON.stringify(res));
+            $scope.pageCount = res.pages;
             $scope.productClassTypeData = res.list;
             $scope.$apply();
         });
@@ -58,14 +60,14 @@ function Common() {
     //获取商品信息
     common.getGoodsInfo=function ($scope) {
         var startRow = 1;
-        var endRow = 50;
+        var endRow = 10;
         var paramData = {
             "startrow": startRow,
             "endrow": endRow
         };
         common.ajax(Config.getProductInfoUrl, "post", paramData, function (res) {
-            alert(JSON.stringify(res));
             //console.log(res)
+            $scope.pageCount = res.pages;
             $scope.goodsInfoData = JSON.parse(res).list;
             $scope.$apply();
         });
