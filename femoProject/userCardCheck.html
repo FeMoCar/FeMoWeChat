@@ -1,183 +1,185 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>用户证件认证信息</title>
-		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
-		<link rel="stylesheet" href="assets/css/ace.min.css" />
-		<link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
-	</head>
-	<body ng-app="myApp" ng-controller="myOnlineLeaseCtr">
-		<div ng-include="'temp/header.html'"></div>
-		<div class="main-container" id="main-container">
-			<div ng-include="'temp/leftNav.html'"></div>
-			<div class="main-content">
-				<div class="breadcrumbs" id="breadcrumbs">
-					<ul class="breadcrumb">
-						<li>
-							<i class="icon-home home-icon"></i>
-							<a href="#">首页</a>
-						</li>
-						<li class="active">用户证件认证信息</li>
-					</ul>
-				</div>
-				<div class="page-content">
-					<div class="row">
-						<div class="search-contain">
-							<div class="col-xs-1 text-right fr" style="line-height: 37px;font-size: 16px;">
-								用户名：
-							</div>
-							<div class="col-xs-2">
-								<input type="text" id="search_txt" class="form-control" autocomplete="off">
-							</div>
-							<div class="col-xs-2">
-								<button class="btn btn-info btn-sm" ng-click="search()">查询</button>
-							</div>
-						</div>
-						<div class="col-xs-12">
-							<div class="col-xs-6 col-sm-3 pricing-box" ng-repeat="item in UserCheckData">
-								<div class="widget-box">
-									<div class="widget-header header-color-red">
-										<h5 class="bigger lighter">{{item.nickname}}</h5>
-									</div>
-									<div class="widget-body">
-										<div class="widget-main">
-											<ul class="list-unstyled spaced2">
-												<li>
-													<i class="icon-ok green"></i> 用户OPenID：{{item.openid}}
-												</li>
-												<li>
-													<i class="icon-ok green"></i> 联系电话：{{item.wxuserTelephone}}
-												</li>
-												<li>
-													<i class="icon-ok green"></i> 身份证名：{{item.idCardName}}
-												</li>
-												<li>
-													<i class="icon-ok green"></i> 身份证号：{{item.idCardNumber}}
-												</li>
-												<li>
-													<i class="icon-ok green"></i> 地址：{{item.idCardAddress}}
-												</li>
-												<li>
-													<i class="icon-ok green"></i> 驾驶证号:{{item.driverNumber}}
-												</li>
-												<li>
-													<i class="icon-ok green"></i> 国籍:{{item.driverNationality}}
-												</li>
-												<li>
-													<i class="icon-ok green"></i> 准驾类型:{{item.driverCardType}}
-												</li>
-												<li>
-													<i class="icon-ok green"></i>身份证图片：
-													<div class="card">
-														<img class="pull-left" alt="身份证" ng-src="{{item.idCardImg}}" style="width:95%;height:20%;"/>
-													</div>
-												</li>
-												<li>
-													<i class="icon-ok green"></i>驾驶证图片：
-													<div class="card">
-														<img class="pull-left" alt="驾驶证" ng-src="{{item.driverImg}}" style="width:95%;height:20%;"/>
-													</div>
-												</li>
-											</ul>
-											<hr />
-										</div>
-										<div>
-											<a href="#" class="btn btn-block btn-danger">
-												<!--<i class="icon-shopping-cart bigger-110"></i>
-												<span style="margin:0 15px 0 0;">发布</span>
-												<i class="icon-cog bigger-110"></i>
-												<span data-toggle="modal" data-target="#myModal">设置</span>-->
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="message-navbar clearfix" ng-show="pageCount">
-			<div class="row" style="float:right">
-				<div class="pager" ng-show="pageCount">
-					<pager page-count="pageCount" current-page="currentPage"
-						   on-page-change="onPageChange()"
-						   first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页"
-						   show-goto="true"
-						   goto-text="跳转到">
-					</pager>
-				</div>
-			</div>
-		</div>
-	</body>
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="js/angular.min.js"></script>
-	<script src="assets/js/ace.min.js"></script>
-	<script src="assets/js/ace-extra.min.js"></script>
-	<script src="assets/ngpagination/ng-pagination.js"></script>
-	<script src="assets/ngpagination/angular.min.js"></script>
-	<script src="js/config.js"></script>
-	<script src="js/common.js"></script>
-	<script type="text/javascript">
-		var Config = Config();
-		var Comm = Common();
-		var app = angular.module("myApp",['ng-pagination']);
-		app.controller("myOnlineLeaseCtr", function($scope) {
-			$scope.isD = true;
-			getUserCardCheck($scope);
-			//分页改变事件
-			$scope.onPageChange = function () {
-				var start = $scope.currentPage;
-				var end = 4;
-				Comm.ajax(Config.getUserCard, "post",
-						{
-							"startrow": start,
-							"endrow": end
-						},
-						function (res) {
-							var obj = JSON.parse(res);
-							$scope.$apply(function () {
-								$scope.UserCheckData = obj.list;
-								$scope.pageCount = obj.pages;
+<head>
+    <meta charset="UTF-8">
+    <title>用户证件认证信息</title>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
+</head>
+<body ng-app="myApp" ng-controller="myOnlineLeaseCtr">
+<div ng-include="'temp/header.html'"></div>
+<div class="main-container" id="main-container">
+    <div ng-include="'temp/leftNav.html'"></div>
+    <div class="main-content">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a href="#">首页</a>
+                </li>
+                <li class="active">用户证件认证信息</li>
+            </ul>
+        </div>
+        <div class="page-content">
+            <div class="row">
+                <div class="search-contain">
+                    <div class="col-xs-1 text-right fr" style="line-height: 37px;font-size: 16px;">
+                        用户名：
+                    </div>
+                    <div class="col-xs-2">
+                        <input type="text" id="search_txt" class="form-control" autocomplete="off">
+                    </div>
+                    <div class="col-xs-2">
+                        <button class="btn btn-info btn-sm" ng-click="search()">查询</button>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-3 pricing-box" ng-repeat="item in UserCheckData">
+                        <div class="widget-box">
+                            <div class="widget-header header-color-red">
+                                <h5 class="bigger lighter">{{item.nickname}}</h5>
+                            </div>
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <ul class="list-unstyled spaced2">
+                                        <li>
+                                            <i class="icon-ok green"></i> 用户OPenID：{{item.openid}}
+                                        </li>
+                                        <li>
+                                            <i class="icon-ok green"></i> 联系电话：{{item.wxuserTelephone}}
+                                        </li>
+                                        <li>
+                                            <i class="icon-ok green"></i> 身份证名：{{item.idCardName}}
+                                        </li>
+                                        <li>
+                                            <i class="icon-ok green"></i> 身份证号：{{item.idCardNumber}}
+                                        </li>
+                                        <li>
+                                            <i class="icon-ok green"></i> 地址：{{item.idCardAddress}}
+                                        </li>
+                                        <li>
+                                            <i class="icon-ok green"></i> 驾驶证号:{{item.driverNumber}}
+                                        </li>
+                                        <li>
+                                            <i class="icon-ok green"></i> 国籍:{{item.driverNationality}}
+                                        </li>
+                                        <li>
+                                            <i class="icon-ok green"></i> 准驾类型:{{item.driverCardType}}
+                                        </li>
+                                        <li>
+                                            <i class="icon-ok green"></i>身份证图片：
+                                            <div class="card">
+                                                <img class="pull-left" alt="身份证" ng-src="{{item.idCardImg}}"
+                                                     style="width:95%;height:20%;"/>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i class="icon-ok green"></i>驾驶证图片：
+                                            <div class="card">
+                                                <img class="pull-left" alt="驾驶证" ng-src="{{item.driverImg}}"
+                                                     style="width:95%;height:20%;"/>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <hr/>
+                                </div>
+                                <div>
+                                    <a href="#" class="btn btn-block btn-danger">
+                                        <!--<i class="icon-shopping-cart bigger-110"></i>
+                                        <span style="margin:0 15px 0 0;">发布</span>
+                                        <i class="icon-cog bigger-110"></i>
+                                        <span data-toggle="modal" data-target="#myModal">设置</span>-->
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="message-navbar clearfix" ng-show="pageCount">
+    <div class="row" style="float:right">
+        <div class="pager" ng-show="pageCount">
+            <pager page-count="pageCount" current-page="currentPage"
+                   on-page-change="onPageChange()"
+                   first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页"
+                   show-goto="true"
+                   goto-text="跳转到">
+            </pager>
+        </div>
+    </div>
+</div>
+</body>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="assets/js/ace.min.js"></script>
+<script src="assets/js/ace-extra.min.js"></script>
+<script src="assets/ngpagination/ng-pagination.js"></script>
+<script src="assets/ngpagination/angular.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript">
+    var Config = Config();
+    var Comm = Common();
+    var app = angular.module("myApp", ['ng-pagination']);
+    app.controller("myOnlineLeaseCtr", function ($scope) {
+        $scope.isG = true;
+        getUserCardCheck($scope);
+        //分页改变事件
+        $scope.onPageChange = function () {
+            var start = $scope.currentPage;
+            var end = 4;
+            Comm.ajax(Config.getUserCard, "post",
+                {
+                    "startrow": start,
+                    "endrow": end
+                },
+                function (res) {
+                    var obj = JSON.parse(res);
+                    $scope.$apply(function () {
+                        $scope.UserCheckData = obj.list;
+                        $scope.pageCount = obj.pages;
 
-							});
-						});
-			}
-            //根据用户输入搜索
-            $scope.search = function () {
-                var search_type = "IdCardName";
-                var search_txt = $("#search_txt").val();
+                    });
+                });
+        }
+        //根据用户输入搜索
+        $scope.search = function () {
+            var search_type = "IdCardName";
+            var search_txt = $("#search_txt").val();
 
-                var searchUrl = Config.getUserCard + "startrow=1&endrow=4&" + search_type + "=" + search_txt;
-                Comm.ajax(searchUrl, "get", "",
-                        function (res) {
-                            var obj = JSON.parse(res);
-                            $scope.$apply(function () {
-                                $scope.UserCheckData = obj.list;
-                                $scope.pageCount = obj.pages;
-                            });
-                        });
-            }
-		})
+            var searchUrl = Config.getUserCard + "startrow=1&endrow=4&" + search_type + "=" + search_txt;
+            Comm.ajax(searchUrl, "get", "",
+                function (res) {
+                    var obj = JSON.parse(res);
+                    $scope.$apply(function () {
+                        $scope.UserCheckData = obj.list;
+                        $scope.pageCount = obj.pages;
+                    });
+                });
+        }
+    })
 
-		//获取用户数据
-		function getUserCardCheck($scope) {
-			Comm.ajax(Config.getUserCard, "post",
-					{
-						"startrow": 1,
-						"endrow": 4
-					},
-					function (res) {
-						var obj = JSON.parse(res);
-						console.log(obj);
-						$scope.UserCheckData = obj.list;
-						$scope.pageCount = obj.pages;
-						$scope.$apply();
-					})
-		}
-	</script>
+    //获取用户数据
+    function getUserCardCheck($scope) {
+        Comm.ajax(Config.getUserCard, "post",
+            {
+                "startrow": 1,
+                "endrow": 4
+            },
+            function (res) {
+                var obj = JSON.parse(res);
+                console.log(obj);
+                $scope.UserCheckData = obj.list;
+                $scope.pageCount = obj.pages;
+                $scope.$apply();
+            })
+    }
+</script>
 
 </html>

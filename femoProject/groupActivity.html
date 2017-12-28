@@ -171,7 +171,7 @@
         </div>
     </div>
 </div>
-<!-- 添加商品轮播图（Modal） -->
+<!-- 添加团购活动信息（Modal） -->
 <div class="modal fade" id="addGroupActivity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
@@ -341,6 +341,7 @@
         var paramData = {
             "groupBuyingName": groupBuyingName_add,
             "groupBuyingSum": groupBuyingSum_add,
+
             "productdetailId": select_xq,
             "groupBuyingStarttime": datetimepicker1_add+" 00:00:00",
             "groupBuyingEndtime": datetimepicker2_add+" 00:00:00"
@@ -355,7 +356,8 @@
     //更新团购活动
     function updateGroupActivityBtn() {
         var select_xq_update = $("#select_xq_update option:selected").val();   //商品详情ID
-        var groupBuyingName_update = $("#groupBuyingName_update").val();   //团购活动名称
+        var groupBuyingName_update = $("#groupBuyingName_update").val();   //团购活动名
+        // 称
         var groupBuyingSum_update = $("#groupBuyingSum_update").val();  //团购活动人数
         var datetimepicker1_update = $("#datetimepicker1_update").val();  //团购开始时间
         var datetimepicker2_update = $("#datetimepicker2_update").val();  //团购结束时间
