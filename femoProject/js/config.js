@@ -71,6 +71,9 @@ function Config() {
         "selectLeaseOrderUrl": host + "Order/selectLeaseOrder",//查询租赁订单
         "searchOrderUrl": host + "Order/selectOrderById",//根据类型查询订单
 
+        "addClassificationRimgUrl": host + "ClassificationRimg/addClassificationRimg",//添加板块轮播图
+        "updateClassificationRimgUrl": host + "ClassificationRimg/updateClassificationRimg",//更新板块轮播图
+        "searchClassificationRimgUrl": host + "ClassificationRimg/selectAll",//根据ID查询轮播图
     }
 	return config;
 }

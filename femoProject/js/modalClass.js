@@ -10,7 +10,7 @@ app.controller("modalClassCtr", function ($scope) {
 
     $scope.hostPath = hostPath; //图片地址拼接
 
-    getModalClass($scope); //获取模块分类数据
+    Comm.getModalClass($scope); //获取模块分类数据
     //getProductClass($scope); //获取商品分类数据
     Comm.getProductClass($scope); //获取商品分类数据
     //分页改变事件
@@ -69,20 +69,6 @@ app.controller("modalClassCtr", function ($scope) {
     }
 
 })
-
-//获取模块分类数据
-function getModalClass($scope) {
-    var startRow = 1;
-    var endRow = 10;
-    var getModalClassUrl = Config.getModalClassUrl + "startrow=" + startRow + "&endrow=" + endRow;
-    //alert(getModalClassUrl);
-    Comm.ajax(getModalClassUrl, "get", "", function (res) {
-        var obj = JSON.parse(res);
-        $scope.modalClassData = obj.list;
-        $scope.pageCount = obj.pages;
-        $scope.$apply();
-    });
-}
 
 //添加模块分类 
 function addModalClass() {

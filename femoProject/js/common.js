@@ -109,6 +109,19 @@ function Common() {
             $scope.$apply();
         });
     }
+    //获取模块分类数据
+    common.getModalClass=function ($scope) {
+        var startRow = 1;
+        var endRow = 10;
+        var getModalClassUrl = Config.getModalClassUrl + "startrow=" + startRow + "&endrow=" + endRow;
+        //alert(getModalClassUrl);
+        Comm.ajax(getModalClassUrl, "get", "", function (res) {
+            var obj = JSON.parse(res);
+            $scope.modalClassData = obj.list;
+            $scope.pageCount = obj.pages;
+            $scope.$apply();
+        });
+    }
 
 
     common.ajaxAsync = function () {
@@ -152,7 +165,7 @@ function Common() {
                 //console.log(responseText);
                 //alert(responseText);
                 //addModalClassImg = responseText;
-                addModalClassImg = responseText.replace("\"", "").replace("\"", ""); //去掉双引号
+                addModalClassImg = responseText.trim().replace("\"", "").replace("\"", ""); //去掉双引号
                 //alert(addModalClassImg);
             },
             beforSubmit: function (formData, jqForm, options) {
@@ -164,7 +177,7 @@ function Common() {
         $("#" + imageForms).ajaxSubmit(ajax_option);
         return false;
     }
-
+    //比较日期
     common.compareDate = function (checkStartDate, checkEndDate) {
         var arys1 = new Array();
         var arys2 = new Array();
