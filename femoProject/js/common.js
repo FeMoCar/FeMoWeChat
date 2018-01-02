@@ -22,7 +22,7 @@ function Common() {
         });
     }
     //获取商品分类数据
-    common.getProductClass=function ($scope) {
+    common.getProductClass = function ($scope) {
         var startRow = 1;
         var endRow = 10;
         var getProductClassUrl = Config.getProductClassUrl + "startrow=" + startRow + "&endrow=" + endRow;
@@ -35,7 +35,7 @@ function Common() {
         });
     }
     //获取商品二级分类数据
-    common.getProductSecondClass=function ($scope) {
+    common.getProductSecondClass = function ($scope) {
         var startRow = 1;
         var endRow = 50;
         var getProductSecondClassUrl = Config.getProductSecondClassUrl + "startrow=" + startRow + "&endrow=" + endRow;
@@ -46,7 +46,7 @@ function Common() {
         });
     }
     //获取商品分类型号
-    common.getProductClassType=function ($scope) {
+    common.getProductClassType = function ($scope) {
         var startRow = 1;
         var endRow = 10;
         var getProductClassTypeUrl = Config.getProductClassTypeUrl + "startrow=" + startRow + "&endrow=" + endRow;
@@ -58,7 +58,7 @@ function Common() {
         });
     }
     //获取商品信息
-    common.getGoodsInfo=function ($scope) {
+    common.getGoodsInfo = function ($scope) {
         var startRow = 1;
         var endRow = 10;
         var paramData = {
@@ -73,15 +73,64 @@ function Common() {
             $scope.$apply();
         });
     }
+    //获取商品详情信息
+    common.getProductDetail = function ($scope) {
+        var startRow = 1;
+        var endRow = 50;
+        var getProductDetailUrl = Config.getProductDetailUrl + "?startrow=" + startRow + "&endrow=" + endRow;
+        Comm.ajax(getProductDetailUrl, "get", "", function (res) {
+            //alert(JSON.stringify(res));
+            //console.log(res);
+            $scope.productDetailData = JSON.parse(res);
+            $scope.$apply();
+        });
+    }
+    //获取商品活动信息
+    common.getProductPromotion = function ($scope) {
+        var startRow = 1;
+        var endRow = 10;
+        var searchProductPromotionUrl = Config.searchProductPromotionUrl + "?startrow=" + startRow + "&endrow=" + endRow;
+        Comm.ajax(searchProductPromotionUrl, "get", "", function (res) {
+            console.log(JSON.parse(res))
+            $scope.productPromotionData = JSON.parse(res);
+            $scope.pageCount = obj.pages;
+            $scope.$apply();
+        });
+    }
+    //获取团购活动信息
+    common.getGroupActivity=function ($scope) {
+        var startRow = 1;
+        var endRow = 50;
+        var searchProductGroupBuyingUrl = Config.searchProductGroupBuyingUrl + "?startrow=" + startRow + "&endrow=" + endRow;
+        Comm.ajax(searchProductGroupBuyingUrl, "get", "", function (res) {
+            //alert(JSON.stringify(res));
+            //console.log(res);
+            $scope.groupActivityData = JSON.parse(res).list;
+            $scope.$apply();
+        });
+    }
+    //获取模块分类数据
+    common.getModalClass=function ($scope) {
+        var startRow = 1;
+        var endRow = 10;
+        var getModalClassUrl = Config.getModalClassUrl + "startrow=" + startRow + "&endrow=" + endRow;
+        //alert(getModalClassUrl);
+        Comm.ajax(getModalClassUrl, "get", "", function (res) {
+            var obj = JSON.parse(res);
+            $scope.modalClassData = obj.list;
+            $scope.pageCount = obj.pages;
+            $scope.$apply();
+        });
+    }
 
 
-    common.ajaxAsync=function () {
+    common.ajaxAsync = function () {
         $.ajaxSetup({
             async: true
         });
     }
     //图片预览及上传
-    common.uploadImg=function (fileDom, previews, imageForms) {
+    common.uploadImg = function (fileDom, previews, imageForms) {
         //判断是否支持FileReader
         if (window.FileReader) {
             var reader = new FileReader();
@@ -127,6 +176,24 @@ function Common() {
         };
         $("#" + imageForms).ajaxSubmit(ajax_option);
         return false;
+    }
+    //
+    common.compareDate = function (checkStartDate, checkEndDate) {
+        var arys1 = new Array();
+        var arys2 = new Array();
+        if (checkStartDate != null && checkEndDate != null) {
+            arys1 = checkStartDate.split('-');
+            var sdate = new Date(arys1[0], parseInt(arys1[1] - 1), arys1[2]);
+            arys2 = checkEndDate.split('-');
+            var edate = new Date(arys2[0], parseInt(arys2[1] - 1), arys2[2]);
+            if (sdate > edate) {
+                //alert("开始日期不能大于结束日期");
+                return false;
+            } else {
+                //alert("通过");
+                return true;
+            }
+        }
     }
     common.cc = function (tt) {
         alert(tt);

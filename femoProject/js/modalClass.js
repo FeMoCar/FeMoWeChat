@@ -4,7 +4,7 @@ var Comm = Common();
 $(function () {
 
 })
-var app = angular.module("myApp", []);
+var app = angular.module("myApp", ['ng-pagination']);
 app.controller("modalClassCtr", function ($scope) {
     $scope.isH = true;
 
@@ -27,7 +27,7 @@ app.controller("modalClassCtr", function ($scope) {
                 $scope.$apply(function () {
                     $scope.modalClassData = obj.list;
                     $scope.pageCount = obj.pages;
-
+                    $scope.$apply();
                 });
             });
     }

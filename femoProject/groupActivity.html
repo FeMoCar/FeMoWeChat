@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html ng-app="myApp" ng-controller="myProductPromotionCtr">
+<html ng-app="myApp" ng-controller="myGroupActivityCtr">
 
 <head>
     <meta charset="UTF-8">
-    <title>促销活动信息</title>
+    <title>团购活动</title>
     <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="assets/css/ace.min.css"/>
@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="css/common.css"/>
     <link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
 </head>
-
 <body>
 <!--
     作者：yyw
@@ -39,7 +38,7 @@
                 <li>
                     <a href="#">活动管理</a>
                 </li>
-                <li class="active">促销活动信息</li>
+                <li class="active">团购活动</li>
             </ul>
         </div>
         <div class="page-content">
@@ -49,49 +48,46 @@
                 </div>
                 <div class="col-xs-2">
                     <button class="btn btn-info btn-sm" ng-click="search()">查询</button>
-                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addProductDetail">添加
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addGroupActivity">添加
                     </button>
                 </div>
                 <div class="col-xs-12 umar-t20">
                     <div class="hr"></div>
-                    <div class="col-xs-4 col-sm-2 pricing-box" ng-repeat="item in productPromotionData" ng-cloak>
+                    <div class="col-xs-4 col-sm-2 pricing-box" ng-repeat="item in groupActivityData" ng-cloak>
                         <div class="widget-box">
-                            <div class="widget-header header-color-red3">
-                                <h5 class="bigger lighter">促销活动信息</h5>
+                            <div class="widget-header header-color-dark">
+                                <h5 class="bigger lighter">团购活动</h5>
                             </div>
                             <div class="widget-body">
                                 <div class="widget-main">
                                     <ul class="list-unstyled spaced2">
                                         <li>
-                                            <i class="icon-ok green"></i> 促销活动名称：{{item.promotionName}}
+                                            <i class="icon-ok green"></i> 团购活动名称：{{item.groupBuyingName}}
                                         </li>
                                         <li>
-                                            <i class="icon-ok green"></i> 促销活动状态：{{item.promotionFlag}}
-                                        </li>
-                                        <li>
-                                            <i class="icon-ok green"></i> 促销活动类型：{{item.promotionType}}
+                                            <i class="icon-ok green"></i> 团购人数：{{item.groupBuyingSum}}
                                         </li>
                                         <li>
                                             <i class="icon-ok green"></i> 商品详情ID：{{item.productdetailId}}
                                         </li>
                                         <li>
                                             <i class="icon-ok green"></i>
-                                            促销开始日期：{{item.promotionStarttime|date:'yyyy-MM-dd'}}
+                                            开始日期：{{item.groupBuyingStarttime|date:'yyyy-MM-dd'}}
                                         </li>
                                         <li>
                                             <i class="icon-ok green"></i>
-                                            促销结束日期：{{item.promotionEndtime|date:'yyyy-MM-dd'}}
+                                            结束日期：{{item.groupBuyingEndtime|date:'yyyy-MM-dd'}}
                                         </li>
                                     </ul>
                                 </div>
                                 <div>
-                                    <a href="#" class="btn btn-block btn-danger">
+                                    <a href="#" class="btn btn-block btn-inverse">
                                         <i class="icon-edit  bigger-110"></i>
-                                        <span data-toggle="modal" data-target="#updateProductDetail"
+                                        <span data-toggle="modal" data-target="#updateGroupActivity"
                                               style="margin:0 15px 0 0;"
-                                              ng-click="updateProductPromotion(item)">修改</span>
+                                              ng-click="updateGroupActivity(item)">修改</span>
                                         <i class="icon-exclamation-sign  bigger-110"></i>
-                                        <span ng-click="deleteProductPromotion(item.productPromotionId)">删除</span>
+                                        <span ng-click="deleteGroupActivity(item.groupBuyingId)">删除</span>
                                     </a>
                                 </div>
                             </div>
@@ -111,38 +107,30 @@
             </div>
         </div>
     </div>
-    </div>
 </div>
 
-<!-- 更新促销活动信息（Modal） -->
-<div class="modal fade" id="updateProductDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<!-- 更新团购活动信息（Modal） -->
+<div class="modal fade" id="updateGroupActivity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">更新商品活动信息</h4>
+                <h4 class="modal-title" id="myModalLabel">更新团购活动信息</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">促销活动名称</label>
+                        <label class="col-sm-3 control-label">团购活动名称</label>
                         <div class="col-sm-9">
-                            <input type="text" value="{{updateItems.promotionName}}" id="promotionName_update"
+                            <input type="text" value="{{updateItems.groupBuyingName}}" id="groupBuyingName_update"
                                    class="col-xs-10 col-sm-9"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">商品促销</label>
+                        <label class="col-sm-3 control-label">团购人数</label>
                         <div class="col-sm-9">
-                            <input type="text" value="{{updateItems.promotionFlag}}" id="promotionFlag_update"
-                                   class="col-xs-10 col-sm-9"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">促销活动类型</label>
-                        <div class="col-sm-9">
-                            <input type="text" value="{{updateItems.promotionType}}" id="promotionType_update"
+                            <input type="text" value="{{updateItems.groupBuyingSum}}" id="groupBuyingSum_update"
                                    class="col-xs-10 col-sm-9"/>
                         </div>
                     </div>
@@ -151,8 +139,7 @@
                         <div class="col-sm-7">
                             <select class="form-control" id="select_xq_update">
                                 <option value="">请选择</option>
-                                <option ng-repeat="item in productDetailData"
-                                        ng-selected="{{item.productDetailid}}==updateItems.productdetailId"
+                                <option ng-repeat="item in productDetailData"  ng-selected="{{item.productDetailid}}==updateItems.productdetailId"
                                         value="{{item.productDetailid}}">
                                     {{item.productDetailid}}
                                 </option>
@@ -160,10 +147,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">促销开始日期</label>
+                        <label class="col-sm-3 control-label">团购开始日期</label>
                         <div class="col-sm-7">
                             <div class="input-group">
-                                <input value="{{updateItems.promotionStarttime|date:'yyyy-MM-dd'}}" class="form-control date-picker"
+                                <input value="{{updateItems.groupBuyingStarttime|date:'yyyy-MM-dd'}}" class="form-control date-picker"
                                        id="datetimepicker1_update" type="text"
                                        data-date-format="yyyy-mm-dd"/>
                                 <span class="input-group-addon">
@@ -173,10 +160,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">促销结束日期</label>
+                        <label class="col-sm-3 control-label">团购结束日期</label>
                         <div class="col-sm-7">
                             <div class="input-group">
-                                <input value="{{updateItems.promotionEndtime|date:'yyyy-MM-dd'}}" class="form-control date-picker"
+                                <input value="{{updateItems.groupBuyingEndtime|date:'yyyy-MM-dd'}}" class="form-control date-picker"
                                        id="datetimepicker2_update" type="text"
                                        data-date-format="yyyy-mm-dd"/>
                                 <span class="input-group-addon">
@@ -189,38 +176,34 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="updateProductPromotionBtn()">更新</button>
+                <button type="button" class="btn btn-primary" onclick="updateGroupActivityBtn()">更新</button>
             </div>
         </div>
     </div>
 </div>
-<!-- 添加促销活动信息（Modal） -->
-<div class="modal fade" id="addProductDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<!-- 添加团购活动信息（Modal） -->
+<div class="modal fade" id="addGroupActivity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel2">添加活动信息</h4>
+                <h4 class="modal-title" id="myModalLabel2">添加团购活动信息</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">促销活动名称</label>
+                        <label class="col-sm-3 control-label">团购活动名称</label>
                         <div class="col-sm-9">
-                            <input type="text" id="promotionName_add" class="col-xs-10 col-sm-9"/>
+                            <input type="text"   id="groupBuyingName_add"
+                                   class="col-xs-10 col-sm-9"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">商品促销活动状态</label>
+                        <label class="col-sm-3 control-label">团购人数</label>
                         <div class="col-sm-9">
-                            <input type="text" id="promotionFlag_add" class="col-xs-10 col-sm-9"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">促销活动类型</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="promotionType_add" class="col-xs-10 col-sm-9"/>
+                            <input type="text"   id="groupBuyingSum_add"
+                                   class="col-xs-10 col-sm-9"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -228,17 +211,17 @@
                         <div class="col-sm-7">
                             <select class="form-control" id="select_xq">
                                 <option value="">请选择</option>
-                                <option ng-repeat="item in productDetailData" value="{{item.productDetailid}}">
+                                <option ng-repeat="item in productDetailData"  value="{{item.productDetailid}}">
                                     {{item.productDetailid}}
                                 </option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">促销开始日期</label>
+                        <label class="col-sm-3 control-label">团购开始日期</label>
                         <div class="col-sm-7">
                             <div class="input-group">
-                                <input class="form-control date-picker"
+                                <input   class="form-control date-picker"
                                        id="datetimepicker1_add" type="text"
                                        data-date-format="yyyy-mm-dd"/>
                                 <span class="input-group-addon">
@@ -248,10 +231,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">促销结束日期</label>
+                        <label class="col-sm-3 control-label">团购结束日期</label>
                         <div class="col-sm-7">
                             <div class="input-group">
-                                <input class="form-control date-picker"
+                                <input   class="form-control date-picker"
                                        id="datetimepicker2_add" type="text"
                                        data-date-format="yyyy-mm-dd"/>
                                 <span class="input-group-addon">
@@ -264,7 +247,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="addProductPromotion()">添加</button>
+                <button type="button" class="btn btn-primary" onclick="addGroupActivity()">添加</button>
             </div>
         </div>
     </div>
@@ -280,7 +263,6 @@
 <script src="assets/js/ace-extra.min.js"></script>
 <script src="assets/ngpagination/angular.min.js"></script>
 <script src="assets/ngpagination/ng-pagination.js"></script>
-
 <script src="js/config.js"></script>
 <script src="js/common.js"></script>
 <script type="text/javascript">
@@ -296,18 +278,18 @@
         });
     })
 
-    var myApp = angular.module("myApp",['ng-pagination']);
-    var productPromotionId = "";  //商品活动id
-    myApp.controller("myProductPromotionCtr", function ($scope) {
+    var myApp = angular.module("myApp", ['ng-pagination']);
+    var groupBuyingId = "";  //团购活动id
+    myApp.controller("myGroupActivityCtr", function ($scope) {
         $scope.isK = true;
 
         Comm.getProductDetail($scope); //获取商品详情
-        getProductPromotion($scope);  //获取商品活动信息
+        getGroupActivity($scope);  //获取团购活动信息
         //分页改变事件
         $scope.onPageChange = function () {
             var start = $scope.currentPage;
             var end = 10;
-            Comm.ajax(Config.searchProductPromotionUrl, "post",
+            Comm.ajax(Config.searchProductGroupBuyingUrl, "post",
                     {
                         "startrow": start,
                         "endrow": end
@@ -324,29 +306,28 @@
         //根据用户输入搜索
         $scope.search = function () {
             var search_txt = $("#search_txt").val();
-            var searchProductPromotionUrl = Config.searchProductPromotionUrl + "?promotionName=" + search_txt;
+            var searchProductGroupBuyingUrl = Config.searchProductGroupBuyingUrl + "?groupBuyingName=" + search_txt;
             //alert(searchUrl);
-            Comm.ajax(searchProductPromotionUrl, "get", "", function (res) {
+            Comm.ajax(searchProductGroupBuyingUrl, "get", "", function (res) {
                 //alert(JSON.stringify(res));
-                $scope.productPromotionData = JSON.parse(res);
-                $scope.pageCount = obj.pages;
+                $scope.groupActivityData = JSON.parse(res);
                 $scope.$apply();
             });
         }
-        //更新轮播图
-        $scope.updateProductPromotion = function (item) {
+        //更新团购活动
+        $scope.updateGroupActivity = function (item) {
             $scope.updateItems = item;
             //console.log(JSON.stringify(item));
-            productPromotionId = item.productPromotionId;
+            groupBuyingId = item.groupBuyingId;
         }
 
         //根据id删除这条数据
-        $scope.deleteProductPromotion = function (productPromotionId) {
+        $scope.deleteGroupActivity = function (groupBuyingId) {
             $('#confirmModal').modal('show');
             $scope.confirmBtn = function () {
                 var paramData = {
                     "isdelete": 1,
-                    "productPromotionId": productPromotionId
+                    "productPromotionId": groupBuyingId
                 };
                 Comm.ajax(Config.updateProductPromotionUrl, "post", paramData, function (res) {
                     //alert(JSON.stringify(res));
@@ -358,26 +339,22 @@
 
     })
 
-    //添加商品详情
-    function addProductPromotion() {
+    //添加团购活动
+    function addGroupActivity() {
         var select_xq = $("#select_xq option:selected").val();   //商品详情ID
-        var promotionName_add = $("#promotionName_add").val();   //促销活动名称
-        var promotionFlag_add = $("#promotionFlag_add").val();  //促销活动状态
-        var promotionType_add = $("#promotionType_add").val();  //促销活动类型
-        var datetimepicker1_add = $("#datetimepicker1_add").val();  //促销开始时间
-        var datetimepicker2_add = $("#datetimepicker2_add").val();  //促销结束时间
+        var groupBuyingName_add = $("#groupBuyingName_add").val();   //团购活动名称
+        var groupBuyingSum_add = $("#groupBuyingSum_add").val();  //团购活动人数
+        var datetimepicker1_add = $("#datetimepicker1_add").val();  //团购开始时间
+        var datetimepicker2_add = $("#datetimepicker2_add").val();  //团购结束时间
 
         if (!select_xq) {
             alert("请选择商品详情ID");
             return;
-        } else if (!promotionName_add) {
-            alert("请输入活动名称");
+        } else if (!groupBuyingName_add) {
+            alert("请输入团购名称");
             return;
-        }else if (!promotionFlag_add) {
-            alert("请输入活动状态");
-            return;
-        }else if (!promotionType_add) {
-            alert("请输入活动类型");
+        }else if (!groupBuyingSum_add) {
+            alert("请输入团购人数");
             return;
         }else if (!datetimepicker1_add) {
             alert("请选择活动开始时间");
@@ -390,40 +367,37 @@
             return;
         }
         var paramData = {
-            "promotionName": promotionName_add,
-            "promotionFlag": promotionFlag_add,
-            "promotionType": promotionType_add,
+            "groupBuyingName": groupBuyingName_add,
+            "groupBuyingSum": groupBuyingSum_add,
+
             "productdetailId": select_xq,
-            "promotionStarttime": datetimepicker1_add+" 00:00:00",
-            "promotionEndtime": datetimepicker2_add+" 00:00:00"
+            "groupBuyingStarttime": datetimepicker1_add+" 00:00:00",
+            "groupBuyingEndtime": datetimepicker2_add+" 00:00:00"
         };
         //console.log(paramData);
-        Comm.ajax(Config.addProductPromotionUrl, "post", paramData, function (res) {
+        Comm.ajax(Config.addProductGroupBuyingUrl, "post", paramData, function (res) {
             //alert(JSON.stringify(res));
             alert("添加成功");
             location.reload(); //刷新当前页面
         });
     }
-    //更新商品详情
-    function updateProductPromotionBtn() {
+    //更新团购活动
+    function updateGroupActivityBtn() {
         var select_xq_update = $("#select_xq_update option:selected").val();   //商品详情ID
-        var promotionName_update = $("#promotionName_update").val();   //促销活动名称
-        var promotionFlag_update = $("#promotionFlag_update").val();  //促销活动状态
-        var promotionType_update = $("#promotionType_update").val();  //促销活动类型
-        var datetimepicker1_update = $("#datetimepicker1_update").val();  //促销开始时间
-        var datetimepicker2_update = $("#datetimepicker2_update").val();  //促销结束时间
+        var groupBuyingName_update = $("#groupBuyingName_update").val();   //团购活动名
+        // 称
+        var groupBuyingSum_update = $("#groupBuyingSum_update").val();  //团购活动人数
+        var datetimepicker1_update = $("#datetimepicker1_update").val();  //团购开始时间
+        var datetimepicker2_update = $("#datetimepicker2_update").val();  //团购结束时间
 
         if (!select_xq_update) {
             alert("请选择商品详情ID");
             return;
-        } else if (!promotionName_update) {
-            alert("请输入活动名称");
+        } else if (!groupBuyingName_update) {
+            alert("请输入团购名称");
             return;
-        }else if (!promotionFlag_update) {
-            alert("请输入活动状态");
-            return;
-        }else if (!promotionType_update) {
-            alert("请输入活动类型");
+        }else if (!groupBuyingSum_update) {
+            alert("请输入团购人数");
             return;
         }else if (!datetimepicker1_update) {
             alert("请选择活动开始时间");
@@ -436,29 +410,28 @@
             return;
         }
         var paramData = {
-            "productPromotionId":productPromotionId,
-            "promotionName": promotionName_update,
-            "promotionFlag": promotionFlag_update,
-            "promotionType": promotionType_update,
+            "groupBuyingId":groupBuyingId,
+            "groupBuyingName": groupBuyingName_update,
+            "groupBuyingSum": groupBuyingSum_update,
             "productdetailId": select_xq_update,
-            "promotionStarttime": datetimepicker1_update+" 00:00:00",
-            "promotionEndtime": datetimepicker2_update+" 00:00:00"
+            "groupBuyingStarttime": datetimepicker1_update+" 00:00:00",
+            "groupBuyingEndtime": datetimepicker2_update+" 00:00:00"
         };
-        //alert(JSON.stringify(paramData));
-        //console.log(JSON.stringify(paramData));
-        Comm.ajax(Config.updateProductPromotionUrl, "post", paramData, function (res) {
+        //console.log(paramData);
+        Comm.ajax(Config.updateProductGroupBuyingUrl, "post", paramData, function (res) {
             //alert(JSON.stringify(res));
             alert("更新成功");
             location.reload(); //刷新当前页面
         });
     }
-    function getProductPromotion($scope){
+
+    function getGroupActivity($scope) {
         var startRow = 1;
-        var endRow = 10;
-        var searchProductPromotionUrl = Config.searchProductPromotionUrl + "?startrow=" + startRow + "&endrow=" + endRow;
-        Comm.ajax(searchProductPromotionUrl, "get", "", function (res) {
+        var endRow = 50;
+        var searchProductGroupBuyingUrl = Config.searchProductGroupBuyingUrl + "?startrow=" + startRow + "&endrow=" + endRow;
+        Comm.ajax(searchProductGroupBuyingUrl, "get", "", function (res) {
             var obj = JSON.parse(res);
-            $scope.productPromotionData = obj.list;
+            $scope.groupActivityData = obj.list;
             $scope.pageCount = obj.pages;
             $scope.$apply();
         });

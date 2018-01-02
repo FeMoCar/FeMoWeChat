@@ -2,7 +2,6 @@ var Config = Config();
 var Comm = Common();
 var app = angular.module("myApp",['ng-pagination']);
 app.controller("modalClassCtr", ['$scope',function ($scope) {
-    $scope.isH = true;
     $scope.onPageChange = function() {
         var start = $scope.currentPage;
         var end = 10;
