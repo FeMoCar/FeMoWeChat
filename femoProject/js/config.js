@@ -80,6 +80,21 @@ function Config() {
 		"updateClassificationRimgUrl": host + "ClassificationRimg/updateClassificationRimg",//更新板块轮播图
 		"searchClassificationRimgUrl": host + "ClassificationRimg/selectAll",//根据ID查询轮播图
 
+        "addProductPromotionUrl": host + "ProductPromotion/addProductPromotion",//添加促销活动信息
+        "updateProductPromotionUrl": host + "ProductPromotion/updateProductPromotion",//更新促销活动信息
+        "searchProductPromotionUrl": host + "ProductPromotion/selectAllById",//查询促销活动信息
+
+        "addProductGroupBuyingUrl": host + "ProductGroupBuying/addProductGroupBuying",//添加团购活动信息
+        "updateProductGroupBuyingUrl": host + "ProductGroupBuying/updateProductGroupBuying",//更新团购活动信息
+        "searchProductGroupBuyingUrl": host + "ProductGroupBuying/selectAllById",//查询团购活动信息
+
+        "selectProductOrderUrl": host + "Order/selectProductOrder",//查询商品订单
+        "selectLeaseOrderUrl": host + "Order/selectLeaseOrder",//查询租赁订单
+        "searchOrderUrl": host + "Order/selectOrderById",//根据类型查询订单
+
+        "addClassificationRimgUrl": host + "ClassificationRimg/addClassificationRimg",//添加板块轮播图
+        "updateClassificationRimgUrl": host + "ClassificationRimg/updateClassificationRimg",//更新板块轮播图
+        "searchClassificationRimgUrl": host + "ClassificationRimg/selectAll",//根据ID查询轮播图
     }
 	return config;
 }

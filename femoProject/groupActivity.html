@@ -9,8 +9,13 @@
     <link rel="stylesheet" href="assets/css/ace.min.css"/>
     <link rel="stylesheet" href="css/userInfo.css"/>
     <link rel="stylesheet" href="css/common.css"/>
+<<<<<<< HEAD
     <link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
 </head>
+=======
+</head>
+
+>>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
 <body>
 <!--
     作者：yyw
@@ -96,6 +101,7 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
         <div class="message-navbar clearfix">
             <div class="row" style="float:right">
                 <div class="pager" ng-show="pageCount">
@@ -106,6 +112,8 @@
                 </div>
             </div>
         </div>
+=======
+>>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
     </div>
 </div>
 
@@ -261,8 +269,12 @@
 <script src="js/angular.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
 <script src="assets/js/ace-extra.min.js"></script>
+<<<<<<< HEAD
 <script src="assets/ngpagination/angular.min.js"></script>
 <script src="assets/ngpagination/ng-pagination.js"></script>
+=======
+
+>>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
 <script src="js/config.js"></script>
 <script src="js/common.js"></script>
 <script type="text/javascript">
@@ -278,12 +290,17 @@
         });
     })
 
+<<<<<<< HEAD
     var myApp = angular.module("myApp", ['ng-pagination']);
+=======
+    var myApp = angular.module("myApp", []);
+>>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
     var groupBuyingId = "";  //团购活动id
     myApp.controller("myGroupActivityCtr", function ($scope) {
         $scope.isK = true;
 
         Comm.getProductDetail($scope); //获取商品详情
+<<<<<<< HEAD
         getGroupActivity($scope);  //获取团购活动信息
         //分页改变事件
         $scope.onPageChange = function () {
@@ -303,6 +320,10 @@
                         });
                     });
         }
+=======
+        Comm.getGroupActivity($scope);  //获取团购活动信息
+
+>>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
         //根据用户输入搜索
         $scope.search = function () {
             var search_txt = $("#search_txt").val();
@@ -425,6 +446,7 @@
         });
     }
 
+<<<<<<< HEAD
     function getGroupActivity($scope) {
         var startRow = 1;
         var endRow = 50;
@@ -436,6 +458,9 @@
             $scope.$apply();
         });
     }
+=======
+
+>>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
 </script>
 
 </html>
