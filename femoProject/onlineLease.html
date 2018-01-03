@@ -67,15 +67,16 @@
 
                                     <hr/>
                                     <div class="price">
-                                        <span ng-if="item.leaseState==1">销售</span>
                                         <span ng-if="item.leaseState==2">租赁</span>
                                         <span ng-if="item.leaseState==3">租售</span>
                                     </div>
                                 </div>
                                 <div>
-                                    <a href="#" class="btn btn-block btn-success" ng-click="updateLeaseStatus(item.productDetailid)">
-                                        <i class="icon-shopping-cart bigger-110"></i>
-                                        <span style="margin:0 15px 0 0;">发布</span>
+                                    <a href="#" class="btn btn-block btn-success">
+                                        <i class="icon-plane bigger-110"></i>
+                                        <span style="margin:0 15px 0 0;" ng-click="updateLeaseStatus(item.productDetailid)">发布</span>
+                                        <i class="icon-exclamation-sign bigger-110"></i>
+                                        <span style="margin:0 15px 0 0;" ng-click="updateCancelLeaseStatus(item.productDetailid)">取消发布</span>
                                     </a>
                                         <!--<i class="icon-cog bigger-110"></i>-->
                                         <!--<span data-toggle="modal" data-target="#myModal">设置</span>-->
@@ -119,6 +120,19 @@
             Comm.ajax(Config.updateProductDetailUrl, "post", paramData, function (res) {
                 //alert(JSON.stringify(res));
                 alert("发布成功");
+                location.reload(); //刷新当前页面
+            });
+        }
+        //取消发布
+        $scope.updateCancelLeaseStatus = function (productDetailId) {
+            var paramData = {
+                "leaseState": 3,
+                "productDetailid": productDetailId
+            };
+            //console.log(paramData);
+            Comm.ajax(Config.updateProductDetailUrl, "post", paramData, function (res) {
+                //alert(JSON.stringify(res));
+                alert("取消成功");
                 location.reload(); //刷新当前页面
             });
         }
