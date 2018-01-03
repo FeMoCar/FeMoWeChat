@@ -81,7 +81,7 @@ function Common() {
         var startRow = 1;
         var endRow = 50;
         var getProductDetailUrl = Config.getProductDetailUrl + "?startrow=" + startRow + "&endrow=" + endRow;
-        Comm.ajax(getProductDetailUrl, "get", "", function (res) {
+        common.ajax(getProductDetailUrl, "get", "", function (res) {
             //alert(JSON.stringify(res));
             //console.log(res);
             $scope.productDetailData = JSON.parse(res);
@@ -91,12 +91,13 @@ function Common() {
     //获取商品活动信息
     common.getProductPromotion = function ($scope) {
         var startRow = 1;
-        var endRow = 50;
+        var endRow = 10;
         var searchProductPromotionUrl = Config.searchProductPromotionUrl + "?startrow=" + startRow + "&endrow=" + endRow;
-        Comm.ajax(searchProductPromotionUrl, "get", "", function (res) {
-            //alert(JSON.stringify(res));
-            //console.log(res);
-            $scope.productPromotionData = JSON.parse(res);
+        common.ajax(searchProductPromotionUrl, "get", "", function (res) {
+            //console.log(res)
+            var obj = JSON.parse(res);
+            $scope.productPromotionData = obj.list;
+            $scope.pageCount = obj.pages;
             $scope.$apply();
         });
     }
@@ -105,10 +106,11 @@ function Common() {
         var startRow = 1;
         var endRow = 50;
         var searchProductGroupBuyingUrl = Config.searchProductGroupBuyingUrl + "?startrow=" + startRow + "&endrow=" + endRow;
-        Comm.ajax(searchProductGroupBuyingUrl, "get", "", function (res) {
-            //alert(JSON.stringify(res));
+        common.ajax(searchProductGroupBuyingUrl, "get", "", function (res) {
             //console.log(res);
-            $scope.groupActivityData = JSON.parse(res).list;
+            var obj = JSON.parse(res);
+            $scope.groupActivityData = obj.list;
+            $scope.pageCount = obj.pages;
             $scope.$apply();
         });
     }
@@ -118,15 +120,13 @@ function Common() {
         var endRow = 10;
         var getModalClassUrl = Config.getModalClassUrl + "startrow=" + startRow + "&endrow=" + endRow;
         //alert(getModalClassUrl);
-        Comm.ajax(getModalClassUrl, "get", "", function (res) {
+        common.ajax(getModalClassUrl, "get", "", function (res) {
             var obj = JSON.parse(res);
             $scope.modalClassData = obj.list;
             $scope.pageCount = obj.pages;
             $scope.$apply();
         });
     }
-
-
     common.ajaxAsync = function () {
         $.ajaxSetup({
             async: true

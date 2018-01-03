@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="assets/css/ace.min.css"/>
     <link rel="stylesheet" href="css/userInfo.css"/>
     <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
 </head>
-
 <body>
 <!--
     作者：yyw
@@ -56,7 +56,9 @@
                         <div class="tab-content">
                             <div id="home" class="tab-pane in active clearfix">
                                 <div class="search-contain">
-                                    <div class="col-xs-1 text-right fr" style="line-height: 37px;font-size: 16px;">查询条件：</div>
+                                    <div class="col-xs-1 text-right fr" style="line-height: 37px;font-size: 16px;">
+                                        查询条件：
+                                    </div>
                                     <div class="col-xs-1">
                                         <div class="form-group">
                                             <select class="form-control" id="select_search">
@@ -113,62 +115,31 @@
                                                         <td class="line-h">{{item.orderFlag}}</td>
                                                         <td class="line-h">{{item.productOrderdetail[0].sumprice}}</td>
                                                         <td class="line-h">{{item.orderRemark}}</td>
-
-                                                        <!--<td class="line-h">-->
-                                                            <!--<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">-->
-
-                                                                <!--<a class="green" href="#">-->
-                                                                    <!--<i class="icon-pencil bigger-130"></i>-->
-                                                                <!--</a>-->
-
-                                                                <!--<a class="red" href="#">-->
-                                                                    <!--<i class="icon-trash bigger-130"></i>-->
-                                                                <!--</a>-->
-                                                            <!--</div>-->
-
-                                                        <!--</td>-->
                                                     </tr>
                                                     </tbody>
                                                 </table>
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="dataTables_info" id="sample-table-2_info">Showing 1
-                                                            to 10 of 23
-                                                            entries
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="dataTables_paginate paging_bootstrap">
-                                                            <ul class="pagination">
-                                                                <li class="prev disabled">
-                                                                    <a href="#"><i
-                                                                            class="icon-double-angle-left"></i></a>
-                                                                </li>
-                                                                <li class="active">
-                                                                    <a href="#">1</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">2</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">3</a>
-                                                                </li>
-                                                                <li class="next">
-                                                                    <a href="#"><i class="icon-double-angle-right"></i></a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+                                            </div>
+                                            <div class="message-navbar clearfix">
+                                                <div class="row" style="float:right">
+                                                    <div class="pager" ng-show="pageCount">
+                                                        <pager page-count="pageCount" current-page="currentPage"
+                                                               on-page-change="onPageChange()" first-text="首页"
+                                                               next-text="下一页"
+                                                               prev-text="上一页" last-text="尾页" show-goto="true"
+                                                               goto-text="跳转到">
+                                                        </pager>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <div id="profile" class="tab-pane clearfix">
                                 <div class="search-contain">
-                                    <div class="col-xs-1 text-right fr" style="line-height: 37px;font-size: 16px;">查询条件：</div>
+                                    <div class="col-xs-1 text-right fr" style="line-height: 37px;font-size: 16px;">
+                                        查询条件：
+                                    </div>
                                     <div class="col-xs-1">
                                         <div class="form-group">
                                             <select class="form-control" id="select_search2">
@@ -219,7 +190,8 @@
                                                         <td class="line-h">{{item.nickname}}</td>
                                                         <td class="line-h">{{item.wxuserId}}</td>
                                                         <td class="line-h">{{item.receiverTelephone}}</td>
-                                                        <td class="line-h">{{item.orderCreatetime|date:'yyyy-MM-dd hh:mm:ss'}}
+                                                        <td class="line-h">{{item.orderCreatetime|date:'yyyy-MM-dd
+                                                            hh:mm:ss'}}
                                                         </td>
                                                         <td class="line-h">{{item.ordertype}}</td>
                                                         <td class="line-h">{{item.sendtime}}</td>
@@ -227,51 +199,19 @@
                                                         <td class="line-h">{{item.orderFlag}}</td>
                                                         <td class="line-h">{{item.orderPrice}}</td>
                                                         <td class="line-h">{{item.orderRemark}}</td>
-
-                                                        <!--<td class="line-h">-->
-                                                            <!--<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">-->
-
-                                                                <!--<a class="green" href="#">-->
-                                                                    <!--<i class="icon-pencil bigger-130"></i>-->
-                                                                <!--</a>-->
-
-                                                                <!--<a class="red" href="#">-->
-                                                                    <!--<i class="icon-trash bigger-130"></i>-->
-                                                                <!--</a>-->
-                                                            <!--</div>-->
-
-                                                        <!--</td>-->
                                                     </tr>
                                                     </tbody>
                                                 </table>
-                                                <div class="row">
-                                                    <div class="col-sm-6">
-                                                        <div class="dataTables_info" id="sample-table-2_info2">Showing 1
-                                                            to 10 of 23
-                                                            entries
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="dataTables_paginate paging_bootstrap">
-                                                            <ul class="pagination">
-                                                                <li class="prev disabled">
-                                                                    <a href="#"><i
-                                                                            class="icon-double-angle-left"></i></a>
-                                                                </li>
-                                                                <li class="active">
-                                                                    <a href="#">1</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">2</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">3</a>
-                                                                </li>
-                                                                <li class="next">
-                                                                    <a href="#"><i class="icon-double-angle-right"></i></a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+                                            </div>
+                                            <div class="message-navbar clearfix">
+                                                <div class="row" style="float:right">
+                                                    <div class="pager" ng-show="pageCount_s">
+                                                        <pager page-count="pageCount_s" current-page="currentPage_s"
+                                                               on-page-change="onPageChange_s()" first-text="首页"
+                                                               next-text="下一页"
+                                                               prev-text="上一页" last-text="尾页" show-goto="true"
+                                                               goto-text="跳转到">
+                                                        </pager>
                                                     </div>
                                                 </div>
                                             </div>
@@ -290,10 +230,10 @@
 
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
-<script src="js/angular.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
 <script src="assets/js/ace-extra.min.js"></script>
-
+<script src="assets/ngpagination/angular.min.js"></script>
+<script src="assets/ngpagination/ng-pagination.js"></script>
 <script src="js/config.js"></script>
 <script src="js/common.js"></script>
 <script type="text/javascript">
@@ -303,69 +243,104 @@
     $(function () {
 
     })
-    var app = angular.module("myApp", []);
+    var app = angular.module("myApp", ['ng-pagination']);
     app.controller("myProductOrderCtr", function ($scope) {
-        $scope.isF = true;
-        getProductOrder($scope);
-        getLeaseOrder($scope);
-
-        //根据用户输入搜索(商品订单查询）
-        $scope.search = function () {
-            var search_type = $('#select_search option:selected').val();
-            var search_txt = $("#search_txt").val();
-            if (!search_txt) {
-                alert("请选择查询条件！");
-                return false;
+            $scope.isF = true;
+            getProductOrder($scope);
+            getLeaseOrder($scope);
+            //分页改变事件
+            $scope.onPageChange = function () {
+                var start = $scope.currentPage;
+                var end = 10;
+                Comm.ajax(Config.selectProductOrderUrl, "post",
+                    {
+                        "startrow": start,
+                        "endrow": end
+                    },
+                    function (res) {
+                        var obj = JSON.parse(res);
+                        $scope.$apply(function () {
+                            $scope.userFeedbackData = obj.list;
+                            $scope.pageCount = obj.pages;
+                            $scope.currentPage = obj.pageNum;
+                        });
+                    });
             }
-            var selectProductOrderUrl = Config.selectProductOrderUrl + "?startrow=1&endrow=50&" + search_type + "=" + search_txt;
-            //alert(selectProductOrderUrl);
-            console.log(selectProductOrderUrl);
-            Comm.ajax(selectProductOrderUrl, "get", "", function (res) {
-                alert(JSON.stringify(res));
-                $scope.productOrderData = JSON.parse(res).list;
-                $scope.$apply();
-            });
-        }
-        //根据用户输入搜索(租赁订单查询）
-        $scope.search2 = function () {
-            var search_type2 = $('#select_search2 option:selected').val();
-            var search_txt2 = $("#search_txt2").val();
-            if (!search_type2) {
-                alert("请选择查询条件！");
-                return false;
+            $scope.onPageChange_s = function () {
+                var start = $scope.currentPage_s;
+                var end = 10;
+                Comm.ajax(Config.selectLeaseOrderUrl, "post",
+                    {
+                        "startrow": start,
+                        "endrow": end
+                    },
+                    function (res) {
+                        var obj = JSON.parse(res);
+                        $scope.$apply(function () {
+                            $scope.userFeedbackData = obj.list;
+                            $scope.pageCount_s = obj.pages;
+                            $scope.currentPage_s = obj.pageNum;
+                        });
+                    });
             }
-            var selectLeaseOrderUrl = Config.selectLeaseOrderUrl + "?startrow=1&endrow=50&" + search_type2 + "=" + search_txt2;
-            //alert(selectProductOrderUrl);
-            console.log(selectLeaseOrderUrl);
-            Comm.ajax(selectLeaseOrderUrl, "get", "", function (res) {
-                alert(JSON.stringify(res));
-                $scope.leaseOrderData = JSON.parse(res).list;
-                $scope.$apply();
-            });
+            //根据用户输入搜索(商品订单查询）
+            $scope.search = function () {
+                var search_type = $('#select_search option:selected').val();
+                var search_txt = $("#search_txt").val();
+                if (!search_txt) {
+                    alert("请选择查询条件！");
+                    return false;
+                }
+                var selectProductOrderUrl = Config.selectProductOrderUrl + "?startrow=1&endrow=10&" + search_type + "=" + search_txt;
+                //alert(selectProductOrderUrl);
+                console.log(selectProductOrderUrl);
+                Comm.ajax(selectProductOrderUrl, "get", "", function (res) {
+                    var obj = JSON.parse(res);
+                    $scope.productOrderData = obj.list;
+                    $scope.pageCount = obj.pages;
+                    $scope.$apply();
+                });
+            }
+            //根据用户输入搜索(租赁订单查询）
+            $scope.search2 = function () {
+                var search_type2 = $('#select_search2 option:selected').val();
+                var search_txt2 = $("#search_txt2").val();
+                if (!search_type2) {
+                    alert("请选择查询条件！");
+                    return false;
+                }
+                var selectLeaseOrderUrl = Config.selectLeaseOrderUrl + "?startrow=1&endrow=10&" + search_type2 + "=" + search_txt2;
+                Comm.ajax(selectLeaseOrderUrl, "get", "", function (res) {
+                    var obj = JSON.parse(res);
+                    $scope.leaseOrderData = obj.list;
+                    $scope.pageCount_s = obj.pages;
+                    $scope.$apply();
+                });
+            }
         }
-    })
+    )
 
     //获取商品订单
     function getProductOrder($scope) {
         var startRow = 1;
-        var endRow = 50;
+        var endRow = 10;
         var selectProductOrderUrl = Config.selectProductOrderUrl + "?startrow=" + startRow + "&endrow=" + endRow;
         Comm.ajax(selectProductOrderUrl, "get", "", function (res) {
-            //alert(JSON.stringify(res));
-            //console.log(res);
-            $scope.productOrderData = JSON.parse(res).list;
+            var obj = JSON.parse(res);
+            $scope.productOrderData = obj.list;
+            $scope.pageCount = obj.pages;
             $scope.$apply();
         });
     }
     //获取租赁订单
     function getLeaseOrder($scope) {
         var startRow = 1;
-        var endRow = 50;
+        var endRow = 10;
         var selectLeaseOrderUrl = Config.selectLeaseOrderUrl + "?startrow=" + startRow + "&endrow=" + endRow;
         Comm.ajax(selectLeaseOrderUrl, "get", "", function (res) {
-            //alert(JSON.stringify(res));
-            //console.log(res);
-            $scope.leaseOrderData = JSON.parse(res).list;
+            var obj = JSON.parse(res);
+            $scope.leaseOrderData = obj.list;
+            $scope.pageCount_s = obj.pages;
             $scope.$apply();
         });
     }

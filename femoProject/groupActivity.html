@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="assets/css/ace.min.css"/>
     <link rel="stylesheet" href="css/userInfo.css"/>
     <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
 </head>
-
 <body>
 <!--
     作者：yyw
@@ -93,6 +93,16 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="message-navbar clearfix">
+            <div class="row" style="float:right">
+                <div class="pager" ng-show="pageCount">
+                    <pager page-count="pageCount" current-page="currentPage"
+                           on-page-change="onPageChange()" first-text="首页" next-text="下一页"
+                           prev-text="上一页" last-text="尾页" show-goto="true" goto-text="跳转到">
+                    </pager>
                 </div>
             </div>
         </div>
@@ -248,10 +258,10 @@
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/date-time/bootstrap-datepicker.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
-<script src="js/angular.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
 <script src="assets/js/ace-extra.min.js"></script>
-
+<script src="assets/ngpagination/angular.min.js"></script>
+<script src="assets/ngpagination/ng-pagination.js"></script>
 <script src="js/config.js"></script>
 <script src="js/common.js"></script>
 <script type="text/javascript">
@@ -266,14 +276,31 @@
             $(this).prev().focus();
         });
     })
-
-    var myApp = angular.module("myApp", []);
+    var myApp = angular.module("myApp", ['ng-pagination']);
     var groupBuyingId = "";  //团购活动id
     myApp.controller("myGroupActivityCtr", function ($scope) {
         $scope.isK = true;
 
         Comm.getProductDetail($scope); //获取商品详情
         Comm.getGroupActivity($scope);  //获取团购活动信息
+        //分页改变事件
+        $scope.onPageChange = function () {
+            var start = $scope.currentPage;
+            var end = 10;
+            Comm.ajax(Config.searchProductGroupBuyingUrl, "post",
+                    {
+                        "startrow": start,
+                        "endrow": end
+                    },
+                    function (res) {
+                        var obj = JSON.parse(res);
+                        $scope.$apply(function () {
+                            $scope.userFeedbackData = obj.list;
+                            $scope.pageCount = obj.pages;
+                            $scope.currentPage = obj.pageNum;
+                        });
+                    });
+        }
 
         //根据用户输入搜索
         $scope.search = function () {
@@ -396,8 +423,6 @@
             location.reload(); //刷新当前页面
         });
     }
-
-
 </script>
 
 </html>

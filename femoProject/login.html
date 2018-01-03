@@ -1,37 +1,207 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="widt=device-widt,initial-scale=1">
-    <meta name="yyw" content="yyw20171208">
-    <title>登录</title>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/login.css" rel="stylesheet"/>
-</head>
+<html lang="en">
 
+<head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/camera.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="assets/css/matrix-login.css" />
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+</head>
 <body>
-<div class="container-fluid">
-    <div class="login-form">
-        <div class="logo">
-            <img src="http://demo.mycodes.net/houtai/MemberLogin/images/user.png" alt="logo" class="img-circle">
-        </div>
-        <h2 class="form-signin-heading">管理员登录</h2>
-        <form class="form-signin">
-            <div class="input-txt">
-                <input type="text" id="inputEmail" class="form-control" placeholder="请输入账号" required autofocus>
-                <input type="password" id="inputPassword" class="form-control" placeholder="请输入密码" required>
+<div style="width:100%;text-align: center;margin: 0 auto;margin-top:100px;position: absolute;">
+    <div id="loginbox">
+        <form action="" method="post" name="loginForm"
+              id="loginForm">
+            <div class="control-group normal_text">
+                <h3>
+                    <img src="assets/images/logo.png" alt="Logo" />
+                </h3>
             </div>
-            <div class="checkbox">
-                <label><input type="checkbox" value="remember-me" checked="checked"> 记住我</label>
+            <div class="control-group">
+                <div class="controls">
+                    <div class="main_input_box">
+							<span class="add-on bg_lg">
+							<i><img height="18px" width="22" src="assets/images/user.png" /></i>
+							</span><input type="text" name="loginname" id="loginname" value="" placeholder="请输入用户名" />
+                    </div>
+                </div>
             </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+            <div class="control-group">
+                <div class="controls">
+                    <div class="main_input_box">
+							<span class="add-on bg_ly">
+							<i><img height="18px" width="22" src="assets/images/suo.png" /></i>
+							</span><input type="password" name="password" id="password" placeholder="请输入密码" value="" />
+                    </div>
+                </div>
+            </div>
+            <div style="float:right;padding-right:10%;">
+                <div style="float: left;margin-top:3px;margin-right:2px;">
+                </div>
+            </div>
+            <div class="form-actions">
+                <div style="width:86%;padding-left:8%;">
+						<span class="pull-right" style="padding-right:3%;"><a
+                                href="javascript:quxiao();" class="btn btn-success">取消</a></span> <span
+                        class="pull-right"><a onclick="severCheck();"
+                                              class="flip-link btn btn-info" id="to-recover">登录</a></span>
+                </div>
+            </div>
         </form>
-    </div>
-    <div class="copy">
-        <p>Copyright &copy; 2017 宁波肥猫信息科技有限公司</p>
+
+        <div class="controls">
+            <div class="main_input_box">
+                <font color="white"><span id="nameerr">Copyright © Femo 2017</span></font>
+            </div>
+        </div>
     </div>
 </div>
-</body>
+<div id="templatemo_banner_slide" class="container_wapper">
+    <div class="camera_wrap camera_emboss" id="camera_slide">
+        <div data-src="assets/images/banner_slide_01.jpg"></div>
+        <div data-src="assets/images/banner_slide_02.jpg"></div>
+        <div data-src="assets/images/banner_slide_03.jpg"></div>
+    </div>
+    <!-- #camera_wrap_3 -->
+</div>
 
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery-1.7.2.js"></script>
+<script src="assets/js/jquery.easing.1.3.js"></script>
+<script src="assets/js/jquery.mobile.customized.min.js"></script>
+<script src="assets/js/camera.min.js"></script>
+<script src="assets/js/templatemo_script.js"></script>
+<script type="text/javascript" src="assets/js/jquery.tips.js"></script>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript">
+    var Config = Config();
+    //服务器校验
+    function severCheck(){
+        if(check()){
+            var loginname = $("#loginname").val();
+            var password = $("#password").val();
+            $.ajax({
+                type: "POST",
+                url: Config.UserLogin,
+                data: {userName:loginname,password:password},
+                dataType:'json',
+                cache: false,
+                success: function(data){
+                    if(data.status == 200){
+                        window.location.href="index.html";
+                    }else{
+                        $("#loginname").tips({
+                            side : 1,
+                            msg : "登陆失败",
+                            bg : '#FF5080',
+                            time : 15
+                        });
+                        $("#loginname").focus();
+                    }
+                },
+                error : function(response) {
+                    $("#loginname").tips({
+                        side : 1,
+                        msg : "数据异常",
+                        bg : '#FF5080',
+                        time : 15
+                    });
+                }
+            });
+        }
+    }
+
+    $(document).ready(function() {
+        changeCode();
+        $("#codeImg").bind("click", changeCode);
+    });
+
+    $(document).keyup(function(event) {
+        if (event.keyCode == 13) {
+            $("#to-recover").trigger("click");
+        }
+    });
+
+    function genTimestamp() {
+        var time = new Date();
+        return time.getTime();
+    }
+
+    function changeCode() {
+        $("#codeImg").attr("src", "code.do?t=" + genTimestamp());
+    }
+
+    //客户端校验
+    function check() {
+
+        if ($("#loginname").val() == "") {
+
+            $("#loginname").tips({
+                side : 2,
+                msg : '用户名不得为空',
+                bg : '#AE81FF',
+                time : 3
+            });
+
+            $("#loginname").focus();
+            return false;
+        } else {
+            $("#loginname").val(jQuery.trim($('#loginname').val()));
+        }
+
+        if ($("#password").val() == "") {
+
+            $("#password").tips({
+                side : 2,
+                msg : '密码不得为空',
+                bg : '#AE81FF',
+                time : 3
+            });
+
+            $("#password").focus();
+            return false;
+        }
+        if ($("#code").val() == "") {
+
+            $("#code").tips({
+                side : 1,
+                msg : '验证码不得为空',
+                bg : '#AE81FF',
+                time : 3
+            });
+
+            $("#code").focus();
+            return false;
+        }
+
+        $("#loginbox").tips({
+            side : 1,
+            msg : '正在登录 , 请稍后 ...',
+            bg : '#68B500',
+            time : 10
+        });
+
+        return true;
+    }
+
+    function quxiao() {
+        $("#loginname").val('');
+        $("#password").val('');
+    }
+
+</script>
+<script>
+    //TOCMAT重启之后 点击左侧列表跳转登录首页
+    if (window != top) {
+        top.location.href = location.href;
+    }
+</script>
+</body>
 </html>

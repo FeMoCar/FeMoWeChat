@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>用户须知信息</title>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="css/common.css"/>
+</head>
+
+<body id="app" ng-app="myApp" ng-controller="userClause">
+<div ng-include="'temp/header.html'"></div>
+
+<div class="main-container" id="main-container">
+    <div ng-include="'temp/leftNav.html'"></div>
+
+    <div class="main-content">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a href="#">首页</a>
+                </li>
+                <li class="active">用户须知信息</li>
+            </ul>
+        </div>
+        <div class="page-content">
+            <div class="row">
+
+                <div class="col-xs-12">
+
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="active">
+                                <a data-toggle="tab" href="#home">
+                                    用户须知信息
+                                </a>
+                            </li>
+
+                        </ul>
+                        <div >
+                            <div class="tab-content">
+                                <div id="home" class="tab-pane in active clearfix">
+                                    <div class="row">
+                                        <div class="col-xs-22">
+                                            <div class="col-xs-22 col-sm-12 pricing-box" >
+                                                <div class="widget-box">
+                                                    <div class="widget-header header-color-blue">
+                                                        <h5 class="bigger lighter">用户注册须知条款</h5>
+                                                    </div>
+                                                    <div class="widget-body">
+                                                        <div class="widget-main">
+                                                            <ul class="list-unstyled spaced2">
+                                                                <li ng-bind-html="noticeContent">
+                                                                   <!--{{ClauseDate[0].noticeContent}}-->
+                                                                </li>
+                                                            </ul>
+
+                                                            <hr />
+                                                        </div>
+                                                        <div>
+                                                            <a href="#" class="btn btn-block btn-primary">
+                                                                <i class="icon-edit  bigger-110"></i>
+                                                                <span data-toggle="modal" data-target="#updateUserClause" style="margin:0 15px 0 0;">修改</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--更新用户须知信息-->
+<div class="modal fade" id="updateUserClause" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="width:900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">更新用户须知</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div id="editoru">
+                                <div ng-bind-html="ClauseDate[0].noticeContent"></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" ng-click="updateCaluse(ClauseDate[0].noticeId)">更新</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="assets/js/ace.min.js"></script>
+<script src="assets/js/ace-extra.min.js"></script>
+<script src="assets/js/angular-sanitize.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/wangEditor.js"></script>
+<script type="text/javascript">
+    var E = window.wangEditor
+    var editoru = new E('#editoru');
+    editoru.create();
+    var Config = Config();
+    var Comm = Common();
+    $(function () {
+
+    })
+    var app = angular.module("myApp", ['ngSanitize']);
+    app.controller("userClause", function ($scope) {
+        $scope.isE = true;
+        getUserCaluse($scope);
+
+        //根据模块id更新用户须知信息
+        $scope.updateCaluse = function (noticeId) {
+            Comm.ajax(Config.updateUserClause, "post",
+                    {
+                        "noticeId":noticeId,
+                        "noticeType":1,
+                        "noticeContent":editoru.txt.html()
+                    },
+                    function (res) {
+                        if (res.status == 200) {
+                            $scope.$apply();
+                            location.reload();
+                        }
+                    })
+        }
+    })
+    //获取预约数据   getUserReserve
+    function getUserCaluse($scope) {
+        Comm.ajax(Config.getUserClause, "post",
+                {
+                    "noticeId":1,
+                    "noticeType":1
+                },
+                function (res) {
+                    $scope.ClauseDate = res;
+                    $scope.noticeContent= $scope.ClauseDate[0].noticeContent;
+                    $scope.$apply();
+                })
+    }
+</script>
+</html>
