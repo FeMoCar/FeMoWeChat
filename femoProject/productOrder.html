@@ -106,8 +106,7 @@
                                                         <td class="line-h">{{item.wxuserRealname}}</td>
                                                         <td class="line-h">{{item.wxuserId}}</td>
                                                         <td class="line-h">{{item.receiverTelephone}}</td>
-                                                        <td class="line-h">{{item.orderCreatetime|date:'yyyy-MM-dd
-                                                            hh:mm:ss'}}
+                                                        <td class="line-h">{{item.orderCreatetime|date:'yyyy-MM-dd hh:mm:ss'}}
                                                         </td>
                                                         <td class="line-h">{{item.ordertype}}</td>
                                                         <td class="line-h">{{item.sendtime}}</td>
@@ -260,7 +259,7 @@
                     function (res) {
                         var obj = JSON.parse(res);
                         $scope.$apply(function () {
-                            $scope.userFeedbackData = obj.list;
+                            $scope.productOrderData = obj.list;
                             $scope.pageCount = obj.pages;
                             $scope.currentPage = obj.pageNum;
                         });
@@ -277,7 +276,7 @@
                     function (res) {
                         var obj = JSON.parse(res);
                         $scope.$apply(function () {
-                            $scope.userFeedbackData = obj.list;
+                            $scope.leaseOrderData = obj.list;
                             $scope.pageCount_s = obj.pages;
                             $scope.currentPage_s = obj.pageNum;
                         });
