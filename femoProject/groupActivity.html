@@ -290,17 +290,13 @@
         });
     })
 
-<<<<<<< HEAD
     var myApp = angular.module("myApp", ['ng-pagination']);
-=======
     var myApp = angular.module("myApp", []);
->>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
     var groupBuyingId = "";  //团购活动id
     myApp.controller("myGroupActivityCtr", function ($scope) {
         $scope.isK = true;
 
         Comm.getProductDetail($scope); //获取商品详情
-<<<<<<< HEAD
         getGroupActivity($scope);  //获取团购活动信息
         //分页改变事件
         $scope.onPageChange = function () {
@@ -320,10 +316,8 @@
                         });
                     });
         }
-=======
         Comm.getGroupActivity($scope);  //获取团购活动信息
 
->>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
         //根据用户输入搜索
         $scope.search = function () {
             var search_txt = $("#search_txt").val();

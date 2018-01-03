@@ -88,21 +88,11 @@ function Common() {
     //获取商品活动信息
     common.getProductPromotion = function ($scope) {
         var startRow = 1;
-<<<<<<< HEAD
         var endRow = 10;
         var searchProductPromotionUrl = Config.searchProductPromotionUrl + "?startrow=" + startRow + "&endrow=" + endRow;
         Comm.ajax(searchProductPromotionUrl, "get", "", function (res) {
-            console.log(JSON.parse(res))
             $scope.productPromotionData = JSON.parse(res);
             $scope.pageCount = obj.pages;
-=======
-        var endRow = 50;
-        var searchProductPromotionUrl = Config.searchProductPromotionUrl + "?startrow=" + startRow + "&endrow=" + endRow;
-        Comm.ajax(searchProductPromotionUrl, "get", "", function (res) {
-            //alert(JSON.stringify(res));
-            //console.log(res);
-            $scope.productPromotionData = JSON.parse(res);
->>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
             $scope.$apply();
         });
     }
@@ -186,11 +176,8 @@ function Common() {
         $("#" + imageForms).ajaxSubmit(ajax_option);
         return false;
     }
-<<<<<<< HEAD
-    //
-=======
+
     //比较日期
->>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
     common.compareDate = function (checkStartDate, checkEndDate) {
         var arys1 = new Array();
         var arys2 = new Array();
