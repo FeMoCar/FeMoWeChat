@@ -9,13 +9,8 @@
     <link rel="stylesheet" href="assets/css/ace.min.css"/>
     <link rel="stylesheet" href="css/userInfo.css"/>
     <link rel="stylesheet" href="css/common.css"/>
-<<<<<<< HEAD
     <link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
 </head>
-=======
-</head>
-
->>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
 <body>
 <!--
     作者：yyw
@@ -77,11 +72,11 @@
                                         </li>
                                         <li>
                                             <i class="icon-ok green"></i>
-                                            开始日期：{{item.groupBuyingStarttime|date:'yyyy-MM-dd'}}
+                                            开始日期：{{item.groupBuyingStarttime|date:'yyyy.MM.dd'}}
                                         </li>
                                         <li>
                                             <i class="icon-ok green"></i>
-                                            结束日期：{{item.groupBuyingEndtime|date:'yyyy-MM-dd'}}
+                                            结束日期：{{item.groupBuyingEndtime|date:'yyyy.MM.dd'}}
                                         </li>
                                     </ul>
                                 </div>
@@ -101,7 +96,6 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
         <div class="message-navbar clearfix">
             <div class="row" style="float:right">
                 <div class="pager" ng-show="pageCount">
@@ -112,8 +106,6 @@
                 </div>
             </div>
         </div>
-=======
->>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
     </div>
 </div>
 
@@ -266,15 +258,10 @@
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/date-time/bootstrap-datepicker.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
-<script src="js/angular.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
 <script src="assets/js/ace-extra.min.js"></script>
-<<<<<<< HEAD
 <script src="assets/ngpagination/angular.min.js"></script>
 <script src="assets/ngpagination/ng-pagination.js"></script>
-=======
-
->>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
 <script src="js/config.js"></script>
 <script src="js/common.js"></script>
 <script type="text/javascript">
@@ -289,15 +276,23 @@
             $(this).prev().focus();
         });
     })
+<<<<<<< HEAD
 
     var myApp = angular.module("myApp", ['ng-pagination']);
     var myApp = angular.module("myApp", []);
+=======
+    var myApp = angular.module("myApp", ['ng-pagination']);
+>>>>>>> ea1d8dc2dfb5c8fe001e8cebef58e91b67230d0f
     var groupBuyingId = "";  //团购活动id
     myApp.controller("myGroupActivityCtr", function ($scope) {
         $scope.isK = true;
 
         Comm.getProductDetail($scope); //获取商品详情
+<<<<<<< HEAD
         getGroupActivity($scope);  //获取团购活动信息
+=======
+        Comm.getGroupActivity($scope);  //获取团购活动信息
+>>>>>>> ea1d8dc2dfb5c8fe001e8cebef58e91b67230d0f
         //分页改变事件
         $scope.onPageChange = function () {
             var start = $scope.currentPage;
@@ -316,7 +311,10 @@
                         });
                     });
         }
+<<<<<<< HEAD
         Comm.getGroupActivity($scope);  //获取团购活动信息
+=======
+>>>>>>> ea1d8dc2dfb5c8fe001e8cebef58e91b67230d0f
 
         //根据用户输入搜索
         $scope.search = function () {
@@ -439,22 +437,6 @@
             location.reload(); //刷新当前页面
         });
     }
-
-<<<<<<< HEAD
-    function getGroupActivity($scope) {
-        var startRow = 1;
-        var endRow = 50;
-        var searchProductGroupBuyingUrl = Config.searchProductGroupBuyingUrl + "?startrow=" + startRow + "&endrow=" + endRow;
-        Comm.ajax(searchProductGroupBuyingUrl, "get", "", function (res) {
-            var obj = JSON.parse(res);
-            $scope.groupActivityData = obj.list;
-            $scope.pageCount = obj.pages;
-            $scope.$apply();
-        });
-    }
-=======
-
->>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
 </script>
 
 </html>

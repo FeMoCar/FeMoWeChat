@@ -101,7 +101,7 @@ function updateModalClass() {
     var select_updateModal = $('#select_updateModal option:selected').val();
     var modalName_update = $("#modalName_update").val();
     var modalPath_update = $("#modalPath_update").val();
-    var classificationImg = addModalClassImg || $("#preview2").attr("src");
+    var classificationImg = addModalClassImg || $("#preview2").attr("name");
 
     if (!select_updateModal) {
         alert("请选择商品分类");
@@ -120,6 +120,7 @@ function updateModalClass() {
         "classificationProductId": select_updateModal,
         "classificationId": ModalClassId
     };
+    //console.log(paramData);
     Comm.ajax(Config.getUpdateModalClassUrl, "post", paramData, function (res) {
         //alert(JSON.stringify(res));
         alert("更新成功");

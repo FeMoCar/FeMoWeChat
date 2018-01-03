@@ -9,10 +9,7 @@
     <link rel="stylesheet" href="assets/css/ace.min.css"/>
     <link rel="stylesheet" href="css/userInfo.css"/>
     <link rel="stylesheet" href="css/common.css"/>
-<<<<<<< HEAD
     <link rel="stylesheet" href="assets/ngpagination/ng-pagination.css">
-=======
->>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
 </head>
 
 <body>
@@ -31,8 +28,6 @@
     描述：左边导航模版
       -->
     <div ng-include="'temp/leftNav.html'"></div>
-<<<<<<< HEAD
-
     <div class="main-content">
         <div class="breadcrumbs" id="breadcrumbs">
             <ul class="breadcrumb">
@@ -114,82 +109,6 @@
                 </div>
             </div>
         </div>
-    </div>
-=======
-
-    <div class="main-content">
-        <div class="breadcrumbs" id="breadcrumbs">
-            <ul class="breadcrumb">
-                <li>
-                    <i class="icon-home home-icon"></i>
-                    <a href="#">首页</a>
-                </li>
-                <li>
-                    <a href="#">活动管理</a>
-                </li>
-                <li class="active">促销活动信息</li>
-            </ul>
-        </div>
-        <div class="page-content">
-            <div class="row">
-                <div class="col-xs-3">
-                    <input type="text" id="search_txt" class="form-control" autocomplete="off">
-                </div>
-                <div class="col-xs-2">
-                    <button class="btn btn-info btn-sm" ng-click="search()">查询</button>
-                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addProductDetail">添加
-                    </button>
-                </div>
-                <div class="col-xs-12 umar-t20">
-                    <div class="hr"></div>
-                    <div class="col-xs-4 col-sm-2 pricing-box" ng-repeat="item in productPromotionData" ng-cloak>
-                        <div class="widget-box">
-                            <div class="widget-header header-color-red3">
-                                <h5 class="bigger lighter">促销活动信息</h5>
-                            </div>
-                            <div class="widget-body">
-                                <div class="widget-main">
-                                    <ul class="list-unstyled spaced2">
-                                        <li>
-                                            <i class="icon-ok green"></i> 促销活动名称：{{item.promotionName}}
-                                        </li>
-                                        <li>
-                                            <i class="icon-ok green"></i> 促销活动状态：{{item.promotionFlag}}
-                                        </li>
-                                        <li>
-                                            <i class="icon-ok green"></i> 促销活动类型：{{item.promotionType}}
-                                        </li>
-                                        <li>
-                                            <i class="icon-ok green"></i> 商品详情ID：{{item.productdetailId}}
-                                        </li>
-                                        <li>
-                                            <i class="icon-ok green"></i>
-                                            促销开始日期：{{item.promotionStarttime|date:'yyyy-MM-dd'}}
-                                        </li>
-                                        <li>
-                                            <i class="icon-ok green"></i>
-                                            促销结束日期：{{item.promotionEndtime|date:'yyyy-MM-dd'}}
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <a href="#" class="btn btn-block btn-danger">
-                                        <i class="icon-edit  bigger-110"></i>
-                                        <span data-toggle="modal" data-target="#updateProductDetail"
-                                              style="margin:0 15px 0 0;"
-                                              ng-click="updateProductPromotion(item)">修改</span>
-                                        <i class="icon-exclamation-sign  bigger-110"></i>
-                                        <span ng-click="deleteProductPromotion(item.productPromotionId)">删除</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
->>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
     </div>
 </div>
 
@@ -354,15 +273,10 @@
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/date-time/bootstrap-datepicker.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
-<script src="js/angular.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
 <script src="assets/js/ace-extra.min.js"></script>
-<<<<<<< HEAD
 <script src="assets/ngpagination/angular.min.js"></script>
 <script src="assets/ngpagination/ng-pagination.js"></script>
-=======
->>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
-
 <script src="js/config.js"></script>
 <script src="js/common.js"></script>
 <script type="text/javascript">
@@ -378,18 +292,13 @@
         });
     })
 
-<<<<<<< HEAD
     var myApp = angular.module("myApp",['ng-pagination']);
-=======
-    var myApp = angular.module("myApp", []);
->>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
     var productPromotionId = "";  //商品活动id
     myApp.controller("myProductPromotionCtr", function ($scope) {
         $scope.isK = true;
 
         Comm.getProductDetail($scope); //获取商品详情
-<<<<<<< HEAD
-        getProductPromotion($scope);  //获取商品活动信息
+        Comm.getProductPromotion($scope);  //获取商品活动信息
         //分页改变事件
         $scope.onPageChange = function () {
             var start = $scope.currentPage;
@@ -408,10 +317,8 @@
                         });
                     });
         }
-=======
         Comm.getProductPromotion($scope);  //获取商品活动信息
 
->>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
         //根据用户输入搜索
         $scope.search = function () {
             var search_txt = $("#search_txt").val();
@@ -420,10 +327,7 @@
             Comm.ajax(searchProductPromotionUrl, "get", "", function (res) {
                 //alert(JSON.stringify(res));
                 $scope.productPromotionData = JSON.parse(res);
-<<<<<<< HEAD
                 $scope.pageCount = obj.pages;
-=======
->>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
                 $scope.$apply();
             });
         }
@@ -546,22 +450,6 @@
             location.reload(); //刷新当前页面
         });
     }
-<<<<<<< HEAD
-    function getProductPromotion($scope){
-        var startRow = 1;
-        var endRow = 10;
-        var searchProductPromotionUrl = Config.searchProductPromotionUrl + "?startrow=" + startRow + "&endrow=" + endRow;
-        Comm.ajax(searchProductPromotionUrl, "get", "", function (res) {
-            var obj = JSON.parse(res);
-            $scope.productPromotionData = obj.list;
-            $scope.pageCount = obj.pages;
-            $scope.$apply();
-        });
-    }
-=======
-
-
->>>>>>> 7231c9ad8c41be4592bf9f392ccb071d3f7acd01
 </script>
 
 </html>
