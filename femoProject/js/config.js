@@ -5,17 +5,8 @@
  var Config = Config();
  Config.Func();
  */
-<<<<<<< HEAD
-//var host = "http://39.104.15.177:8080/FeMoDemo/";
-/*var host = "http://127.0.0.1:8080/FeMoDemo/";
-var hostPath = "http://39.104.15.177:8080/FeMoDemo";*/
 var host = "https://www.zjnbzh.com/FeMoDemo/";
 var hostPath = "https://www.zjnbzh.com/FeMoDemo";
-
-=======
-var host = "https://www.zjnbzh.com/FeMoDemo/";
-var hostPath = "https://www.zjnbzh.com/FeMoDemo";
->>>>>>> ea1d8dc2dfb5c8fe001e8cebef58e91b67230d0f
 function Config() {
 	var config = {
 		"UserLogin": host + "UserInfo/Login", //用户登陆
