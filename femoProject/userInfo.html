@@ -68,6 +68,7 @@
                                             <th class="sorting_disabled">电话</th>
                                             <th class="sorting_disabled">证件号</th>
                                             <th class="sorting_disabled">驾驶证</th>
+                                            <th class="sorting_disabled">定金</th>
                                             <th class="sorting_disabled">用户积分</th>
                                             <th class="sorting_disabled">验证状态</th>
                                             <th class="sorting_disabled">操作</th>
@@ -88,6 +89,7 @@
                                             <td class="line-h">{{item.wxuserTelephone||'暂无'}}</td>
                                             <td class="line-h">{{item.wxuserNumber}}</td>
                                             <td class="line-h">{{item.licence}}</td>
+                                            <td class="line-h">{{item.amount}}</td>
                                             <td class="line-h">{{item.Integral}}</td>
                                             <td class="line-h" ng-if="item.checkflag=='0'">未认证</td>
                                             <td class="line-h" ng-if="item.checkflag=='1'">已认证</td>
@@ -133,16 +135,16 @@
 
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
-<script src="js/angular.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
 <script src="assets/js/ace-extra.min.js"></script>
-<script src="js/layui.js"></script>
 <script src="assets/ngpagination/angular.min.js"></script>
 <script src="assets/ngpagination/ng-pagination.js"></script>
-<script src="js/config.js"></script>
 
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
 <script type="text/javascript">
     var Config = Config();
+    var Comm = Common();
     $(function () {
 
     })
@@ -179,19 +181,12 @@
             var searchUrl = Config.getUserInfoUrl + "startrow=1&endrow=10&" + search_type + "=" + search_txt;
             //alert(searchUrl);
 
-            $.ajax({
-                type: "get",
-                url: searchUrl,
-                dataType: "json",
-                success: function (data) {
-                    var obj = JSON.parse(res);
-                    $scope.userInfoData = obj.list;
-                    $scope.pageCount = obj.pages;
-                    $scope.$apply();
-                },
-                complete: function () {
-
-                }
+            Comm.ajax(searchUrl, "get", "", function (res) {
+                //alert(JSON.stringify(res));
+                var obj = JSON.parse(res);
+                $scope.userInfoData = obj.list;
+                $scope.pageCount = obj.pages;
+                $scope.$apply();
             });
         }
 
@@ -205,19 +200,13 @@
         var endRow = 10;
         var getUserInfoUrl = Config.getUserInfoUrl + "startrow=" + startRow + "&endrow=" + endRow;
         //alert(getUserInfoUrl);
-        $.ajax({
-            type: "get",
-            url: getUserInfoUrl,
-            dataType: "json",
-            success: function (res) {
-                var obj = JSON.parse(res);
-                $scope.userInfoData = obj.list;
-                $scope.pageCount = obj.pages;
-                $scope.$apply();
-            },
-            complete: function () {
 
-            }
+        Comm.ajax(getUserInfoUrl, "get", "", function (res) {
+            //alert(JSON.stringify(res));
+            var obj = JSON.parse(res);
+            $scope.userInfoData = obj.list;
+            $scope.pageCount = obj.pages;
+            $scope.$apply();
         });
     }
 </script>

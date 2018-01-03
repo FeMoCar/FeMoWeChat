@@ -16,6 +16,9 @@ function Common() {
             success: function (ret) {
                 callBack(ret);
             },
+            error:function (a,b,c) {
+                //console.log(a+b+c);
+            },
             complete: function () {
 
             }
