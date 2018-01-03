@@ -1,155 +1,130 @@
 <!DOCTYPE html>
 <html ng-app="myApp" ng-controller="myOnlineLeaseCtr">
 
-	<head>
-		<meta charset="UTF-8">
-		<title>商品信息</title>
-		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
-		<link rel="stylesheet" href="assets/css/ace.min.css" />
+<head>
+    <meta charset="UTF-8">
+    <title>商品信息</title>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="css/userInfo.css"/>
+    <link rel="stylesheet" href="css/common.css"/>
+</head>
 
-	</head>
+<body>
+<!--
+    作者：yyw
+    时间：2017-12-11
+    描述：头部模版
+-->
+<div ng-include="'temp/header.html'"></div>
 
-	<body>
-		<!--
-        	作者：yyw
-        	时间：2017-12-11
-        	描述：头部模版
-        -->
-		<div ng-include="'temp/header.html'"></div>
+<div class="main-container" id="main-container">
+    <!--
+    作者：yyw
+    时间：2017-12-11
+    描述：左边导航模版
+      -->
+    <div ng-include="'temp/leftNav.html'"></div>
+    <div class="main-content">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon"></i>
+                    <a href="#">首页</a>
+                </li>
+                <li class="active">在线租赁</li>
+            </ul>
+        </div>
+        <div class="page-content">
+            <div class="row">
+                <div class="col-xs-12">
 
-		<div class="main-container" id="main-container">
-			<!--
-        	作者：yyw
-        	时间：2017-12-11
-        	描述：左边导航模版
-              -->
-			<div ng-include="'temp/leftNav.html'"></div>
-			<div class="main-content">
-				<div class="breadcrumbs" id="breadcrumbs">
-					<ul class="breadcrumb">
-						<li>
-							<i class="icon-home home-icon"></i>
-							<a href="#">首页</a>
-						</li>
-						<li class="active">在线租赁</li>
-					</ul>
-				</div>
-				<div class="page-content">
-					<div class="row">
-						<div class="col-xs-12">
+                    <div class="col-xs-6 col-sm-3 pricing-box" ng-repeat="item in productDetailData" ng-cloak>
+                        <div class="widget-box">
+                            <div class="widget-header header-color-green">
+                                <h5 class="bigger lighter">租赁状态</h5>
+                            </div>
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <ul class="list-unstyled spaced2">
+                                        <li>
+                                            <i class="icon-ok green"></i> 商品详情ID：{{item.productDetailid}}
+                                        </li>
+                                        <li>
+                                            <i class="icon-ok green"></i> 商品ID：{{item.productId}}
+                                        </li>
+                                        <li>
+                                            <i class="icon-ok green"></i> 商品促销ID：{{item.productPromotionId||'暂无活动'}}
+                                        </li>
+                                        <li>
+                                            <i class="icon-ok green"></i> 商品团购ID：{{item.groupBuyingId||'暂无活动'}}
+                                        </li>
+                                        <li>
+                                            <i class="icon-ok green"></i> 车辆编号：{{item.carno}}
+                                        </li>
+                                    </ul>
 
-							<div class="col-xs-6 col-sm-3 pricing-box" ng-repeat="item in onlineLeaseData">
-								<div class="widget-box">
-									<div class="widget-header header-color-green">
-										<h5 class="bigger lighter">{{item.name}}</h5>
-									</div>
-									<div class="widget-body">
-										<div class="widget-main">
-											<ul class="list-unstyled spaced2">
-												<li>
-													<i class="icon-ok green"></i> 级别：{{item.jb}}
-												</li>
-												<li>
-													<i class="icon-ok green"></i> 排量：{{item.pl}}
-												</li>
-												<li>
-													<i class="icon-ok green"></i> 车系：{{item.cx}}
-												</li>
-												<li>
-													<i class="icon-ok green"></i> 区域：{{item.qy}}
-												</li>
-												<li>
-													<i class="icon-ok green"></i> 换挡类型：{{item.hdlx}}
-												</li>
-												<li>
-													<i class="icon-ok green"></i> 汽车价格:{{item.qcjg}}
-												</li>
-											</ul>
+                                    <hr/>
+                                    <div class="price">
+                                        <span ng-if="item.leaseState==1">销售</span>
+                                        <span ng-if="item.leaseState==2">租赁</span>
+                                        <span ng-if="item.leaseState==3">租售</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <a href="#" class="btn btn-block btn-success" ng-click="updateLeaseStatus(item.productDetailid)">
+                                        <i class="icon-shopping-cart bigger-110"></i>
+                                        <span style="margin:0 15px 0 0;">发布</span>
+                                    </a>
+                                        <!--<i class="icon-cog bigger-110"></i>-->
+                                        <!--<span data-toggle="modal" data-target="#myModal">设置</span>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-											<hr />
-											<div class="price">
-												￥88
-												<small>/月</small>
-											</div>
-										</div>
-										<div>
-											<a href="#" class="btn btn-block btn-success">
-												<i class="icon-shopping-cart bigger-110"></i>
-												<span style="margin:0 15px 0 0;">发布</span>
-												<i class="icon-cog bigger-110"></i>
-												<span data-toggle="modal" data-target="#myModal">设置</span>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="assets/js/ace.min.js"></script>
+<script src="assets/js/ace-extra.min.js"></script>
 
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script type="text/javascript">
+    //配置文件（数据请求接口）
+    var Config = Config();
+    var Comm = Common();
 
-		<!-- 模态框（Modal） -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					&times;
-				</button>
-						<h4 class="modal-title" id="myModalLabel">
-					模态框标题
-				</h4>
-					</div>
-					<div class="modal-body">
-						租赁价格和区域修改
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
-				</button>
-						<button type="button" class="btn btn-primary">
-					提交更改
-				</button>
-					</div>
-				</div>
-				<!-- /.modal-content -->
-			</div>
-			<!-- /.modal -->
-		</div>
+    var app = angular.module("myApp", []);
+    app.controller("myOnlineLeaseCtr", function ($scope) {
+        $scope.isD = true;
 
-	</body>
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="js/angular.min.js"></script>
-	<script src="assets/js/ace.min.js"></script>
-	<script src="assets/js/ace-extra.min.js"></script>
+        Comm.getProductDetail($scope); //获取商品详情信息
 
-	<script type="text/javascript">
-		var app = angular.module("myApp", []);
-		app.controller("myOnlineLeaseCtr", function($scope) {
-			$scope.isD = true;
+        //根据id更新租赁状态
+        $scope.updateLeaseStatus = function (productDetailId) {
+            var paramData = {
+                "leaseState": 2,
+                "productDetailid": productDetailId
+            };
+            //console.log(paramData);
+            Comm.ajax(Config.updateProductDetailUrl, "post", paramData, function (res) {
+                //alert(JSON.stringify(res));
+                alert("发布成功");
+                location.reload(); //刷新当前页面
+            });
+        }
+    })
 
-			getOnlineLease($scope);
-		})
 
-		//获取用户数据
-		function getOnlineLease($scope) {
-			$.ajax({
-				type: "get",
-				url: "modal/onlineLease.json",
-				dataType: "json",
-				success: function(data) {
-					//alert(JSON.stringify(data));
-					$scope.onlineLeaseData = data.datas;
-					$scope.$apply();
-				},
-				complete: function() {
-
-				}
-			});
-		}
-	</script>
+</script>
 
 </html>
