@@ -106,12 +106,8 @@
                                                         <td class="line-h">{{item.wxuserRealname}}</td>
                                                         <td class="line-h">{{item.wxuserId}}</td>
                                                         <td class="line-h">{{item.receiverTelephone}}</td>
-<<<<<<< HEAD
-                                                        <td class="line-h">{{item.orderCreatetime|date:'yyyy-MM-dd hh:mm:ss'}}
-=======
                                                         <td class="line-h">{{item.orderCreatetime|date:'yyyy-MM-dd
                                                             hh:mm:ss'}}
->>>>>>> ea1d8dc2dfb5c8fe001e8cebef58e91b67230d0f
                                                         </td>
                                                         <td class="line-h">{{item.ordertype}}</td>
                                                         <td class="line-h">{{item.sendtime}}</td>
@@ -132,64 +128,10 @@
                                                                prev-text="上一页" last-text="尾页" show-goto="true"
                                                                goto-text="跳转到">
                                                         </pager>
-<<<<<<< HEAD
-                                                        <!--<td class="line-h">-->
-                                                        <!--<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">-->
-
-                                                        <!--<a class="green" href="#">-->
-                                                        <!--<i class="icon-pencil bigger-130"></i>-->
-                                                        <!--</a>-->
-
-                                                        <!--<a class="red" href="#">-->
-                                                        <!--<i class="icon-trash bigger-130"></i>-->
-                                                        <!--</a>-->
-                                                        <!--</div>-->
-
-                                                        <!--</td>-->
-                                                        </tr>
-                                                        </tbody>
-                                                        </table>
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                <div class="dataTables_info" id="sample-table-2_info">
-                                                                    Showing 1
-                                                                    to 10 of 23
-                                                                    entries
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <div class="dataTables_paginate paging_bootstrap">
-                                                                    <ul class="pagination">
-                                                                        <li class="prev disabled">
-                                                                            <a href="#"><i
-                                                                                    class="icon-double-angle-left"></i></a>
-                                                                        </li>
-                                                                        <li class="active">
-                                                                            <a href="#">1</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">2</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#">3</a>
-                                                                        </li>
-                                                                        <li class="next">
-                                                                            <a href="#"><i
-                                                                                    class="icon-double-angle-right"></i></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-=======
->>>>>>> ea1d8dc2dfb5c8fe001e8cebef58e91b67230d0f
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-<<<<<<< HEAD
-
-=======
                                     </div>
                                 </div>
                             </div>
@@ -210,141 +152,16 @@
                                     </div>
                                     <div class="col-xs-2">
                                         <input type="text" id="search_txt2" class="form-control" autocomplete="off">
->>>>>>> ea1d8dc2dfb5c8fe001e8cebef58e91b67230d0f
                                     </div>
-                                    <div id="profile" class="tab-pane clearfix">
-                                        <div class="search-contain">
-                                            <div class="col-xs-1 text-right fr"
-                                                 style="line-height: 37px;font-size: 16px;">查询条件：
-                                            </div>
-                                            <div class="col-xs-1">
-                                                <div class="form-group">
-                                                    <select class="form-control" id="select_search2">
-                                                        <option value="wxuserId">微信用户ID</option>
-                                                        <option value="orderId">订单ID</option>
-                                                        <option value="wxuserRealname">真实姓名</option>
-                                                        <option value="wxuserTelephone">手机号码</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-2">
-                                                <input type="text" id="search_txt2" class="form-control"
-                                                       autocomplete="off">
-                                            </div>
-                                            <div class="col-xs-1">
-                                                <button class="btn btn-info btn-sm" ng-click="search2()">查询</button>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <div class="table-responsive">
-                                                    <div id="sample-table-2_wrapper" class="dataTables_wrapper"
-                                                         role="grid">
+                                    <div class="col-xs-1">
+                                        <button class="btn btn-info btn-sm" ng-click="search2()">查询</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="table-responsive">
+                                            <div id="sample-table-2_wrapper" class="dataTables_wrapper" role="grid">
 
-<<<<<<< HEAD
-                                                        <table id="sample-table-2"
-                                                               class="table table-striped table-bordered table-hover dataTable"
-                                                               aria-describedby="sample-table-2_info">
-                                                            <thead>
-                                                            <tr role="row">
-                                                                <th class="sorting_disabled">订单ID</th>
-                                                                <th class="sorting_disabled">真实姓名</th>
-                                                                <th class="sorting_disabled">用户昵称</th>
-                                                                <th class="sorting_disabled">微信用户ID</th>
-                                                                <th class="sorting_disabled">联系电话</th>
-                                                                <th class="sorting_disabled">创建时间</th>
-                                                                <th class="sorting_disabled">订单类型</th>
-                                                                <th class="sorting_disabled">提货时间</th>
-                                                                <th class="sorting_disabled">订单状态</th>
-                                                                <th class="sorting_disabled">订单总价</th>
-                                                                <th class="sorting_disabled">备注</th>
-                                                                <!--<th class="sorting_disabled">操作</th>-->
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody role="alert" aria-live="polite" aria-relevant="all">
-                                                            <tr class="odd" ng-repeat="item in leaseOrderData">
-                                                                <td class="sorting_1 line-h">
-                                                                    <a href="#">{{item.orderId}}</a>
-                                                                </td>
-                                                                <td class="line-h">{{item.wxuserRealname}}</td>
-                                                                <td class="line-h">{{item.nickname}}</td>
-                                                                <td class="line-h">{{item.wxuserId}}</td>
-                                                                <td class="line-h">{{item.receiverTelephone}}</td>
-                                                                <td class="line-h">
-                                                                    {{item.orderCreatetime|date:'yyyy-MM-dd hh:mm:ss'}}
-                                                                </td>
-                                                                <td class="line-h">{{item.ordertype}}</td>
-                                                                <td class="line-h">{{item.sendtime}}</td>
-
-                                                                <td class="line-h">{{item.orderFlag}}</td>
-                                                                <td class="line-h">{{item.orderPrice}}</td>
-                                                                <td class="line-h">{{item.orderRemark}}</td>
-
-                                                            </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="message-navbar clearfix">
-                                                        <div class="row" style="float:right">
-                                                            <div class="pager" ng-show="pageCount_s">
-                                                                <pager page-count="pageCount_s"
-                                                                       current-page="currentPage_s"
-                                                                       on-page-change="onPageChange_s()" first-text="首页"
-                                                                       next-text="下一页"
-                                                                       prev-text="上一页" last-text="尾页" show-goto="true"
-                                                                       goto-text="跳转到">
-                                                                </pager>
-                                                                <!--<td class="line-h">-->
-                                                                <!--<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">-->
-
-                                                                <!--<a class="green" href="#">-->
-                                                                <!--<i class="icon-pencil bigger-130"></i>-->
-                                                                <!--</a>-->
-
-                                                                <!--<a class="red" href="#">-->
-                                                                <!--<i class="icon-trash bigger-130"></i>-->
-                                                                <!--</a>-->
-                                                                <!--</div>-->
-
-                                                                <!--</td>-->
-                                                                </tr>
-                                                                </tbody>
-                                                                </table>
-                                                                <div class="row">
-                                                                    <div class="col-sm-6">
-                                                                        <div class="dataTables_info"
-                                                                             id="sample-table-2_info2">Showing 1
-                                                                            to 10 of 23
-                                                                            entries
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-sm-6">
-                                                                        <div class="dataTables_paginate paging_bootstrap">
-                                                                            <ul class="pagination">
-                                                                                <li class="prev disabled">
-                                                                                    <a href="#"><i
-                                                                                            class="icon-double-angle-left"></i></a>
-                                                                                </li>
-                                                                                <li class="active">
-                                                                                    <a href="#">1</a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="#">2</a>
-                                                                                </li>
-                                                                                <li>
-                                                                                    <a href="#">3</a>
-                                                                                </li>
-                                                                                <li class="next">
-                                                                                    <a href="#"><i
-                                                                                            class="icon-double-angle-right"></i></a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-=======
                                                 <table id="sample-table-2"
                                                        class="table table-striped table-bordered table-hover dataTable"
                                                        aria-describedby="sample-table-2_info">
@@ -395,7 +212,6 @@
                                                                prev-text="上一页" last-text="尾页" show-goto="true"
                                                                goto-text="跳转到">
                                                         </pager>
->>>>>>> ea1d8dc2dfb5c8fe001e8cebef58e91b67230d0f
                                                     </div>
                                                 </div>
                                             </div>
@@ -416,15 +232,8 @@
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/ace.min.js"></script>
 <script src="assets/js/ace-extra.min.js"></script>
-<<<<<<< HEAD
-
 <script src="assets/ngpagination/angular.min.js"></script>
 <script src="assets/ngpagination/ng-pagination.js"></script>
-
-=======
-<script src="assets/ngpagination/angular.min.js"></script>
-<script src="assets/ngpagination/ng-pagination.js"></script>
->>>>>>> ea1d8dc2dfb5c8fe001e8cebef58e91b67230d0f
 <script src="js/config.js"></script>
 <script src="js/common.js"></script>
 <script type="text/javascript">
@@ -435,18 +244,6 @@
 
     })
     var app = angular.module("myApp", ['ng-pagination']);
-<<<<<<< HEAD
-    var app = angular.module("myApp", []);
-    app.controller("myProductOrderCtr", function ($scope) {
-        $scope.isF = true;
-        getProductOrder($scope);
-        getLeaseOrder($scope);
-        //分页改变事件
-        $scope.onPageChange = function () {
-            var start = $scope.currentPage;
-            var end = 10;
-            Comm.ajax(Config.selectProductOrderUrl, "post",
-=======
     app.controller("myProductOrderCtr", function ($scope) {
             $scope.isF = true;
             getProductOrder($scope);
@@ -456,7 +253,6 @@
                 var start = $scope.currentPage;
                 var end = 10;
                 Comm.ajax(Config.selectProductOrderUrl, "post",
->>>>>>> ea1d8dc2dfb5c8fe001e8cebef58e91b67230d0f
                     {
                         "startrow": start,
                         "endrow": end
@@ -486,70 +282,6 @@
                             $scope.currentPage_s = obj.pageNum;
                         });
                     });
-<<<<<<< HEAD
-        }
-        //根据用户输入搜索(商品订单查询）
-        $scope.search = function () {
-            var search_type = $('#select_search option:selected').val();
-            var search_txt = $("#search_txt").val();
-            if (!search_txt) {
-                alert("请选择查询条件！");
-                return false;
-            }
-            var selectProductOrderUrl = Config.selectProductOrderUrl + "?startrow=1&endrow=10&" + search_type + "=" + search_txt;
-            //alert(selectProductOrderUrl);
-            console.log(selectProductOrderUrl);
-            Comm.ajax(selectProductOrderUrl, "get", "", function (res) {
-                var obj = JSON.parse(res);
-                $scope.productOrderData = obj.list;
-                $scope.pageCount = obj.pages;
-                $scope.$apply();
-            });
-        }
-        //根据用户输入搜索(租赁订单查询）
-        $scope.search2 = function () {
-            var search_type2 = $('#select_search2 option:selected').val();
-            var search_txt2 = $("#search_txt2").val();
-            if (!search_type2) {
-                alert("请选择查询条件！");
-                return false;
-            }
-            var selectLeaseOrderUrl = Config.selectLeaseOrderUrl + "?startrow=1&endrow=10&" + search_type2 + "=" + search_txt2;
-            Comm.ajax(selectLeaseOrderUrl, "get", "", function (res) {
-                var obj = JSON.parse(res);
-                $scope.leaseOrderData = obj.list;
-                $scope.pageCount_s = obj.pages;
-                    $scope.$apply();
-                });
-            }
-        }
-        )
-
-        //获取商品订单
-        function getProductOrder($scope) {
-            var startRow = 1;
-            var endRow = 10;
-            var selectProductOrderUrl = Config.selectProductOrderUrl + "?startrow=" + startRow + "&endrow=" + endRow;
-            Comm.ajax(selectProductOrderUrl, "get", "", function (res) {
-                    var obj = JSON.parse(res);
-                    $scope.productOrderData = obj.list;
-                    $scope.pageCount = obj.pages;
-                    $scope.$apply();
-                });
-            }
-            //获取租赁订单
-            function getLeaseOrder($scope) {
-                var startRow = 1;
-                var endRow = 10;
-                var selectLeaseOrderUrl = Config.selectLeaseOrderUrl + "?startrow=" + startRow + "&endrow=" + endRow;
-                Comm.ajax(selectLeaseOrderUrl, "get", "", function (res) {
-                        var obj = JSON.parse(res);
-                        $scope.leaseOrderData = obj.list;
-                        $scope.pageCount_s = obj.pages;
-                        $scope.$apply();
-                    });
-                }
-=======
             }
             //根据用户输入搜索(商品订单查询）
             $scope.search = function () {
@@ -612,6 +344,5 @@
             $scope.$apply();
         });
     }
->>>>>>> ea1d8dc2dfb5c8fe001e8cebef58e91b67230d0f
 </script>
 </html>

@@ -93,15 +93,10 @@ function Common() {
         var startRow = 1;
         var endRow = 10;
         var searchProductPromotionUrl = Config.searchProductPromotionUrl + "?startrow=" + startRow + "&endrow=" + endRow;
-<<<<<<< HEAD
-        Comm.ajax(searchProductPromotionUrl, "get", "", function (res) {
-            $scope.productPromotionData = JSON.parse(res);
-=======
         common.ajax(searchProductPromotionUrl, "get", "", function (res) {
             //console.log(res)
             var obj = JSON.parse(res);
             $scope.productPromotionData = obj.list;
->>>>>>> ea1d8dc2dfb5c8fe001e8cebef58e91b67230d0f
             $scope.pageCount = obj.pages;
             $scope.$apply();
         });
@@ -185,10 +180,6 @@ function Common() {
         $("#" + imageForms).ajaxSubmit(ajax_option);
         return false;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> ea1d8dc2dfb5c8fe001e8cebef58e91b67230d0f
     //比较日期
     common.compareDate = function (checkStartDate, checkEndDate) {
         var arys1 = new Array();
